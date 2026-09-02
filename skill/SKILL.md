@@ -31,7 +31,7 @@ board); this skill is the layer underneath it and wins on tokens, type and radii
    Enforce it with a drift test in the consuming repo.
 2. **Fonts:** `font-display` (Newsreader) for headings, `font-body` (Space Grotesk, the
    default) for everything else, `font-code` (JetBrains Mono) for code/CLI chrome.
-   **Never put `font-bold`/`font-semibold` on `font-display`** — Newsreader loads only weight 200; hierarchy comes from size. `font-mono` and `font-sentient` are
+   **Never put `font-bold`/`font-semibold` on `font-display`** — Newsreader loads only weight 200; hierarchy comes from size. `font-mono` and `font-newsreader` are
    deprecated aliases — do not use in new code.
 3. **Semantic color tokens only** — `bg-background`, `text-foreground`,
    `text-muted-foreground`, `bg-card`, `border-border`, `bg-primary`,

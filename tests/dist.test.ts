@@ -39,7 +39,7 @@ describe("dist", () => {
 
   it.skipIf(!built)("tailwind.css carries the source hint and the utilities", () => {
     const css = readFileSync(join(ROOT, "dist/css/tailwind.css"), "utf8")
-    expect(css).toContain('@source "../components"')
+    expect(css).toContain('@source "../**/*.js"')
     expect(css).toContain("@utility page-shell")
     expect(css).toContain("@custom-variant dark")
     expect(css).toContain("--color-status-success: var(--status-success)")

@@ -115,7 +115,7 @@ export function SectionHeading({
       {eyebrow ? (
         <p className="text-micro uppercase tracking-[0.14em] text-primary mb-2">{eyebrow}</p>
       ) : null}
-      {/* No weight class: Sentient ships one weight, so `font-bold` here would
+      {/* No weight class: the display face ships one weight, so `font-bold` here would
           only ask the browser to smear it. Hierarchy comes from size. */}
       <Tag className="font-display text-section text-foreground">{title}</Tag>
       {subtitle ? (

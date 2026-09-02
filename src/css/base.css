@@ -9,9 +9,10 @@
 @custom-variant dark (&:is(.dark *, [data-theme="dark"] *));
 
 /* Tailwind ignores node_modules by default; this points it at our own
- * compiled components so their classes are generated in the consumer. The
- * path is relative to this file's location in dist/css. */
-@source "../components";
+ * compiled output — components, control variants, brand — so their classes
+ * are generated in the consumer. Relative to this file's location in
+ * dist/css, so it covers all of dist/. */
+@source "../**/*.js";
 
 /**
  * The measure every page shares — 72rem of content inside a `px-4 md:px-6`

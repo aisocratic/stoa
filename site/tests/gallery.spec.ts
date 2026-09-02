@@ -25,6 +25,9 @@ test("the package's classes are generated and the theme resolves", async ({ page
   // The same Button inside the two panels — tokens flip by ancestor class.
   await expect(page.getByTestId("light-panel").getByRole("button", { name: "Primary" })).toHaveCSS("background-color", "rgb(10, 10, 10)")
   await expect(page.getByTestId("dark-panel").getByRole("button", { name: "Primary" })).toHaveCSS("background-color", "rgb(250, 250, 250)")
+  // Classes that live outside dist/components (control-variants.js) must be generated too.
+  await expect(page.getByTestId("dark-panel").getByRole("button", { name: "Primary" })).toHaveCSS("color", "rgb(10, 10, 10)")
+  await expect(page.getByTestId("light-panel").getByRole("button", { name: "Primary" })).toHaveCSS("color", "rgb(255, 255, 255)")
 
   // A Radix dialog opening proves the "use client" boundary survived the build.
   await page.getByTestId("dark-panel").getByRole("button", { name: "Open dialog" }).click()

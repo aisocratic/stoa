@@ -1,13 +1,13 @@
 import { describe, expect, it } from "vitest"
 
-import { type, typeSize } from "../src/tokens/type.ts"
+import { type, typeSize, type TypeStep } from "../src/tokens/type.ts"
 
 /**
  * The scale is √φ per step. The px values are hand-rounded, so allow the
  * rounding a real ladder needs (≤ 1px) rather than asserting exact ratios.
  */
 describe("golden-ratio type scale", () => {
-  const steps = Object.values(type)
+  const steps = Object.values(type) as TypeStep[]
   it("is √φ between neighbours and φ between alternate steps", () => {
     // A fluid step's rung is its top; its px is the previous rung, where the clamp starts.
     const px = steps.map((s) => s.max ?? s.px)
