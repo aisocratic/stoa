@@ -1,0 +1,8 @@
+node_modules/
+dist/
+site/.next/
+site/out/
+site/test-results/
+site/playwright-report/
+*.tsbuildinfo
+.DS_Store

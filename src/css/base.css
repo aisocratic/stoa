@@ -1,0 +1,79 @@
+/*
+ * Hand-written half of `@aisocratic/stoa/tailwind.css`. The generator
+ * prepends the token block and the `@theme` blocks; everything that is not a
+ * value lives here.
+ */
+@import "tw-animate-css";
+
+/* Dark is a class (next-themes) or a data attribute (static sites / forced). */
+@custom-variant dark (&:is(.dark *, [data-theme="dark"] *));
+
+/* Tailwind ignores node_modules by default; this points it at our own
+ * compiled components so their classes are generated in the consumer. The
+ * path is relative to this file's location in dist/css. */
+@source "../components";
+
+/**
+ * The measure every page shares — 72rem of content inside a `px-4 md:px-6`
+ * gutter. The gutter is added ON TOP of the 72rem here rather than eaten out
+ * of it, so a `page-shell` and a hand-written `px-4 md:px-6 > max-w-6xl
+ * mx-auto` pair resolve to the same content box at every width.
+ */
+@utility page-shell {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  max-width: calc(72rem + 2rem);
+
+  @media (width >= 768px) {
+    padding-inline: 1.5rem;
+    max-width: calc(72rem + 3rem);
+  }
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+
+  @media (width >= 768px) {
+    padding-inline: 2rem;
+  }
+
+  @media (width >= 1280px) {
+    padding-inline: 3rem;
+  }
+}
+
+/* Safe-area padding for installed / full-bleed surfaces. */
+@utility pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+@utility px-safe {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    /* The scale's body step, so anything WITHOUT an explicit size still lands
+       on the scale. 16px would be one rung above the system's actual body
+       size, which is why unstyled text used to render off-scale. */
+    font-size: var(--text-body);
+    font-weight: 400;
+    line-height: var(--text-body--line-height);
+    letter-spacing: normal;
+  }
+}
