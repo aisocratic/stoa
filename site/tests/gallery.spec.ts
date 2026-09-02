@@ -33,8 +33,11 @@ test("the package's classes are generated and the theme resolves", async ({ page
   await page.getByTestId("dark-panel").getByRole("button", { name: "Open dialog" }).click()
   await expect(page.getByRole("dialog")).toBeVisible()
   await page.keyboard.press("Escape")
+  await expect(page.getByRole("dialog")).toBeHidden()
+  await expect(page.locator("[data-slot=dialog-overlay]")).toHaveCount(0)
 
   expect(errors).toEqual([])
-  expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBe(0)
+  // No horizontal overflow. Linux Chromium can report a negative delta with scrollbar-gutter, hence ≤.
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(0)
   await page.screenshot({ path: info.outputPath("gallery.png"), fullPage: true })
 })
