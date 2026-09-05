@@ -7,28 +7,29 @@ lucide icons, `cssVariables: true`.
 
 ## Colours: a palette, then roles
 
-The default palette follows the public and admin website at aisocratic.org.
+The light palette uses the ivory, oat and warm ink colors measured on
+[Anthropic](https://www.anthropic.com/) on 2026-09-04. Dark keeps aisocratic.org's ink theme.
 Use semantic roles in components. Primitive values are only for theme overrides.
 
-| Role                         | Light                 | Dark                  |
-| ---------------------------- | --------------------- | --------------------- |
-| background                   | white `#ffffff`       | ink.1 `#0a0a0a`       |
-| foreground                   | ink.1 `#0a0a0a`       | ink.12 `#e6e6e6`      |
-| reading                      | ink.4 `#262626`       | neutral.300 `#c8c8c8` |
-| muted-foreground             | slate.600 `#475569`   | ink.11 `#a1a1aa`      |
-| card                         | neutral.100 `#f8f8f8` | ink.2 `#141414`       |
-| popover                      | white                 | ink.1                 |
-| muted                        | slate.100             | ink.4                 |
-| secondary                    | slate.200             | ink.3                 |
-| border / input               | slate.200             | ink.4                 |
-| primary / primary-foreground | ink.1 / white         | neutral.50 / ink.1    |
-| accent / ring                | amber.600             | amber.400             |
-| join                         | violet.600            | violet.500            |
-| destructive                  | red.600               | red.600               |
+| Role                         | Light            | Dark                  |
+| ---------------------------- | ---------------- | --------------------- |
+| background                   | oat.2 `#f0eee6`  | ink.1 `#0a0a0a`       |
+| foreground                   | oat.12 `#141413` | ink.12 `#e6e6e6`      |
+| reading                      | oat.11 `#3d3d3a` | neutral.300 `#c8c8c8` |
+| muted-foreground             | oat.10 `#5e5d59` | ink.11 `#a1a1aa`      |
+| card                         | oat.1 `#faf9f5`  | ink.2 `#141414`       |
+| popover                      | oat.1            | ink.1                 |
+| muted                        | oat.3            | ink.4                 |
+| secondary                    | oat.3            | ink.3                 |
+| border / input               | oat.4            | ink.4                 |
+| primary / primary-foreground | oat.12 / oat.1   | neutral.50 / ink.1    |
+| accent / ring                | amber.600        | amber.400             |
+| join                         | violet.600       | violet.500            |
+| destructive                  | red.600          | red.600               |
 
-Light muted text is one slate step darker than the reference website so small
-labels remain readable on cards, muted fills, and secondary controls. Destructive
-fills use red.600 in both modes to preserve contrast with white labels.
+The page uses ivory-medium and cards use ivory-light, so broad surfaces avoid
+stark white. Warm muted text remains readable on cards, muted fills, and secondary
+controls. Destructive fills use red.600 with white labels in both modes.
 
 `foreground` names headings and emphasis, `reading` names article prose, and
 `muted-foreground` names metadata, labels, and placeholders. Reading is an explicit
@@ -37,13 +38,13 @@ pair matching the website, so override it too when creating a different theme.
 Seven `status-*` roles cover success, warning, caution, danger, info, highlight,
 and accent. They use a deep hue in light mode and a light hue in dark mode.
 Categorical charts reuse status hues. `chart-ramp-1` is amber; the remaining ramp
-steps are slate in light mode and ink in dark mode. Charts always carry labels.
+steps are oat in light mode and ink in dark mode. Charts always carry labels.
 
 `card-foreground`, `popover-foreground`, and `secondary-foreground` alias
 `foreground`; `input` aliases `border`, and `ring` aliases `accent`.
 
-The original 12-step `oat` primitives remain available for opt-in warm themes.
-They do not drive the default interface. All values and resolved colors are
+The 12-step `oat` scale drives light surfaces, text and neutral chart ramps.
+Legacy cool neutral/slate primitives remain available for overrides. Resolved colors are
 exported in `@aisocratic/design/tokens.json`, also displayed in the gallery.
 
 ## Type scale (golden ratio, anchored at 14px)

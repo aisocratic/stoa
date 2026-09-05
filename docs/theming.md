@@ -55,7 +55,7 @@ var(--accent)`), every `bg-accent`, `text-accent` and `ring-ring` (an alias of
 `--accent`) follows. Roles reference the palette (`--oat-1` … `--ink-12`,
 `--amber-600` …, emitted once on `:root`), so you can point a role at any
 palette entry, or at a colour of your own. Overriding a palette entry itself
-re-themes every role that uses it — `--white` moves the light page, `--ink-12` the
+re-themes every role that uses it — `--oat-2` moves the light page, `--ink-12` the
 dark text. `--reading` is an explicit light/dark pair; override it alongside your text colors.
 
 ## Adding a token

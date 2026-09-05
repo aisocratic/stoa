@@ -5,6 +5,9 @@ All notable changes to `@aisocratic/design`. The format follows
 
 ## Unreleased
 
+- Use Anthropic’s measured ivory/oat light palette across page surfaces, cards,
+  controls and text. Dark mode retains the AI Socratic ink theme.
+
 - Align light surfaces and reading colors with aisocratic.org; preserve readable
   small labels and offer oat primitives for optional warm themes.
 - Use the body font consistently in shared public navigation, admin navigation,
@@ -14,6 +17,9 @@ All notable changes to `@aisocratic/design`. The format follows
 - Document local package adoption, vendored stylesheet updates and family links.
 
 ## Unreleased
+
+- Use Anthropic’s measured ivory/oat light palette across page surfaces, cards,
+  controls and text. Dark mode retains the AI Socratic ink theme.
 
 ### Changed
 

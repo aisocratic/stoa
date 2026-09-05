@@ -40,16 +40,16 @@ test("the package's classes are generated and the theme resolves", async ({ page
   // The same Button inside the two panels — roles resolve through the palette by ancestor class.
   const light = page.getByTestId("light-panel")
   const dark = page.getByTestId("dark-panel")
-  await expect(light).toHaveCSS("background-color", "rgb(255, 255, 255)") // website light ground
-  await expect(light.getByRole("button", { name: "Primary" })).toHaveCSS("background-color", "rgb(10, 10, 10)") // website light ground2
-  await expect(light.getByRole("button", { name: "Primary" })).toHaveCSS("color", "rgb(255, 255, 255)")
+  await expect(light).toHaveCSS("background-color", "rgb(240, 238, 230)") // Anthropic ivory-medium
+  await expect(light.getByRole("button", { name: "Primary" })).toHaveCSS("background-color", "rgb(20, 20, 19)") // warm ink
+  await expect(light.getByRole("button", { name: "Primary" })).toHaveCSS("color", "rgb(250, 249, 245)")
   await expect(dark.getByRole("button", { name: "Primary" })).toHaveCSS("background-color", "rgb(250, 250, 250)")
   // Classes that live outside dist/components (control-variants.js) must be generated too.
   await expect(dark.getByRole("button", { name: "Primary" })).toHaveCSS("color", "rgb(10, 10, 10)")
   // Two rungs: controls are 10px, surfaces 16px.
   await expect(light.getByRole("button", { name: "Primary" })).toHaveCSS("border-radius", "10px")
   await expect(light).toHaveCSS("border-radius", "16px")
-  // `--reading` is a color-mix; it must compute to a real colour in each panel.
+  // `--reading` must resolve to the theme-specific prose color in each panel.
   const readingIn = (panel: typeof light) => panel.evaluate((el) => getComputedStyle(el).getPropertyValue("--reading"))
   expect(await readingIn(light)).not.toBe("")
   expect(await readingIn(light)).not.toBe(await readingIn(dark))

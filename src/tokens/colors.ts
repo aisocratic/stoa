@@ -7,13 +7,12 @@
  * share a palette entry, which is what keeps `border` and `secondary` from
  * drifting one hex apart the way they used to.
  *
- * The default theme follows aisocratic.org: white/slate light surfaces,
- * near-black dark surfaces, amber accents, and a violet membership CTA.
- * Reading text is the website's #262626 / #c8c8c8 pair. Light chrome uses
- * slate.600 instead of the website's slate.500 to keep small labels readable
- * on muted and secondary surfaces. Destructive fills use red.600 in both
- * modes for readable white labels. Chart ramps always require text labels.
- * The optional oat palette remains available for consumer theme overrides.
+ * Light surfaces and warm text use Anthropic's ivory/oat palette; dark
+ * retains aisocratic.org's ink surfaces. The page is ivory-medium, cards
+ * are ivory-light, and oat borders define controls without stark white.
+ * Amber accents, violet membership CTAs and status colors retain their
+ * semantic roles. Destructive fills use red.600 for readable white labels.
+ * Chart ramps always require text labels.
  */
 import { contrast, mixOklab } from "./color-math.js"
 import { paletteHex, paletteVar, type PaletteRef } from "./palette.js"
@@ -30,24 +29,24 @@ const pair = (light: PaletteRef, dark: PaletteRef): ColorPair => ({ light, dark 
 
 export const colors = {
   /* -------------------------------------------------------------- neutrals */
-  background: pair("white", "ink.1"),
-  foreground: pair("ink.1", "ink.12"),
-  reading: pair("ink.4", "neutral.300"),
-  "muted-foreground": pair("slate.600", "ink.11"),
+  background: pair("oat.2", "ink.1"),
+  foreground: pair("oat.12", "ink.12"),
+  reading: pair("oat.11", "neutral.300"),
+  "muted-foreground": pair("oat.10", "ink.11"),
   /** Boxed surfaces: one step off the page. */
-  card: pair("neutral.100", "ink.2"),
-  /** Floating surfaces sit on the page colour so their border does the lifting. */
-  popover: pair("white", "ink.1"),
+  card: pair("oat.1", "ink.2"),
+  /** Floating surfaces use the raised card ground with a defining border. */
+  popover: pair("oat.1", "ink.1"),
   /** Subdued fills — table hover, neutral badges, skeletons. */
-  muted: pair("slate.100", "ink.4"),
+  muted: pair("oat.3", "ink.4"),
   /** Secondary buttons and the hover fill of ghost/outline controls. */
-  secondary: pair("slate.200", "ink.3"),
-  border: pair("slate.200", "ink.4"),
+  secondary: pair("oat.3", "ink.3"),
+  border: pair("oat.4", "ink.4"),
 
   /* -------------------------------------------------------------- controls */
   /** Near-monochrome by design: the page inverted. */
-  primary: pair("ink.1", "neutral.50"),
-  "primary-foreground": pair("white", "ink.1"),
+  primary: pair("oat.12", "neutral.50"),
+  "primary-foreground": pair("oat.1", "ink.1"),
   accent: pair("amber.600", "amber.400"),
   "accent-foreground": pair("white", "ink.1"),
   destructive: pair("red.600", "red.600"),
@@ -59,7 +58,7 @@ export const colors = {
   /* ---------------------------------------------------------------- status */
   "status-success": pair("green.800", "green.400"),
   "status-warning": pair("yellow.800", "yellow.400"),
-  "status-caution": pair("orange.700", "orange.400"),
+  "status-caution": pair("orange.800", "orange.400"),
   "status-danger": pair("red.700", "red.400"),
   "status-info": pair("blue.700", "blue.400"),
   "status-highlight": pair("cyan.700", "cyan.400"),
@@ -72,11 +71,11 @@ export const colors = {
   "chart-4": pair("violet.600", "violet.500"),
   "chart-5": pair("red.700", "red.400"),
   "chart-ramp-1": pair("amber.600", "amber.400"),
-  "chart-ramp-2": pair("slate.700", "ink.12"),
-  "chart-ramp-3": pair("slate.500", "ink.10"),
-  "chart-ramp-4": pair("slate.400", "ink.8"),
-  "chart-ramp-5": pair("slate.300", "ink.6"),
-  "chart-ramp-muted": pair("slate.100", "ink.3"),
+  "chart-ramp-2": pair("oat.12", "ink.12"),
+  "chart-ramp-3": pair("oat.10", "ink.10"),
+  "chart-ramp-4": pair("oat.8", "ink.8"),
+  "chart-ramp-5": pair("oat.6", "ink.6"),
+  "chart-ramp-muted": pair("oat.3", "ink.3"),
 } as const satisfies Record<string, ColorDef>
 
 export type ColorRole = keyof typeof colors

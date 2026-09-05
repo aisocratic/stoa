@@ -8,8 +8,7 @@
  *
  * ## Neutrals: two 12-step scales, Radix numbering
  *
- * `neutral` and `slate` supply the website light theme. `oat` is an optional
- * warm neutral, `ink` the dark one. Both follow Radix's step
+ * `oat` supplies the warm light theme and `ink` the dark theme. Both follow Radix's step
  * meanings, so a step number says what it is for in either mode:
  *
  *    1  app background            7  hovered border
@@ -19,12 +18,13 @@
  *    5  active element           11  low-contrast text (chrome)
  *    6  subtle border            12  high-contrast text
  *
- * The optional warm scale is *oat*: hue 85°, chroma ~0.015 in OKLCH,
- * tapering as it darkens. Page and card sit on the warm end (#f7f2e8,
- * #f0ebdf); text is a warm near-black rather than #0a0a0a. The dark scale
- * keeps the values aisocratic.org has always shipped (#0a0a0a page, #141414
- * card, #e6e6e6 text — see the halation note in colors.ts) and fills in the
- * steps between them.
+ * The light theme uses Anthropic's measured ivory/oat surfaces and warm ink:
+ * 1 ivory-light #faf9f5; 2 ivory-medium #f0eee6; 3 ivory-dark #e8e6dc;
+ * 4 oat #e3dacc; 10 slate-light #5e5d59; 11 slate-medium #3d3d3a;
+ * 12 slate-dark #141413. Sampled from https://www.anthropic.com/ on
+ * 2026-09-04. The page uses step 2, cards step 1. Intervening steps preserve
+ * a monotonic ramp. Legacy neutral/slate primitives remain for overrides.
+ * Dark keeps aisocratic.org's page #0a0a0a, card #141414, text #e6e6e6.
  *
  * ## Hues: Tailwind weights
  *
@@ -36,23 +36,23 @@
 export const palette = {
   white: "#ffffff",
 
-  /** Website surfaces; oat remains available for an optional warm theme. */
+  /** Legacy cool surfaces, available for consumer overrides. */
   neutral: { 50: "#fafafa", 100: "#f8f8f8", 300: "#c8c8c8" },
   slate: { 100: "#f1f5f9", 200: "#e2e8f0", 300: "#cbd5e1", 400: "#94a3b8", 500: "#64748b", 600: "#475569", 700: "#334155" },
 
   oat: {
-    1: "#f7f2e8",
-    2: "#f0ebdf",
-    3: "#e8e2d6",
-    4: "#dfd8cb",
+    1: "#faf9f5",
+    2: "#f0eee6",
+    3: "#e8e6dc",
+    4: "#e3dacc",
     5: "#d4cdbf",
     6: "#c6bfb0",
     7: "#b1aa9c",
     8: "#928b7f",
     9: "#797469",
-    10: "#676359",
-    11: "#56524a",
-    12: "#1f1d18",
+    10: "#5e5d59",
+    11: "#3d3d3a",
+    12: "#141413",
   },
 
   ink: {
@@ -78,7 +78,7 @@ export const palette = {
   red: { 400: "#f87171", 600: "#dc2626", 700: "#b91c1c" },
   green: { 400: "#4ade80", 800: "#166534" },
   yellow: { 400: "#facc15", 800: "#854d0e" },
-  orange: { 400: "#fb923c", 700: "#c2410c" },
+  orange: { 400: "#fb923c", 700: "#c2410c", 800: "#9a3412" },
   blue: { 400: "#60a5fa", 700: "#1d4ed8" },
   cyan: { 400: "#22d3ee", 700: "#0e7490" },
   purple: { 400: "#c084fc", 700: "#7e22ce" },

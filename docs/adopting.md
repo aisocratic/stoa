@@ -88,7 +88,7 @@ your dependency. Once published, a versioned npm CDN URL can supply the same fil
 ```ts
 import { native } from "@aisocratic/design/native"
 
-native.colors.light.background // "#ffffff"
+native.colors.light.background // "#f0eee6" — warm ivory
 native.colors.dark.background // "#0a0a0a"
 native.type.body // { fontSize: 14, lineHeight: 23 }
 native.textStyles.nav // { fontSize: 14, textTransform: "uppercase", letterSpacing: 1.12, … }

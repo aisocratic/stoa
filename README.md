@@ -53,9 +53,9 @@ import { Dialog } from "@aisocratic/design/components/dialog"
    golden-ratio ladder anchored at 14px, the top six fluid. Never a stock
    `text-sm`, never `text-[Npx]`, never `leading-*` beside a step. Two text
    styles on top: `text-nav` (the header navigation) and `text-eyebrow`.
-2. **A palette, then roles.** Every hex lives once in the palette (white/slate light surfaces, a 12-step _ink_ dark neutral,
+2. **A palette, then roles.** Every hex lives once in the palette (ivory/oat light surfaces, a 12-step _ink_ dark neutral,
    Tailwind-weight hues); only the semantic roles become classes, and each points at a
-   palette entry per mode. The optional oat palette supports warm theme overrides.
+   palette entry per mode. Light uses Anthropic’s soft white, ivory and oat colors.
 3. **Three text colours.** `text-foreground` for titles and emphasis,
    `text-reading` for prose in an article, `text-muted-foreground` for chrome.
    No fourth shade.

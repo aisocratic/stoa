@@ -57,11 +57,13 @@ describe.each<Mode>(["light", "dark"])("%s mode contrast", (mode) => {
   })
 })
 
-it("uses the website page, card and reading colours", () => {
-  expect(resolveColor("background", "light")).toBe("#ffffff")
-  expect(resolveColor("card", "light")).toBe("#f8f8f8")
-  expect(resolveColor("foreground", "light")).toBe("#0a0a0a")
-  expect(resolveColor("reading", "light")).toBe("#262626")
+it("uses Anthropic ivory and oat in light mode and retains the dark reading colour", () => {
+  expect(resolveColor("background", "light")).toBe("#f0eee6")
+  expect(resolveColor("card", "light")).toBe("#faf9f5")
+  expect(resolveColor("foreground", "light")).toBe("#141413")
+  expect(resolveColor("reading", "light")).toBe("#3d3d3a")
+  expect(resolveColor("border", "light")).toBe("#e3dacc")
+  expect(resolveColor("muted-foreground", "light")).toBe("#5e5d59")
   expect(resolveColor("reading", "dark")).toBe("#c8c8c8")
 })
 
