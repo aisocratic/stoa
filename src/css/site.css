@@ -612,7 +612,7 @@ hr {
 
 /* PageHero + Section: shared entry to each GitHub Pages project. */
 .project-hero {
-  padding-block: calc(104px + 5rem) 5rem;
+  padding-block: calc(104px + 6.5rem) 6.5rem;
   text-align: center;
 }
 .project-hero h1 {
@@ -655,5 +655,12 @@ hr {
     scroll-behavior: auto !important;
     transition-duration: 0s !important;
     animation-duration: 0s !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .project-hero .actions {
+    flex-direction: column;
+    align-items: center;
   }
 }
