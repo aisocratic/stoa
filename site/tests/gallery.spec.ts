@@ -18,6 +18,9 @@ test("the package's classes are generated and the theme resolves", async ({ page
     if (r.status() >= 400) errors.push(`${r.status()} ${r.url()}`)
   })
   await page.goto("/")
+  // The static export is visible before React attaches event handlers.
+  // ThemeToggle changes its accessible name only after the client has mounted.
+  await expect(page.getByRole("button", { name: /Switch to (light|dark) mode/ }).first()).toBeVisible()
 
   const isMobile = info.project.name === "mobile"
   const shell = page.locator(".page-shell").first()
@@ -87,6 +90,9 @@ test("the package's classes are generated and the theme resolves", async ({ page
 
 test("keyboard controls and accessibility semantics remain intact", async ({ page }) => {
   await page.goto("/")
+  // The static export is visible before React attaches event handlers.
+  // ThemeToggle changes its accessible name only after the client has mounted.
+  await expect(page.getByRole("button", { name: /Switch to (light|dark) mode/ }).first()).toBeVisible()
   const table = page.getByTestId("table-demo")
   const guests = table.getByRole("columnheader", { name: "Guests" })
   await guests.getByRole("button").focus()
