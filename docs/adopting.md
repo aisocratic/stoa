@@ -39,7 +39,9 @@
    export const fontClassName = `${body.variable} ${display.variable} ${code.variable}`
    ```
 
-   Put `fontClassName` on `<html>` (or `<body>`). The slots inherit.
+   Put `fontClassName` on `<html>`. The font roles resolve at the root, so
+   placing the loader variables only on `<body>` can leave them using fallback
+   faces instead of the loaded fonts.
 
 4. `lib/utils.ts` becomes a shim so every existing import and `npx shadcn add`
    keep working:
