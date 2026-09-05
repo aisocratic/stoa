@@ -6,7 +6,7 @@ import { fontClassName } from "./fonts"
 import { Providers } from "./providers"
 
 export const metadata: Metadata = {
-  title: "Stoa — the AI Socratic design system",
+  title: "AI Socratic Design — the AI Socratic design system",
   description: "Tokens, type scale, colour roles and React primitives shared by aisocratic.org, Agora and Atlas.",
 }
 

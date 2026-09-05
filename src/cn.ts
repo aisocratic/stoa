@@ -1,7 +1,7 @@
 import { clsx, type ClassValue } from "clsx"
 import { extendTailwindMerge } from "tailwind-merge"
 
-import { type } from "./tokens/type.js"
+import { type, textStyles } from "./tokens/type.js"
 
 /**
  * The type scale lives in the `text-*` namespace (`text-body`,
@@ -18,9 +18,11 @@ import { type } from "./tokens/type.js"
  * `text-primary-foreground` was dropped in favour of a font size.
  *
  * Teaching the merger which `text-*` values are sizes fixes it everywhere at
- * once. The list is derived from the token source, so it cannot drift.
+ * once. The list is derived from the token source, so it cannot drift. The
+ * two text styles (`text-nav`, `text-eyebrow`) set a size too, so they join
+ * the same group.
  */
-export const TYPE_SCALE: readonly string[] = Object.keys(type)
+export const TYPE_SCALE: readonly string[] = [...Object.keys(type), ...Object.keys(textStyles)]
 
 const twMerge = extendTailwindMerge({
   extend: {

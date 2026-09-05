@@ -4,6 +4,6 @@ const nextConfig = {
   basePath: process.env.NEXT_PUBLIC_BASE_PATH ?? "",
   images: { unoptimized: true },
   reactStrictMode: true,
-  experimental: { optimizePackageImports: ["@aisocratic/stoa", "lucide-react"] },
+  experimental: { optimizePackageImports: ["@aisocratic/design", "lucide-react"] },
 }
 export default nextConfig

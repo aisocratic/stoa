@@ -1,9 +1,7 @@
-import type { ComponentProps } from "react"
+import { useId, type ComponentProps } from "react"
 
 import { brand } from "../tokens/brand.js"
 import { RING_PATH } from "./paths.js"
-
-let seq = 0
 
 /**
  * The mark: a ring filled with the brand gradient. Square, sized by the
@@ -11,8 +9,13 @@ let seq = 0
  * instead — for favicons, monochrome print, or a mark set into a coloured
  * band where the gradient would fight it.
  */
-export function LogoMark({ size = 32, mono = false, title = brand.name, ...props }: ComponentProps<"svg"> & { size?: number | string; mono?: boolean; title?: string }) {
-  const id = `stoa-mark-${++seq}`
+export function LogoMark({
+  size = 32,
+  mono = false,
+  title = brand.name,
+  ...props
+}: ComponentProps<"svg"> & { size?: number | string; mono?: boolean; title?: string }) {
+  const id = `aisocratic-design-mark-${useId().replace(/\W/g, "")}`
   return (
     <svg viewBox="0 0 796 796" width={size} height={size} role="img" aria-label={title} {...props}>
       {!mono ? (

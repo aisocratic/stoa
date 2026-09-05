@@ -4,15 +4,15 @@
 
 A ring, stroked with the brand gradient:
 
-| stop | colour |
-|---|---|
-| 0% | `#7c3aed` |
-| 35% | `#a855f7` |
-| 65% | `#ec4899` |
+| stop | colour    |
+| ---- | --------- |
+| 0%   | `#7c3aed` |
+| 35%  | `#a855f7` |
+| 65%  | `#ec4899` |
 | 100% | `#f472b6` |
 
 Available as `--brand-gradient` (a `linear-gradient(135deg, …)`), as
-`brandGradientCss()` from `@aisocratic/stoa/tokens`, and as the `LogoMark`
+`brandGradientCss()` from `@aisocratic/design/tokens`, and as the `LogoMark`
 component. `--join` (`#7c3aed` / `#8b5cf6` dark) is the same family flattened
 to one CTA colour; the gradient and the CTA should not share a viewport.
 
@@ -27,7 +27,7 @@ for black):
 - `…/images/logo/ai-socratic-logo-dark.{svg,png}`
 - `…/images/logo/ai-socratic-logo.{svg,png}`
 
-Base URL in `brand.logo` from `@aisocratic/stoa/tokens`.
+Base URL in `brand.logo` from `@aisocratic/design/tokens`.
 
 ## Favicon
 

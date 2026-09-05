@@ -6,17 +6,27 @@
  * three outputs are Tailwind-specific syntax (`@theme inline`,
  * `--text-x--line-height`, `@utility`) that no token tool has a format for,
  * and this is short enough to read in one sitting.
+ *
+ * Shape of the colour output:
+ *
+ *   :root                 --oat-1 … --ink-12, --amber-600 …   the palette, once
+ *   :root / .light        --background: var(--oat-1); …       roles, light
+ *   .dark                 --background: var(--ink-1); …       roles, dark
+ *   @theme inline         --color-background: var(--background)
+ *
+ * Only roles reach `@theme`, so only roles become utilities.
  */
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
 
-import { brand } from "../src/tokens/brand.ts"
-import { colors, type Mode } from "../src/tokens/colors.ts"
-import { fonts, fontStack } from "../src/tokens/fonts.ts"
-import { radii } from "../src/tokens/radii.ts"
-import { shell } from "../src/tokens/shell.ts"
-import { type, typeSize, type TypeStep } from "../src/tokens/type.ts"
+import { brand } from "../dist/tokens/brand.js"
+import { colors, colorAliases, colorCss, resolveColor, type ColorRole, type Mode } from "../dist/tokens/colors.js"
+import { fonts, fontStack } from "../dist/tokens/fonts.js"
+import { paletteEntries, paletteVar } from "../dist/tokens/palette.js"
+import { radii, radiusAliases } from "../dist/tokens/radii.js"
+import { shell } from "../dist/tokens/shell.js"
+import { type, typeSize, textStyles, type TypeStep } from "../dist/tokens/type.js"
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..")
 const pkg = JSON.parse(readFileSync(join(ROOT, "package.json"), "utf8")) as { version: string }
@@ -26,18 +36,25 @@ const DARK = '.dark, [data-theme="dark"]'
 const DARK_MEDIA = ':root:not(.light):not([data-theme="light"])'
 
 const indent = (lines: string[], depth: number) => lines.map((l) => "  ".repeat(depth) + l).join("\n")
+const rem = (px: number) => `${px / 16}rem`
 
-function colorLines(mode: Mode): string[] {
-  return Object.entries(colors).map(([role, pair]) => `--${role}: ${pair[mode]};`)
+const roleNames = Object.keys(colors) as ColorRole[]
+
+const paletteLines = paletteEntries().map(([ref, hex]) => `${paletteVar(ref)}: ${hex};`)
+
+function roleLines(mode: Mode): string[] {
+  return [
+    ...roleNames.map((role) => `--${role}: ${colorCss(role, mode)};`),
+    ...Object.entries(colorAliases).map(([alias, role]) => `--${alias}: var(--${role});`),
+  ]
 }
 
 const radiusLines = [
-  `--radius: ${radii.base / 16}rem;`,
-  `--radius-sm: ${radii.sm / 16}rem;`,
-  `--radius-md: var(--radius);`,
-  `--radius-lg: ${radii.lg / 16}rem;`,
-  `--radius-xl: ${radii.xl / 16}rem;`,
-  `--radius-2xl: ${radii["2xl"] / 16}rem;`,
+  `--radius-md: ${rem(radii.md)}; /* control */`,
+  `--radius-xl: ${rem(radii.xl)}; /* surface */`,
+  ...Object.entries(radiusAliases).map(([name, rung]) =>
+    name === "DEFAULT" ? `--radius: var(--radius-${rung});` : `--radius-${name}: var(--radius-${rung});`,
+  ),
 ]
 
 const typeLines = Object.entries(type).flatMap(([name, step]) => [
@@ -45,27 +62,30 @@ const typeLines = Object.entries(type).flatMap(([name, step]) => [
   `--text-${name}--line-height: ${step.lineHeight};`,
 ])
 
-const fontLines = (Object.keys(fonts) as (keyof typeof fonts)[]).map(
-  (role) => `--font-${role}: ${fontStack(role)};`,
-)
+const trackingLines = Object.entries(textStyles).map(([name, s]) => `--tracking-${name}: ${s.tracking};`)
+
+const fontLines = (Object.keys(fonts) as (keyof typeof fonts)[]).map((role) => `--font-${role}: ${fontStack(role)};`)
 
 const brandLines = [
-  `--brand-gradient: linear-gradient(${brand.gradient.angle}deg, ${brand.gradient.stops
-    .map((s) => `${s.color} ${s.at}%`)
-    .join(", ")});`,
+  `--brand-gradient: linear-gradient(${brand.gradient.angle}deg, ${brand.gradient.stops.map((s) => `${s.color} ${s.at}%`).join(", ")});`,
 ]
 
 /**
- * The colour block is emitted three times — light, dark by class/attribute,
- * dark by OS preference — so one stylesheet serves next-themes apps (the
- * class is always present, so the media branch never fights it) and static
- * sites with no JS at all.
+ * The palette is emitted once on `:root`; the role block three times —
+ * light, dark by class/attribute, dark by OS preference — so one stylesheet
+ * serves next-themes apps (the class is always present, so the media branch
+ * never fights it) and static sites with no JS at all. Every role is redeclared in each theme block so a nested `.dark`
+ * panel resolves its own colors, including aliases and any derived roles.
  */
-function themeBlock(extraLight: string[], extraDark: string[]): string {
-  const light = [`color-scheme: light;`, ...colorLines("light"), ...extraLight]
-  const dark = [`color-scheme: dark;`, ...colorLines("dark"), ...extraDark]
+function themeBlock(extraRoot: string[], extraLight: string[]): string {
+  const light = [`color-scheme: light;`, ...roleLines("light"), ...extraLight]
+  const dark = [`color-scheme: dark;`, ...roleLines("dark")]
   return [
     `@layer base {`,
+    `  :root {`,
+    indent([...paletteLines, ...extraRoot], 2),
+    `  }`,
+    ``,
     `  ${LIGHT} {`,
     indent(light, 2),
     `  }`,
@@ -83,39 +103,36 @@ function themeBlock(extraLight: string[], extraDark: string[]): string {
   ].join("\n")
 }
 
-const header = (what: string) =>
-  `/* @aisocratic/stoa ${pkg.version} — ${what}. Generated by scripts/build-css.ts; do not edit. */\n`
+const header = (what: string) => `/* @aisocratic/design ${pkg.version} — ${what}. Generated by scripts/build-css.ts; do not edit. */\n`
 
 /* ---------------------------------------------------------------- tokens.css */
 const tokensCss =
   header("plain CSS custom properties, no Tailwind") +
-  themeBlock([...radiusLines, ...typeLines, ...fontLines, ...brandLines], []) +
+  themeBlock([...radiusLines, ...typeLines, ...trackingLines, ...fontLines, ...brandLines], []) +
   "\n"
 
 /* -------------------------------------------------------------- tailwind.css */
-const themeType = [
-  `/* The type scale is a plain @theme, not inline, so var(--text-lead) is`,
-  ` * readable from hand-written CSS too. */`,
+const themeStatic = [
+  `/* The type scale and radii are a plain @theme, not inline, so`,
+  ` * var(--text-lead) and var(--radius-xl) are readable from hand-written CSS too. */`,
   `@theme {`,
   indent(typeLines, 1),
+  ``,
+  indent(trackingLines, 1),
+  ``,
+  `  /* Two rungs. Every other Tailwind radius name lands on one of them. */`,
+  `  --radius-*: initial;`,
+  indent(
+    radiusLines.filter((l) => !l.startsWith("--radius:")),
+    1,
+  ),
   `}`,
 ].join("\n")
 
 const themeInline = [
   `@theme inline {`,
   indent(
-    Object.keys(colors).map((role) => `--color-${role}: var(--${role});`),
-    1,
-  ),
-  ``,
-  indent(
-    [
-      `--radius-sm: ${radii.sm / 16}rem;`,
-      `--radius-md: var(--radius);`,
-      `--radius-lg: var(--radius);`,
-      `--radius-xl: ${radii.xl / 16}rem;`,
-      `--radius-2xl: ${radii["2xl"] / 16}rem;`,
-    ],
+    [...roleNames, ...Object.keys(colorAliases)].map((role) => `--color-${role}: var(--${role});`),
     1,
   ),
   ``,
@@ -135,24 +152,46 @@ const themeInline = [
   `}`,
 ].join("\n")
 
+/* `text-nav`, `text-eyebrow`: a step plus transform and tracking, one class. */
+const textStyleUtilities = Object.entries(textStyles)
+  .map(([name, s]) =>
+    [
+      `@utility text-${name} {`,
+      `  font-size: var(--text-${s.step});`,
+      `  line-height: var(--text-${s.step}--line-height);`,
+      `  text-transform: uppercase;`,
+      `  letter-spacing: var(--tracking-${name});`,
+      `}`,
+    ].join("\n"),
+  )
+  .join("\n\n")
+
 const baseCss = readFileSync(join(ROOT, "src/css/base.css"), "utf8")
 
 const tailwindCss =
-  header("Tailwind v4 theme. Import AFTER `@import \"tailwindcss\"`") +
-  themeBlock([`--radius: ${radii.base / 16}rem;`, ...brandLines], []) +
+  header('Tailwind v4 theme. Import AFTER `@import "tailwindcss"`') +
+  themeBlock([`--radius: var(--radius-md);`, ...brandLines], []) +
   "\n\n" +
-  themeType +
+  themeStatic +
   "\n\n" +
   themeInline +
+  "\n\n" +
+  textStyleUtilities +
   "\n\n" +
   baseCss
 
 /* --------------------------------------------------------------- tokens.json */
+const resolvedRoles = (mode: Mode) =>
+  Object.fromEntries([...roleNames, ...Object.keys(colorAliases)].map((r) => [r, resolveColor(r as ColorRole, mode)]))
+
 const tokensJson = {
   version: pkg.version,
+  palette: Object.fromEntries(paletteEntries()),
   color: {
-    light: Object.fromEntries(Object.entries(colors).map(([k, v]) => [k, v.light])),
-    dark: Object.fromEntries(Object.entries(colors).map(([k, v]) => [k, v.dark])),
+    roles: colors,
+    aliases: colorAliases,
+    light: resolvedRoles("light"),
+    dark: resolvedRoles("dark"),
   },
   type: Object.fromEntries(
     (Object.entries(type) as [string, TypeStep][]).map(([k, s]) => [
@@ -160,7 +199,8 @@ const tokensJson = {
       { px: s.px, ...(s.max ? { max: s.max } : {}), css: typeSize(s), lineHeight: s.lineHeight, note: s.note },
     ]),
   ),
-  radius: radii,
+  textStyles,
+  radius: { ...radii, aliases: radiusAliases },
   font: fonts,
   shell,
   brand,
@@ -168,6 +208,7 @@ const tokensJson = {
 
 mkdirSync(join(ROOT, "dist/css"), { recursive: true })
 writeFileSync(join(ROOT, "dist/css/tokens.css"), tokensCss)
+writeFileSync(join(ROOT, "dist/css/site.css"), tokensCss + "\n" + readFileSync(join(ROOT, "src/css/site.css"), "utf8"))
 writeFileSync(join(ROOT, "dist/css/tailwind.css"), tailwindCss)
 writeFileSync(join(ROOT, "dist/tokens.json"), JSON.stringify(tokensJson, null, 2) + "\n")
-console.log("wrote dist/css/tokens.css, dist/css/tailwind.css, dist/tokens.json")
+console.log("wrote dist/css/tokens.css, dist/css/tailwind.css, dist/css/site.css, dist/tokens.json")

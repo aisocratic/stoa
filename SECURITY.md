@@ -7,34 +7,21 @@ Email **security@aisocratic.org**. Please do not open a public issue.
 Include what you found, how to reproduce it, and what an attacker could do with
 it. We aim to acknowledge within 72 hours.
 
-## Stoa's trust model — read this before deploying
+## Trust model
 
-**Stoa has no user accounts and no in-app permission system.** Anyone who can
-reach the board can read and edit every card. Assignees are free text, not
-identities. This is deliberate: adding roles without an identity provider would
-look like access control without being it.
+AI Socratic Design is a client-side design-system package. It does not provide
+authentication, authorization, data storage, network services, or server-side
+input validation. Applications remain responsible for those security
+boundaries.
 
-The consequences you need to plan for:
+Consumers should treat component props and token overrides as application input:
 
-- **Do not expose a board to the internet unauthenticated.** `AGORA_AUTH=none`
-  is meant for localhost. In production, set `AGORA_AUTH=password`, or put Stoa
-  behind a proxy that authenticates for you and use `AGORA_AUTH=proxy`.
-- **`AGORA_AUTH=proxy` is only as good as your network.** It trusts an HTTP
-  header. If anything can reach the app without passing through your proxy, that
-  header can be forged. Stoa refuses the header unless the peer address is in
-  the configured trusted range, but the network is still yours to get right.
-- **API tokens are bearer credentials.** Anything holding one has full board
-  access. They must be at least 32 characters; Stoa refuses shorter ones at
-  startup. Rotate by editing `AGORA_API_TOKENS` and restarting.
-- **The `command` dispatch adapter executes a process on your server.** It is
-  off unless you set `AGORA_ALLOW_COMMAND_DISPATCH=1`. Card content becomes part
-  of that process's input, so treat anyone who can create a card as someone who
-  can influence what runs. Prefer the `webhook` adapter, which moves execution
-  somewhere with its own boundary.
-- **Webhook payloads are signed, not encrypted.** Verify the
-  `X-Stoa-Signature` HMAC on your receiver, and serve it over TLS.
+- Do not render untrusted HTML through component children.
+- Validate URLs before passing them to navigation props.
+- Keep React, Radix, and other peer dependencies on supported security releases.
+- Review generated CSS and package provenance when upgrading.
 
 ## Supported versions
 
-Stoa is pre-1.0. Security fixes land on `main` and in the next release; there
-are no backports yet.
+AI Socratic Design is pre-1.0. Security fixes land on `main` and in the next
+release; there are no backports yet.

@@ -2,7 +2,7 @@
  * Three roles, named for what they do. Every face is OFL and is loaded by the
  * consuming app (next/font/google, a Google Fonts link, expo-font); this
  * package ships no font binary and never will. It only defines a slot per
- * role — `--stoa-font-body` and friends — that the app fills, with a named
+ * role — `--aisocratic-font-body` and friends — that the app fills, with a named
  * fallback stack so an unfilled slot still renders the right face if it is
  * installed, and a sane system face if not.
  *
@@ -27,7 +27,9 @@ export type FontSpec = {
   readonly italic: boolean
   readonly fallback: string
   /** The custom property the app fills (next/font `variable`, or a plain `:root` rule). */
-  readonly slot: `--stoa-font-${FontRole}`
+  readonly slot: `--aisocratic-font-${FontRole}`
+  /** Pre-rename slot read as a fallback through the 1.x compatibility window. */
+  readonly legacySlot: `--stoa-font-${FontRole}`
   /** Google Fonts family spec, for a `<link>` on a static site. */
   readonly google: string
   readonly license: "OFL-1.1"
@@ -39,7 +41,8 @@ export const fonts = {
     weights: [400],
     italic: false,
     fallback: "ui-sans-serif, system-ui, sans-serif",
-    slot: "--stoa-font-body",
+    slot: "--aisocratic-font-body",
+    legacySlot: "--stoa-font-body",
     google: "Space+Grotesk:wght@400",
     license: "OFL-1.1",
   },
@@ -48,7 +51,8 @@ export const fonts = {
     weights: [200],
     italic: true,
     fallback: 'Georgia, "Times New Roman", serif',
-    slot: "--stoa-font-display",
+    slot: "--aisocratic-font-display",
+    legacySlot: "--stoa-font-display",
     google: "Newsreader:ital,opsz,wght@0,6..72,200;1,6..72,200",
     license: "OFL-1.1",
   },
@@ -57,7 +61,8 @@ export const fonts = {
     weights: [400, 500],
     italic: false,
     fallback: "ui-monospace, SFMono-Regular, Menlo, monospace",
-    slot: "--stoa-font-code",
+    slot: "--aisocratic-font-code",
+    legacySlot: "--stoa-font-code",
     google: "JetBrains+Mono:wght@400;500",
     license: "OFL-1.1",
   },
@@ -66,5 +71,5 @@ export const fonts = {
 /** The CSS `font-family` value for a role: the app's slot first, then the named face, then the system stack. */
 export function fontStack(role: FontRole): string {
   const f = fonts[role]
-  return `var(${f.slot}, "${f.family}", ${f.fallback})`
+  return `var(${f.slot}, var(${f.legacySlot}, "${f.family}", ${f.fallback}))`
 }

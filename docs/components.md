@@ -1,63 +1,123 @@
 # Components
 
-Everything below is exported by `@aisocratic/stoa`. Reuse order in a consumer:
+Everything below is exported by `@aisocratic/design`. Reuse order in a consumer:
 package primitive → package composed pattern → the app's own `components/ui/*`
 (shadcn CLI output, which imports `cn` from the package) → a new component.
 
-## From the barrel — `import { … } from "@aisocratic/stoa"`
+Nothing here imports a router or an image loader. Anything that renders a
+link takes `linkComponent` (pass Next's `Link`) and renders `<a>` otherwise.
 
-| Export | Use for |
-|---|---|
-| `Section`, `SectionHeading`, `RuledHeading`, `PageHero` | the page skeleton — see [layouts.md](layouts.md) |
-| `Button`, `buttonVariants` | any in-page action. `variant`: `default` · `cta` (bold + shadow) · `highlight` (pill) · `secondary` · `outline` · `ghost` · `destructive` · `link`. `size`: `default` (h-8) · `sm` · `xs` · `lg` (h-10) · `icon` · `icon-xs` · `icon-lg`. `asChild` for a link. **`loading` renders the Spinner and disables** — never hand-roll `disabled` + a spinning icon |
-| `Badge`, `statusBadgeToneClasses` | two modes: themed `variant` (`default/secondary/destructive/outline`), or status `tone` (`success/warning/caution/danger/info/highlight/accent/neutral`, plus `size`, `shape`, `interactive`). Passing `tone` selects status mode. Tones are the `--status-*` tokens |
-| `Card`, `cardSurface` | the one boxed surface: `bg-card border border-border rounded-xl`. Pad via `className`. `cardSurface` is the class string for elements that can't be a `<div>` |
-| `Input`, `Textarea` | field surfaces built on `fieldVariants`; compose them inside your own labelled field component |
-| `Table` family | plain table chrome |
-| `Alert`, `AlertTitle`, `AlertDescription` | inline banner; `variant`: `default/destructive/success` |
-| `Skeleton`, `SkeletonTable` | loading placeholders, `animate-skeleton-pulse` |
-| `Spinner` | sizes `xs`–`2xl`; inside a Button use `loading` instead |
-| `EmptyState` | "nothing here"; `variant="plain"|"panel"`, `icon`, `title`, `action` |
-| `Collapsible`, `CollapsibleTrigger`, `CollapsibleContent` | disclosure, no Radix dependency |
-| `LogoMark`, `Wordmark` | the brand — see [brand.md](brand.md) |
-| `cn`, `TYPE_SCALE` | class merging that understands the type scale |
-| `controlBase`, `controlSize`, `controlColor`, `fieldVariants` | the cva building blocks every control composes — build new controls from these |
-| `tokens`, `colors`, `type`, `radii`, `fonts`, `shell`, `brand` | the typed token source |
+## The page skeleton and site chrome — `import { … } from "@aisocratic/design"`
 
-## By subpath — `import { … } from "@aisocratic/stoa/components/<name>"`
+| Export                                                  | Use for                                                                                                                                                         |
+| ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Section`, `SectionHeading`, `RuledHeading`, `PageHero` | the page skeleton — see [layouts.md](layouts.md). `Section tone="dark"` is a themed band                                                                        |
+| `SiteHeader`, `navLinkClass`                            | the aisocratic.org header: out of flow, brand left, `text-nav` links centred, `actions` right, `menu` below `lg`. 104px tall — the first `Section` takes `lead` |
+| `SiteFooter`                                            | brand column, eyebrow-headed link `columns`, an `aside` (newsletter), the bottom bar with `bottomLinks` and `social`                                            |
+
+## The admin chrome
+
+| Export                         | Use for                                                                                                                                                                                                                     |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AdminShell`                   | the /admin layout: fixed sidebar on `bg-card` with grouped body-font nav (`groups`, `activeHref`), compact mode persisted to `localStorage`, a mobile drawer, and `<main>` at full width. `embedded` contains it in a frame |
+| `Breadcrumbs`                  | the orientation line (`Events / Venues / Talent Garden`) plus the page's `sr-only` `<h1>`; one item renders the name only. `separator="chevron"` for the public site                                                        |
+| `PageToolbar`                  | section `nav` (a `SegmentedControl`), `filters` left, `meta`, `actions` right — sticky                                                                                                                                      |
+| `StickyBar`, `stickyRailClass` | the pinned bar itself, and the one offset a rail beside it uses                                                                                                                                                             |
+| `PageHeader`                   | a record page's title (display face, `text-page`), mono subtitle, actions. Section pages named by the sidebar render no heading                                                                                             |
+| `SegmentedControl`             | pill view switcher; segments with `href` are route nav, with `onValueChange` an in-page toggle. **Never** Radix `Tabs` for route nav                                                                                        |
+| `MetricCard`                   | the stat card: eyebrow label + display value; `size="compact"`, or `progress` for a label/value row over a bar                                                                                                              |
+
+## Tables
+
+| Export                                                                         | Use for                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DataTable` (`components/data-table`)                                          | the admin list. In-memory by default: `searchText`, select `filters` with a `predicate`, sortable columns (`sortKey` + `sortValue`), `pinFirst`, `pageSize`, `selectedKeys` + `onSelectionChange` + `bulkActions`, `rowActions`, `renderSubRow`, `rowHref` / `onRowClick` (+ `onNavigate` for a router), `stats`, `sectionNav`, `toolbarActions`. Pass `server` (`total`, `page`, `pageSize`, controlled `query` / `sortKey` / `sortDirection`, `onSearch`, `onFilterChange`, `onSortChange`, `onPageChange` or `getPageHref`) for a server-paginated page |
+| `TableShell`, `tableHeadRow`, `tableHeadCell`, `tableBodyRow`, `tableBodyCell` | the one spelling of table chrome, for bespoke tables                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `SortableHeaderCell`, `SortableHeaderContent`, `SortIcon`, `useTableSort`      | sortable headers and the column/direction state for a hand-built table                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `PaginationControls`                                                           | Prev / Next with the page line; `getHref` (links) or `onPageChange` (buttons)                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `ResultsSummary`                                                               | the mono count line                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `RowActions`, `RowAction`                                                      | the trailing icon-action cell; `variant="destructive"` for delete                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `FilterChip`, `FilterToolbar`, `FilterRail`                                    | filter pills, the filters-left / actions-right row above a listing, and the sticky filter column on explorer pages                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+
+## Forms
+
+Every field carries its own label, description and error and wires `aria-describedby` / `aria-invalid`. Never compose raw label + input + error text inline.
+
+| Export                                        | Use for                                                                                                                                         |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `TextField`                                   | the labelled text input; `prefix` (bordered leading segment), `leadingIcon` (glyph inside), `multiline` (textarea), `variant`, `inputClassName` |
+| `SelectField` (`components/select-field`)     | plain (Radix Select), `searchable` (popover + command), `multiple` (badges), options with `group`; `triggerVariant="chip"` beside filter chips  |
+| `ToggleField` (`components/toggle-field`)     | one labelled boolean; `control="checkbox"` (default) or `"switch"`                                                                              |
+| `SearchField`                                 | the filter-bar search box — not a form field                                                                                                    |
+| `FieldWrapper`, `useFieldIds`, `labelClass`   | build a new field on the same chrome                                                                                                            |
+| `FormSection`, `FormActions`                  | the titled card grouping a run of fields (`columns` 1 or 2), and the footer row                                                                 |
+| `ChoiceCard`                                  | card-shaped toggle for pickers; `indicator` radio / checkbox                                                                                    |
+| `ConfirmDialog` (`components/confirm-dialog`) | the one confirmation — never a native `confirm()`                                                                                               |
+
+Not here: a date picker (needs a calendar peer) and a tag input. Build them in the app on `FieldWrapper`.
+
+## Sign in and sign up
+
+| Export                                       | Use for                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AuthPanel` (`components/auth-panel`)        | the join / sign-in window: a Join · Sign in toggle, an email flow (`method`: `code` with a 6-digit step, `link`, or `password` with `forgotHref`), a column of `providers` (`google` `apple` `github` `microsoft` `linkedin` `x` `sso`, or any id with your own `icon`), an `optIn` checkbox, a `terms` line. Handlers return `{ error }` to show a message. `variant="glass"` (over the violet field) or `"card"` (tokens) |
+| `AuthScreen` (`components/auth-panel`)       | the full page: `AuthBackdrop`, eyebrow / title / description / `benefits` / `note` on the left, the glass panel on the right, `closeHref` or `onClose`                                                                                                                                                                                                                                                                      |
+| `AuthBackdrop`                               | the violet (join) or cyan (sign-in) field on its own                                                                                                                                                                                                                                                                                                                                                                        |
+| `providerGlyphs`, `GoogleGlyph` … `KeyGlyph` | the provider marks, from the barrel                                                                                                                                                                                                                                                                                                                                                                                         |
+
+## Primitives
+
+| Export                                                                                                  | Use for                                                                                                                                                                                                                                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Button`, `buttonVariants`                                                                              | any in-page action. `variant`: `default` · `cta` (bold + shadow) · `highlight` (pill) · `secondary` · `outline` · `ghost` · `destructive` · `link`. `size`: `default` (h-8) · `sm` · `xs` · `lg` (h-10) · `icon` · `icon-xs` · `icon-lg`. `asChild` for a link. **`loading` renders the Spinner and disables** — never hand-roll `disabled` + a spinning icon |
+| `Badge`, `statusBadgeToneClasses`                                                                       | two modes: themed `variant` (`default/secondary/destructive/outline`), or status `tone` (`success/warning/caution/danger/info/highlight/accent/neutral`, plus `size`, `shape`, `interactive`). Passing `tone` selects status mode. Tones are the `--status-*` tokens                                                                                          |
+| `Card`, `cardSurface`                                                                                   | the one boxed surface: `bg-card border border-border rounded-xl`. Pad via `className`. `cardSurface` is the class string for elements that can't be a `<div>`                                                                                                                                                                                                 |
+| `Input`, `Textarea`                                                                                     | field surfaces built on `fieldVariants`; compose them inside your own labelled field component                                                                                                                                                                                                                                                                |
+| `Table` family                                                                                          | plain table chrome                                                                                                                                                                                                                                                                                                                                            |
+| `Alert`, `AlertTitle`, `AlertDescription`                                                               | inline banner; `variant`: `default/destructive/success/warning` — the status tokens                                                                                                                                                                                                                                                                           |
+| `Skeleton`, `SkeletonTable`                                                                             | loading placeholders, `animate-skeleton-pulse`                                                                                                                                                                                                                                                                                                                |
+| `Spinner`                                                                                               | sizes `xs`–`2xl`; inside a Button use `loading` instead                                                                                                                                                                                                                                                                                                       |
+| `EmptyState`                                                                                            | "nothing here"; `variant="plain"                                                                                                                                                                                                                                                                                                                              | "panel"`, `icon`, `title`, `action` |
+| `Collapsible`, `CollapsibleTrigger`, `CollapsibleContent`                                               | disclosure, no Radix dependency                                                                                                                                                                                                                                                                                                                               |
+| `LogoMark`, `Wordmark`                                                                                  | the brand — see [brand.md](brand.md)                                                                                                                                                                                                                                                                                                                          |
+| `cn`, `TYPE_SCALE`                                                                                      | class merging that understands the type scale                                                                                                                                                                                                                                                                                                                 |
+| `controlBase`, `controlSize`, `controlColor`, `fieldVariants`                                           | the cva building blocks every control composes                                                                                                                                                                                                                                                                                                                |
+| `tokens`, `palette`, `colors`, `resolveColor`, `type`, `textStyles`, `radii`, `fonts`, `shell`, `brand` | the typed token source                                                                                                                                                                                                                                                                                                                                        |
+
+## By subpath — `import { … } from "@aisocratic/design/components/<name>"`
 
 These need an optional peer (a Radix package, `cmdk`, `sonner`, `next-themes`)
 and are deliberately kept out of the barrel.
 
-| Subpath | Family | Peer |
-|---|---|---|
-| `dialog` | Dialog, DialogContent (`showCloseButton`), DialogHeader/Title/Description/Footer | `@radix-ui/react-dialog` |
-| `sheet` | side panel, `side` prop | `@radix-ui/react-dialog` |
-| `select` | Select, SelectTrigger, SelectContent, SelectItem, … | `@radix-ui/react-select` |
-| `popover` | Popover, PopoverTrigger, PopoverContent | `@radix-ui/react-popover` |
-| `tooltip` | TooltipProvider (`delayDuration={0}` default), Tooltip, TooltipTrigger, TooltipContent | `@radix-ui/react-tooltip` |
-| `tabs` | in-content panels only — route navigation is not a Tabs job | `@radix-ui/react-tabs` |
-| `dropdown-menu` | menus | `@radix-ui/react-dropdown-menu` |
-| `scroll-area` | styled scroll container | `@radix-ui/react-scroll-area` |
-| `progress` | Progress | `@radix-ui/react-progress` |
-| `avatar` | Avatar, AvatarImage, AvatarFallback | `@radix-ui/react-avatar` |
-| `checkbox`, `switch`, `label` | form controls | the matching Radix package |
-| `command` | command palette / combobox | `cmdk` |
-| `sonner` | `Toaster`, theme-aware; call `toast()` from `sonner` | `sonner`, `next-themes` |
+| Subpath                       | Family                                                                                                           | Peer                            |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------- |
+| `theme-toggle`                | the sun/moon header button                                                                                       | `next-themes`                   |
+| `mobile-menu`                 | the burger menu for `SiteHeader`'s `menu` slot: `items` with optional `children` groups, a `footer`              | `@radix-ui/react-dialog`        |
+| `dialog`                      | Dialog, DialogContent (`showCloseButton`), DialogHeader/Title/Description/Footer — the title is the display face | `@radix-ui/react-dialog`        |
+| `sheet`                       | side panel, `side` prop                                                                                          | `@radix-ui/react-dialog`        |
+| `select`                      | Select, SelectTrigger, SelectContent, SelectItem, …                                                              | `@radix-ui/react-select`        |
+| `popover`                     | Popover, PopoverTrigger, PopoverContent (a surface: `rounded-xl`)                                                | `@radix-ui/react-popover`       |
+| `tooltip`                     | TooltipProvider (`delayDuration={0}` default), Tooltip, TooltipTrigger, TooltipContent                           | `@radix-ui/react-tooltip`       |
+| `tabs`                        | in-content panels only — route navigation is `SegmentedControl`                                                  | `@radix-ui/react-tabs`          |
+| `dropdown-menu`               | menus                                                                                                            | `@radix-ui/react-dropdown-menu` |
+| `scroll-area`                 | styled scroll container                                                                                          | `@radix-ui/react-scroll-area`   |
+| `progress`                    | Progress                                                                                                         | `@radix-ui/react-progress`      |
+| `avatar`                      | Avatar, AvatarImage, AvatarFallback                                                                              | `@radix-ui/react-avatar`        |
+| `checkbox`, `switch`, `label` | form controls                                                                                                    | the matching Radix package      |
+| `command`                     | command palette / combobox                                                                                       | `cmdk`                          |
+| `sonner`                      | `Toaster`, theme-aware; call `toast()` from `sonner`                                                             | `sonner`, `next-themes`         |
 
 ## Control geometry
 
-`controlBase` = `text-body font-medium rounded-lg transition-all duration-200
+`controlBase` = `text-body font-medium rounded-md transition-all duration-200
 ease-out outline-none focus-visible:ring-2 focus-visible:ring-ring
 disabled:…`. `controlSize.default` is **h-8**, the canonical rung; `sm` h-7,
 `lg` h-10, `icon` size-8. `controlColor` has `default / secondary / outline /
-ghost / destructive`. `fieldVariants` is the input surface (`bg-input
-border-input`, focus ring, `aria-invalid` styling).
+ghost / destructive`. `fieldVariants` is the input surface (`bg-secondary
+border-border`, focus ring, `aria-invalid` styling).
 
 ## What is not here, on purpose
 
-Anything that imports a router or an image loader (`ButtonLink`,
-pagination, row actions, avatars with `next/image`), charts, calendars, and
-composed form fields. Those belong in the app, built on the primitives
-above. Admin data tables and dashboard card frames are product code, not
-design system.
+Data tables, charts, calendars, composed form fields, the user menu, and
+anything that needs the app's data. Those belong in the app, built on the
+chrome and primitives above.

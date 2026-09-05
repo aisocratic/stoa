@@ -1,20 +1,33 @@
 /**
- * Eight effective corner radii were in use (4, 6, 8, 10, 14, 16, 24, full)
- * across ~860 elements, with no rule about which. These are four rungs of the
- * same φ ladder the type scale uses, anchored on the base (10px):
+ * Two radii. A control is 10px, a surface is 16px, and a pill is
+ * `rounded-full`. That is the whole ladder.
  *
- *     6 · 10 · 16 · 26          (÷φ, base, ×φ, ×φ²)
+ * The previous system had four rungs on a φ ladder (6 · 10 · 16 · 26) and
+ * before that eight values in use with no rule about which. In practice only
+ * two questions ever get asked — "is this a button or a card?" — so the
+ * ladder is two rungs, named the way shadcn output already spells them:
  *
- * `md` is kept only as an alias of the base so legacy call sites don't have
- * to change in the same pass — 8px is not a rung. Bare `rounded` (4px) is
- * off-ladder: use `rounded-sm`.
+ *   rounded-md   10px   controls: buttons, inputs, badges, menu items, tabs
+ *   rounded-xl   16px   surfaces: cards, dialogs, popovers, panels
+ *
+ * Every other Tailwind radius name is an alias, so third-party markup lands
+ * on a rung instead of off the ladder: `rounded` `-xs` `-sm` `-lg` → 10px,
+ * `-2xl` → 16px. `rounded-3xl` and up do not exist.
  */
 export const radii = {
-  base: 10,
-  sm: 6,
-  lg: 10,
+  /** control */
+  md: 10,
+  /** surface */
   xl: 16,
-  "2xl": 26,
 } as const
 
 export type RadiusRung = keyof typeof radii
+
+/** Tailwind names that resolve to a rung. `DEFAULT` is bare `rounded`. */
+export const radiusAliases = {
+  DEFAULT: "md",
+  xs: "md",
+  sm: "md",
+  lg: "md",
+  "2xl": "xl",
+} as const satisfies Record<string, RadiusRung>

@@ -42,7 +42,7 @@ const LEAD = {
 const TONE = {
   default: "bg-background",
   /** The art-directed dark bands on /about, /workshops and /labs. */
-  dark: "bg-black text-white",
+  dark: "dark bg-background text-foreground",
   /** Inherit whatever is behind it — for sections stacked inside one canvas. */
   none: "",
 } as const
@@ -70,13 +70,7 @@ export function Section({
 }) {
   return (
     <section
-      className={cn(
-        lead ? LEAD[size] : SIZE[size].pt,
-        SIZE[size].pb,
-        TONE[tone],
-        divider && "border-t border-border",
-        className,
-      )}
+      className={cn(lead ? LEAD[size] : SIZE[size].pt, SIZE[size].pb, TONE[tone], divider && "border-t border-border", className)}
       {...props}
     >
       {shell ? <div className={cn("page-shell", innerClassName)}>{children}</div> : children}
@@ -112,21 +106,12 @@ export function SectionHeading({
 }) {
   const heading = (
     <div className={cn(ALIGN[align], "min-w-0")}>
-      {eyebrow ? (
-        <p className="text-micro uppercase tracking-[0.14em] text-primary mb-2">{eyebrow}</p>
-      ) : null}
+      {eyebrow ? <p className="text-eyebrow text-primary mb-2">{eyebrow}</p> : null}
       {/* No weight class: the display face ships one weight, so `font-bold` here would
           only ask the browser to smear it. Hierarchy comes from size. */}
       <Tag className="font-display text-section text-foreground">{title}</Tag>
       {subtitle ? (
-        <p
-          className={cn(
-            "text-body text-muted-foreground mt-3 max-w-[60ch]",
-            align === "center" && "mx-auto",
-          )}
-        >
-          {subtitle}
-        </p>
+        <p className={cn("text-body text-muted-foreground mt-3 max-w-[60ch]", align === "center" && "mx-auto")}>{subtitle}</p>
       ) : null}
     </div>
   )
@@ -169,9 +154,7 @@ export function RuledHeading({
           made one header a row taller than the one beside it. */}
       <Tag className="font-display text-title text-foreground shrink-0 whitespace-nowrap">
         {title}
-        {count !== undefined && count > 0 ? (
-          <span className="ml-2 text-body text-muted-foreground">({count})</span>
-        ) : null}
+        {count !== undefined && count > 0 ? <span className="ml-2 text-body text-muted-foreground">({count})</span> : null}
       </Tag>
       <span className="flex-1 border-t border-border" aria-hidden="true" />
     </div>
@@ -213,29 +196,13 @@ export function PageHero({
 }) {
   return (
     <div className={cn(ALIGN[align], "mb-12", className)}>
-      {eyebrow ? (
-        <p className="text-micro uppercase tracking-[0.14em] text-primary mb-3">{eyebrow}</p>
-      ) : null}
+      {eyebrow ? <p className="text-eyebrow text-primary mb-3">{eyebrow}</p> : null}
       <h1 className={cn("font-display text-foreground", HERO_SIZE[size])}>{title}</h1>
       {subtitle ? (
-        <p
-          className={cn(
-            "text-lead text-muted-foreground mt-4 max-w-[58ch]",
-            align === "center" && "mx-auto",
-          )}
-        >
-          {subtitle}
-        </p>
+        <p className={cn("text-lead text-muted-foreground mt-4 max-w-[58ch]", align === "center" && "mx-auto")}>{subtitle}</p>
       ) : null}
       {actions ? (
-        <div
-          className={cn(
-            "mt-8 flex flex-col sm:flex-row items-center gap-3",
-            align === "center" && "justify-center",
-          )}
-        >
-          {actions}
-        </div>
+        <div className={cn("mt-8 flex flex-col sm:flex-row items-center gap-3", align === "center" && "justify-center")}>{actions}</div>
       ) : null}
       {children}
     </div>

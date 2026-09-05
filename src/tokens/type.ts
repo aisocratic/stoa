@@ -60,3 +60,21 @@ export function typeSize(step: TypeStep): string {
   const intercept = step.px - slope * FLUID_RANGE.from
   return `clamp(${rem(step.px)}, ${trim(intercept / 16, 3)}rem + ${trim(slope * 100, 3)}vw, ${rem(step.max)})`
 }
+
+/**
+ * Two tracked, uppercase text styles that the site spells out by hand in
+ * dozens of places. Each is a type step plus a transform and a tracking, and
+ * each becomes one utility — `text-nav`, `text-eyebrow` — so the recipe has
+ * one spelling.
+ *
+ *   nav      the header navigation on aisocratic.org: body size, uppercase,
+ *            0.08em tracking, in the body face (Space Grotesk).
+ *   eyebrow  the label above a heading, a footer column head, a status
+ *            group: micro size, uppercase, 0.14em tracking.
+ */
+export const textStyles = {
+  nav: { step: "body", tracking: "0.08em", note: "header navigation" },
+  eyebrow: { step: "micro", tracking: "0.14em", note: "eyebrows, column heads, tracked labels" },
+} as const satisfies Record<string, { step: TypeStepName; tracking: string; note: string }>
+
+export type TextStyleName = keyof typeof textStyles

@@ -9,7 +9,7 @@ import { Spinner } from "./spinner.js"
 const buttonVariants = cva(
   cn(
     controlBase,
-    "inline-flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0"
+    "inline-flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0",
   ),
   {
     variants: {
@@ -28,7 +28,7 @@ const buttonVariants = cva(
       size: {
         default: controlSize.default,
         sm: controlSize.sm,
-        xs: "h-8 px-3 text-xs",
+        xs: "h-8 px-3 text-micro",
         lg: controlSize.lg,
         icon: controlSize.icon,
         "icon-xs": "size-7",
@@ -39,7 +39,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 )
 
 /**

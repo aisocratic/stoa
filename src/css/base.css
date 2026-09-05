@@ -1,7 +1,7 @@
 /*
- * Hand-written half of `@aisocratic/stoa/tailwind.css`. The generator
- * prepends the token block and the `@theme` blocks; everything that is not a
- * value lives here.
+ * Hand-written half of `@aisocratic/design/tailwind.css`. The generator
+ * prepends the token block, the `@theme` blocks and the text-style
+ * utilities; everything that is not a value lives here.
  */
 @import "tw-animate-css";
 

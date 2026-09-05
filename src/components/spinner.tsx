@@ -37,11 +37,5 @@ export type SpinnerProps = Omit<ComponentProps<typeof Loader2>, "size"> & {
  * component and disables the button in one step.
  */
 export function Spinner({ size = "md", className, ...props }: SpinnerProps) {
-  return (
-    <Loader2
-      aria-hidden="true"
-      className={cn("animate-spin shrink-0", spinnerSizes[size], className)}
-      {...props}
-    />
-  )
+  return <Loader2 aria-hidden="true" className={cn("animate-spin shrink-0", spinnerSizes[size], className)} {...props} />
 }

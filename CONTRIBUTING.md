@@ -1,6 +1,6 @@
-# Contributing to Stoa
+# Contributing to AI Socratic Design
 
-Stoa is the design system behind aisocratic.org and its sibling apps. It is
+AI Socratic Design is the design system behind aisocratic.org and its sibling apps. It is
 small on purpose: one typed token source, one generator, a handful of
 primitives. Changes that grow it should make a consumer's life easier, not
 give the package more surface.

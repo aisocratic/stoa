@@ -50,14 +50,7 @@ type CollapsibleProps = React.ComponentProps<"div"> & {
  * - `CollapsibleContent` renders its children in a `div` only while open
  *   (unmounted when closed, matching conditional-render behavior).
  */
-function Collapsible({
-  open: openProp,
-  defaultOpen = false,
-  onOpenChange,
-  disabled = false,
-  children,
-  ...props
-}: CollapsibleProps) {
+function Collapsible({ open: openProp, defaultOpen = false, onOpenChange, disabled = false, children, ...props }: CollapsibleProps) {
   const [uncontrolledOpen, setUncontrolledOpen] = React.useState(defaultOpen)
   const isControlled = openProp !== undefined
   const open = isControlled ? openProp : uncontrolledOpen
@@ -70,18 +63,11 @@ function Collapsible({
     onOpenChange?.(next)
   }, [disabled, open, isControlled, onOpenChange])
 
-  const contextValue = React.useMemo(
-    () => ({ open, toggle, contentId, disabled }),
-    [open, toggle, contentId, disabled],
-  )
+  const contextValue = React.useMemo(() => ({ open, toggle, contentId, disabled }), [open, toggle, contentId, disabled])
 
   return (
     <CollapsibleContext.Provider value={contextValue}>
-      <div
-        data-slot="collapsible"
-        data-state={open ? "open" : "closed"}
-        {...props}
-      >
+      <div data-slot="collapsible" data-state={open ? "open" : "closed"} {...props}>
         {children}
       </div>
     </CollapsibleContext.Provider>
@@ -96,13 +82,7 @@ type CollapsibleTriggerProps = React.ComponentProps<"button"> & {
   asChild?: boolean
 }
 
-function CollapsibleTrigger({
-  asChild = false,
-  onClick,
-  className,
-  children,
-  ...props
-}: CollapsibleTriggerProps) {
+function CollapsibleTrigger({ asChild = false, onClick, className, children, ...props }: CollapsibleTriggerProps) {
   const { open, toggle, contentId, disabled } = useCollapsibleContext("CollapsibleTrigger")
 
   const sharedProps = {
@@ -127,9 +107,7 @@ function CollapsibleTrigger({
 
     return React.cloneElement(child, {
       ...sharedProps,
-      ...(needsButtonSemantics
-        ? { role: "button", tabIndex: (child.props.tabIndex as number | undefined) ?? 0 }
-        : {}),
+      ...(needsButtonSemantics ? { role: "button", tabIndex: (child.props.tabIndex as number | undefined) ?? 0 } : {}),
       ...props,
       className: cn(child.props.className as string | undefined, className),
       onClick: (event: React.MouseEvent<HTMLButtonElement>) => {

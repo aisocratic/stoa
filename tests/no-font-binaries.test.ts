@@ -14,14 +14,16 @@ const git = (...args: string[]) => {
 }
 
 /**
- * Stoa is MIT and every face it names is OFL, loaded by the consuming app.
+ * AI Socratic Design is MIT and every face it names is OFL, loaded by the consuming app.
  * The system this was extracted from shipped a licensed Fontshare face as
  * woff2 files; a font binary in this tree would be redistribution we have no
  * right to do. The correct number of font files here is zero, forever.
  */
 describe("license-encumbered assets", () => {
   it("tracks no font binaries", () => {
-    const fonts = git("ls-files").split("\n").filter((f) => /\.(woff2?|ttf|otf|eot)$/i.test(f))
+    const fonts = git("ls-files")
+      .split("\n")
+      .filter((f) => /\.(woff2?|ttf|otf|eot)$/i.test(f))
     expect(fonts).toEqual([])
   })
 

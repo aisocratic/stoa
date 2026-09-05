@@ -1,0 +1,6 @@
+dist
+site/.next
+site/out
+site/test-results
+site/next-env.d.ts
+pnpm-lock.yaml

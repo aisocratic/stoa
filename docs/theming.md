@@ -4,11 +4,11 @@
 
 One stylesheet serves three kinds of consumer:
 
-| Consumer | Mechanism | What decides |
-|---|---|---|
-| Next.js with `next-themes` | `.light` / `.dark` class on `<html>` | the user's toggle, or the OS via `enableSystem` |
-| Static site, no JS | `@media (prefers-color-scheme: dark)` | the OS |
-| Anything forced | `data-theme="light"` / `"dark"` on any ancestor | you |
+| Consumer                   | Mechanism                                       | What decides                                    |
+| -------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| Next.js with `next-themes` | `.light` / `.dark` class on `<html>`            | the user's toggle, or the OS via `enableSystem` |
+| Static site, no JS         | `@media (prefers-color-scheme: dark)`           | the OS                                          |
+| Anything forced            | `data-theme="light"` / `"dark"` on any ancestor | you                                             |
 
 The generated block is:
 
@@ -26,7 +26,7 @@ never fights it. A static page with no class follows the OS; add
 
 `dark:` utilities key on the class or the attribute
 (`@custom-variant dark (&:is(.dark *, [data-theme="dark"] *))`). A Tailwind
-consumer that relies on the OS branch alone gets dark *tokens* but no `dark:`
+consumer that relies on the OS branch alone gets dark _tokens_ but no `dark:`
 utilities — so give Tailwind apps a theme class.
 
 Side-by-side rendering is free: wrap any subtree in `<div class="dark">` (or
@@ -39,23 +39,44 @@ the import** beats them, in every mode:
 
 ```css
 @import "tailwindcss";
-@import "@aisocratic/stoa/tailwind.css";
+@import "@aisocratic/design/tailwind.css";
 
-:root { --accent: #2563eb; --ring: #2563eb; }
-.dark, [data-theme="dark"] { --accent: #60a5fa; --ring: #60a5fa; }
+:root {
+  --accent: var(--blue-700);
+}
+.dark,
+[data-theme="dark"] {
+  --accent: var(--blue-400);
+}
 ```
 
 Because the Tailwind utilities point at the variable (`--color-accent:
-var(--accent)`), every `bg-accent`, `text-accent` and `ring-ring` follows.
+var(--accent)`), every `bg-accent`, `text-accent` and `ring-ring` (an alias of
+`--accent`) follows. Roles reference the palette (`--oat-1` … `--ink-12`,
+`--amber-600` …, emitted once on `:root`), so you can point a role at any
+palette entry, or at a colour of your own. Overriding a palette entry itself
+re-themes every role that uses it — `--white` moves the light page, `--ink-12` the
+dark text. `--reading` is an explicit light/dark pair; override it alongside your text colors.
 
 ## Adding a token
 
 ```css
-:root { --ok: #15803d; }
-.dark, [data-theme="dark"] { --ok: #4ade80; }
-@media (prefers-color-scheme: dark) { :root:not(.light):not([data-theme="light"]) { --ok: #4ade80; } }
+:root {
+  --ok: #15803d;
+}
+.dark,
+[data-theme="dark"] {
+  --ok: #4ade80;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not([data-theme="light"]) {
+    --ok: #4ade80;
+  }
+}
 
-@theme inline { --color-ok: var(--ok); }
+@theme inline {
+  --color-ok: var(--ok);
+}
 ```
 
 Multiple `@theme` blocks merge, so this adds `bg-ok` / `text-ok` without
@@ -64,16 +85,19 @@ touching the package. Before adding a status colour, check the seven
 
 ## Fonts are slots
 
-The package never defines `--stoa-font-body`, `--stoa-font-display` or
-`--stoa-font-code`; it only reads them with a fallback:
+The package never defines `--aisocratic-font-body`, `--aisocratic-font-display`
+or `--aisocratic-font-code`; it reads them with a legacy-slot and named-face
+fallback:
 
 ```css
---font-display: var(--stoa-font-display, "Newsreader", Georgia, "Times New Roman", serif);
+--font-display: var(--aisocratic-font-display, var(--stoa-font-display, "Newsreader", Georgia, "Times New Roman", serif));
 ```
 
 A Next.js app fills the slot with `next/font`'s `variable`; a static site with
 a Google Fonts `<link>` (the family is then found by name through the
-fallback); a CSS-only consumer with `:root { --stoa-font-display: "Some Face", serif }`.
+fallback); a CSS-only consumer with
+`:root { --aisocratic-font-display: "Some Face", serif }`. The former
+`--stoa-font-*` slots continue to work during the compatibility window.
 
 ## Replacing a whole utility
 

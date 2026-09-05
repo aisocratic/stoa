@@ -5,53 +5,46 @@ Source of truth: `src/tokens/*.ts` in this repo, generated into `dist/css/tailwi
 `@theme inline` blocks). Consumers use shadcn `components.json` with style `new-york`,
 lucide icons, `cssVariables: true`.
 
-## Colors
+## Colours: a palette, then roles
 
-Raw hex custom properties on `:root` (light) and `.dark` (dark) in
-`app/globals.css`, re-exposed to Tailwind via `@theme inline`. Using the semantic
-classes makes styles dark-mode-aware with **no `dark:` prefix**.
+The default palette follows the public and admin website at aisocratic.org.
+Use semantic roles in components. Primitive values are only for theme overrides.
 
-| Tailwind class | Light | Dark | Use |
-|---|---|---|---|
-| `bg-background` / `text-foreground` | `#ffffff` / `#0a0a0a` | `#0a0a0a` / `#e6e6e6` | page ground / text |
-| `bg-card` (+`text-card-foreground`) | `#f8f8f8` | `#141414` | card surfaces |
-| `bg-primary` / `text-primary-foreground` | `#0a0a0a` / white | `#e6e6e6` / near-black | primary buttons (near-monochrome by design) |
-| `bg-secondary` | `#e2e8f0` | `#1a1a1a` | secondary surfaces |
-| `bg-muted` / `text-muted-foreground` | `#f1f5f9` / `#64748b` | `#262626` / `#a1a1aa` | subdued surfaces / **chrome** text (see below) |
-| `text-reading` | `#262626` | `#c8c8c8` | **running prose in an article** (see below) |
-| `text-accent` / `bg-accent` | `#d97706` (amber) | `#fbbf24` | the accent; also `ring-ring` |
-| `bg-destructive` | `#ef4444` | `#dc2626` | destructive actions/errors |
-| `border-border` / `border-input` | `#e2e8f0` | `#262626` | borders, field borders |
-| `bg-join` / `text-join-foreground` | `#7c3aed` / white | `#8b5cf6` / white | **reserved**: the header "Join Us" CTA only — the one saturated color |
-| `bg-chart-1..5` | amber/green/purple/violet/red | lighter twins | charts |
+| Role                         | Light                 | Dark                  |
+| ---------------------------- | --------------------- | --------------------- |
+| background                   | white `#ffffff`       | ink.1 `#0a0a0a`       |
+| foreground                   | ink.1 `#0a0a0a`       | ink.12 `#e6e6e6`      |
+| reading                      | ink.4 `#262626`       | neutral.300 `#c8c8c8` |
+| muted-foreground             | slate.600 `#475569`   | ink.11 `#a1a1aa`      |
+| card                         | neutral.100 `#f8f8f8` | ink.2 `#141414`       |
+| popover                      | white                 | ink.1                 |
+| muted                        | slate.100             | ink.4                 |
+| secondary                    | slate.200             | ink.3                 |
+| border / input               | slate.200             | ink.4                 |
+| primary / primary-foreground | ink.1 / white         | neutral.50 / ink.1    |
+| accent / ring                | amber.600             | amber.400             |
+| join                         | violet.600            | violet.500            |
+| destructive                  | red.600               | red.600               |
 
-`--radius` base = `0.625rem`. Custom shadow: `shadow-glow` (`0 0 8px 2px` in current shadow color).
+Light muted text is one slate step darker than the reference website so small
+labels remain readable on cards, muted fills, and secondary controls. Destructive
+fills use red.600 in both modes to preserve contrast with white labels.
 
-### The three text roles
+`foreground` names headings and emphasis, `reading` names article prose, and
+`muted-foreground` names metadata, labels, and placeholders. Reading is an explicit
+pair matching the website, so override it too when creating a different theme.
 
-Every piece of text on the site is one of exactly three:
+Seven `status-*` roles cover success, warning, caution, danger, info, highlight,
+and accent. They use a deep hue in light mode and a light hue in dark mode.
+Categorical charts reuse status hues. `chart-ramp-1` is amber; the remaining ramp
+steps are slate in light mode and ink in dark mode. Charts always carry labels.
 
-| Role | Token | Dark | Light | For |
-|---|---|---|---|---|
-| title | `text-foreground` | `#e6e6e6` (15.9:1) | `#0a0a0a` (19.8:1) | headings, emphasis, `strong` inside prose |
-| reading | `text-reading` | `#c8c8c8` (11.8:1) | `#262626` (15.1:1) | running prose in an article, and its standfirst |
-| chrome | `text-muted-foreground` | `#a1a1aa` (7.7:1) | `#64748b` (4.8:1) | meta, labels, timestamps, placeholders, icon tints, empty states |
+`card-foreground`, `popover-foreground`, and `secondary-foreground` alias
+`foreground`; `input` aliases `border`, and `ring` aliases `accent`.
 
-Ratios are against `bg-background`; on `bg-card` each drops ~7%, and all three
-still clear their bar. `text-muted-foreground` is 4.8:1 in light — AA, not AAA
-— which is another reason body copy must not use it.
-
-**Do not reach for `text-reading` in the interface.** It is applied
-automatically to `.markdown-content` prose (see the article-scale note below), so blog posts, `/news` updates and event descriptions get
-it without a class. Write it by hand only for text that reads like an article
-but is not markdown — an article standfirst, a summary panel. A card blurb, a
-section deck and a table cell are chrome: they stay `text-muted-foreground`.
-
-**`text-muted-foreground` was NOT renamed to something reading-ish**, and the
-reason is worth keeping: it has ~1830 call sites and only 7 of them sit on the
-article step (`text-lead`), while 178 sit on `text-micro` badges/eyebrows and
-~220 tint an icon. 46% of them are in `/admin`. It is the chrome token, and
-reading content needed its own name rather than a rename of that one.
+The original 12-step `oat` primitives remain available for opt-in warm themes.
+They do not drive the default interface. All values and resolved colors are
+exported in `@aisocratic/design/tokens.json`, also displayed in the gallery.
 
 ## Type scale (golden ratio, anchored at 14px)
 
@@ -60,45 +53,57 @@ Defined in a plain `@theme` block in `tailwind.css`. Neighboring steps are
 (`clamp()` interpolating 390→1440px viewport, rem-based so it respects user font
 size). Each step carries its own line-height — never add `leading-*`.
 
-| Class | Size | Line-height | Use for |
-|---|---|---|---|
-| `text-micro` | 11px | 1.45 | eyebrows, badges, tracked labels |
-| `text-body` | 14px (anchor; the `body` default) | 1.618 | body copy and UI |
-| `text-lead` | 18px | 1.5 | intros/standfirsts, large UI, article prose |
-| `text-title` | 18→23px fluid | 1.35 | card headlines |
-| `text-section` | 23→29px fluid | 1.272 | section headings (h2) |
-| `text-page` | 29→37px fluid | 1.2 | feature headlines, article h1 |
-| `text-display` | 37→47px fluid | 1.15 | inner-page h1 |
-| `text-hero` | 47→59px fluid | 1.1 | top-level page h1 (PageHero default) |
-| `text-mega` | 59→75px fluid | 1.05 | statement type (/about, /labs) |
+| Class          | Size                              | Line-height | Use for                                            |
+| -------------- | --------------------------------- | ----------- | -------------------------------------------------- |
+| `text-micro`   | 11px                              | 1.45        | eyebrows, badges, tracked labels                   |
+| `text-body`    | 14px (anchor; the `body` default) | 1.618       | body copy and UI                                   |
+| `text-lead`    | 18px                              | 1.5         | intros/standfirsts, large UI, article prose        |
+| `text-title`   | 18→23px fluid                     | 1.35        | card headlines                                     |
+| `text-section` | 23→29px fluid                     | 1.272       | section headings (h2)                              |
+| `text-page`    | 29→37px fluid                     | 1.2         | feature headlines, article h1, admin record titles |
+| `text-display` | 37→47px fluid                     | 1.15        | inner-page h1                                      |
+| `text-hero`    | 47→59px fluid                     | 1.1         | top-level page h1 (PageHero default)               |
+| `text-mega`    | 59→75px fluid                     | 1.05        | statement type                                     |
 
-Bans (a consumer can enforce them with a drift test like the one in aisocratic.org): `text-[Npx]`, stock steps
+### Text styles
+
+Two recipes the site used to spell out by hand, now one class each:
+
+| Class          | Is                                                     | For                                                        |
+| -------------- | ------------------------------------------------------ | ---------------------------------------------------------- |
+| `text-nav`     | `text-body` + uppercase + `tracking-nav` (0.08em)      | the header navigation on aisocratic.org — in the body face |
+| `text-eyebrow` | `text-micro` + uppercase + `tracking-eyebrow` (0.14em) | eyebrows, footer column heads, status group labels         |
+
+Bans (a consumer can enforce them with a drift test): `text-[Npx]`, stock steps
 (`text-xs`…`text-9xl`), `text-X md:text-Y` heading chains, `font-mono`,
-bold/semibold on the display face. 
+bold/semibold on the display face.
 
-**Article scale**: inside `.markdown-content` (blog posts, /news updates, event
-descriptions via `components/markdown-content.tsx`), prose runs one step up:
-`p/li` → `text-lead`, `h1` → `text-page`, `h2` → `text-section`, `h3` → `text-title`,
-tables → `text-body`. "An article is read, not scanned."
+**Article scale**: inside `.markdown-content` (a consumer's prose wrapper), prose runs
+one step up: `p/li` → `text-lead`, `h1` → `text-page`, `h2` → `text-section`,
+`h3` → `text-title`, tables → `text-body`. "An article is read, not scanned."
 
 ## Fonts
 
-Loaded by the app (`app/fonts.ts`, see adopting.md) into the three `--stoa-font-*` slots:
+Loaded by the app (`app/fonts.ts`, see adopting.md) into the three `--aisocratic-font-*` slots. Legacy `--stoa-font-*` values remain fallback-compatible.
 
-| Class | Face | Role |
-|---|---|---|
-| `font-body` | Space Grotesk (weight 400) | body/UI — the `body` default, usually redundant to write |
-| `font-display` | Newsreader (weight 200 + italic, loaded by the app) | headings only; NEVER add a weight class |
-| `font-code` | JetBrains Mono (400/500) | code, CLI-styled chrome |
+| Class          | Face                             | Role                                                                                               |
+| -------------- | -------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `font-body`    | Space Grotesk (weight 400)       | body/UI and the header nav — the `body` default, usually redundant to write                        |
+| `font-display` | Newsreader (weight 200 + italic) | headings only; NEVER add a weight class. aisocratic.org fills this slot with its own licensed face |
+| `font-code`    | JetBrains Mono (400/500)         | code and technical values                                                                          |
 
-There is no `font-mono`. In the codebase this was extracted from it mapped to the
-body sans and was never monospace — say `font-body` or `font-code` and mean it.
+There is no `font-mono`. Say `font-body` or `font-code` and mean it.
 
-## Radii (φ ladder)
+## Radii — two rungs
 
-`rounded-sm` 6px · `rounded-lg` 10px (base) · `rounded-xl` 16px · `rounded-2xl` 26px.
-`rounded-md` is a deprecated alias of base; bare `rounded` (4px) is off-ladder — use
-`rounded-sm`.
+| Class          | Size | For                                                                |
+| -------------- | ---- | ------------------------------------------------------------------ |
+| `rounded-md`   | 10px | controls: buttons, inputs, badges, menu items, tabs, compact cards |
+| `rounded-xl`   | 16px | surfaces: cards, dialogs, popovers, panels                         |
+| `rounded-full` | —    | pills, avatars, the segmented control                              |
+
+Every other Tailwind name lands on a rung: `rounded`, `-xs`, `-sm`, `-lg` → 10px;
+`-2xl` → 16px; `-3xl` and up do not exist. `--radius` (shadcn's base) is 10px.
 
 ## Layout utilities
 
@@ -112,20 +117,20 @@ body sans and was never monospace — say `font-body` or `font-code` and mean it
 ## Dark mode
 
 - Class strategy via `next-themes`: `ThemeProvider attribute="class" defaultTheme="dark"
-  enableSystem` in `app/layout.tsx`; `@custom-variant dark (&:is(.dark *));` in globals.
+enableSystem`; `@custom-variant dark` keys on `.dark` or `[data-theme="dark"]`.
 - Site defaults to **dark**.
-- Token classes adapt automatically. Reach for a token first; use `dark:` only for
-  one-off non-token colors (e.g. `text-purple-600 dark:text-purple-400`).
-- Toggle component: `components/theme-toggle.tsx`.
+- Token classes adapt automatically. Reach for a role first; `dark:` is for the
+  rare one-off. `Section tone="dark"` is a themed band, not raw black.
+- Toggle component: `@aisocratic/design/components/theme-toggle`.
 
 ## `cn()` and control variants
 
-- `cn()` from `@aisocratic/stoa` = clsx + an **extended** tailwind-merge that registers the
-  nine `text-*` scale steps as font-size classes. Without this, merging
-  `"text-primary-foreground"` with `"text-body"` silently drops the color (caused a
-  real white-on-white bug). `TYPE_SCALE` is derived from the token source, so a new step needs no second edit.
-- `@aisocratic/stoa/control-variants` holds the shared cva building blocks for interactive
-  controls: `controlBase`, `controlSize` (`default` h-8 / `sm` h-7 / `lg` h-10 /
-  `icon` size-8), `controlColor` (default/secondary/outline/ghost/destructive), and
-  `fieldVariants` (the canonical form-field surface incl. `aria-invalid` styling).
-  Build new controls from these, not from scratch.
+- `cn()` from `@aisocratic/design` = clsx + an **extended** tailwind-merge that registers the
+  nine `text-*` scale steps and the two text styles as font-size classes. Without this,
+  merging `"text-primary-foreground"` with `"text-body"` silently drops the color (caused a
+  real white-on-white bug). `TYPE_SCALE` is derived from the token source.
+- `@aisocratic/design/control-variants` holds the shared cva building blocks for interactive
+  controls: `controlBase` (`rounded-md`, `text-body`, the focus ring), `controlSize`
+  (`default` h-8 / `sm` h-7 / `lg` h-10 / `icon` size-8), `controlColor`
+  (default/secondary/outline/ghost/destructive), and `fieldVariants` (the canonical
+  form-field surface incl. `aria-invalid` styling). Build new controls from these.

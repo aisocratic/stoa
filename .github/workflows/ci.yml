@@ -21,10 +21,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm verify
       - run: pnpm site:build
-      - run: pnpm --filter stoa-site exec playwright install --with-deps chromium
-      - run: pnpm --filter stoa-site exec playwright test --project=desktop --project=mobile
-        env:
-          STOA_CI: "1"
+      - run: pnpm --filter aisocratic-design-site exec playwright install --with-deps chromium
+      - run: pnpm --filter aisocratic-design-site exec playwright test --project=desktop --project=mobile
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
