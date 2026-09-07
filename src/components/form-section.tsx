@@ -31,7 +31,7 @@ export function FormSection({
     <section className={cn(cardSurface, "p-6", className)}>
       <div className="mb-6 flex items-start justify-between gap-4">
         <div>
-          <h2 className="font-display text-title text-foreground">{title}</h2>
+          <h2 className="font-body font-normal text-title text-foreground">{title}</h2>
           {subtitle ? <p className="mt-1 font-body text-body text-muted-foreground">{subtitle}</p> : null}
         </div>
         {actions}

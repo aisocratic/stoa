@@ -42,7 +42,7 @@ export function EmptyState({
   return (
     <div className={cn("text-center", variant === "panel" ? "rounded-xl border border-dashed border-border p-8" : "py-12", className)}>
       {icon ? <div className="mb-3 flex justify-center text-muted-foreground">{icon}</div> : null}
-      {title ? <p className="font-display text-lead text-foreground">{title}</p> : null}
+      {title ? <p className="font-body font-normal text-lead text-foreground">{title}</p> : null}
       {children ? <p className={cn(bodyClassName ?? "text-body", "text-muted-foreground", title && "mt-2")}>{children}</p> : null}
       {action ? <div className="mt-6 flex justify-center">{action}</div> : null}
     </div>

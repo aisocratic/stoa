@@ -1,0 +1,454 @@
+{
+  "source": "https://ui.shadcn.com/docs/components",
+  "checked": "2026-09-06",
+  "components": [
+    {
+      "name": "Accordion",
+      "module": "accordion",
+      "symbol": "Accordion",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/accordion"
+    },
+    {
+      "name": "Alert",
+      "module": "alert",
+      "symbol": "Alert",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/alert"
+    },
+    {
+      "name": "Alert Dialog",
+      "module": "alert-dialog",
+      "symbol": "AlertDialog",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/alert-dialog"
+    },
+    {
+      "name": "Aspect Ratio",
+      "module": "aspect-ratio",
+      "symbol": "AspectRatio",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/aspect-ratio"
+    },
+    {
+      "name": "Attachment",
+      "module": "attachment",
+      "symbol": "Attachment",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/attachment"
+    },
+    {
+      "name": "Avatar",
+      "module": "avatar",
+      "symbol": "Avatar",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/avatar"
+    },
+    {
+      "name": "Badge",
+      "module": "badge",
+      "symbol": "Badge",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/badge"
+    },
+    {
+      "name": "Breadcrumb",
+      "module": "breadcrumbs",
+      "symbol": "Breadcrumbs",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/breadcrumb"
+    },
+    {
+      "name": "Bubble",
+      "module": "bubble",
+      "symbol": "Bubble",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/bubble"
+    },
+    {
+      "name": "Button",
+      "module": "button",
+      "symbol": "Button",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/button"
+    },
+    {
+      "name": "Button Group",
+      "module": "button-group",
+      "symbol": "ButtonGroup",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/button-group"
+    },
+    {
+      "name": "Calendar",
+      "module": "calendar",
+      "symbol": "Calendar",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/calendar"
+    },
+    {
+      "name": "Card",
+      "module": "card",
+      "symbol": "Card",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/card"
+    },
+    {
+      "name": "Carousel",
+      "module": "carousel",
+      "symbol": "Carousel",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/carousel"
+    },
+    {
+      "name": "Chart",
+      "module": "chart",
+      "symbol": "Chart",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/chart"
+    },
+    {
+      "name": "Checkbox",
+      "module": "checkbox",
+      "symbol": "Checkbox",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/checkbox"
+    },
+    {
+      "name": "Collapsible",
+      "module": "collapsible",
+      "symbol": "Collapsible",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/collapsible"
+    },
+    {
+      "name": "Combobox",
+      "module": "select-field",
+      "symbol": "SelectField",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/combobox"
+    },
+    {
+      "name": "Command",
+      "module": "command",
+      "symbol": "Command",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/command"
+    },
+    {
+      "name": "Context Menu",
+      "module": "context-menu",
+      "symbol": "ContextMenu",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/context-menu"
+    },
+    {
+      "name": "Data Table",
+      "module": "data-table",
+      "symbol": "DataTable",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/data-table"
+    },
+    {
+      "name": "Date Picker",
+      "module": "date-picker",
+      "symbol": "DatePicker",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/date-picker"
+    },
+    {
+      "name": "Dialog",
+      "module": "dialog",
+      "symbol": "Dialog",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/dialog"
+    },
+    {
+      "name": "Direction",
+      "module": "direction",
+      "symbol": "DirectionProvider",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/direction"
+    },
+    {
+      "name": "Drawer",
+      "module": "drawer",
+      "symbol": "Drawer",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/drawer"
+    },
+    {
+      "name": "Dropdown Menu",
+      "module": "dropdown-menu",
+      "symbol": "DropdownMenu",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/dropdown-menu"
+    },
+    {
+      "name": "Empty",
+      "module": "empty-state",
+      "symbol": "EmptyState",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/empty"
+    },
+    {
+      "name": "Field",
+      "module": "field",
+      "symbol": "FieldWrapper",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/field"
+    },
+    {
+      "name": "Hover Card",
+      "module": "hover-card",
+      "symbol": "HoverCard",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/hover-card"
+    },
+    {
+      "name": "Input",
+      "module": "input",
+      "symbol": "Input",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/input"
+    },
+    {
+      "name": "Input Group",
+      "module": "input-group",
+      "symbol": "InputGroup",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/input-group"
+    },
+    {
+      "name": "Input OTP",
+      "module": "input-otp",
+      "symbol": "InputOTP",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/input-otp"
+    },
+    {
+      "name": "Item",
+      "module": "item",
+      "symbol": "Item",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/item"
+    },
+    {
+      "name": "Kbd",
+      "module": "kbd",
+      "symbol": "Kbd",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/kbd"
+    },
+    {
+      "name": "Label",
+      "module": "label",
+      "symbol": "Label",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/label"
+    },
+    {
+      "name": "Marker",
+      "module": "marker",
+      "symbol": "Marker",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/marker"
+    },
+    {
+      "name": "Menubar",
+      "module": "menubar",
+      "symbol": "Menubar",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/menubar"
+    },
+    {
+      "name": "Message",
+      "module": "message",
+      "symbol": "Message",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/message"
+    },
+    {
+      "name": "Message Scroller",
+      "module": "message-scroller",
+      "symbol": "MessageScroller",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/message-scroller"
+    },
+    {
+      "name": "Native Select",
+      "module": "native-select",
+      "symbol": "NativeSelect",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/native-select"
+    },
+    {
+      "name": "Navigation Menu",
+      "module": "navigation-menu",
+      "symbol": "NavigationMenu",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/navigation-menu"
+    },
+    {
+      "name": "Pagination",
+      "module": "pagination",
+      "symbol": "PaginationControls",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/pagination"
+    },
+    {
+      "name": "Popover",
+      "module": "popover",
+      "symbol": "Popover",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/popover"
+    },
+    {
+      "name": "Progress",
+      "module": "progress",
+      "symbol": "Progress",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/progress"
+    },
+    {
+      "name": "Questionnaire",
+      "module": "questionnaire",
+      "symbol": "Questionnaire",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/questionnaire"
+    },
+    {
+      "name": "Radio Group",
+      "module": "radio-group",
+      "symbol": "RadioGroup",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/radio-group"
+    },
+    {
+      "name": "Resizable",
+      "module": "resizable",
+      "symbol": "ResizablePanelGroup",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/resizable"
+    },
+    {
+      "name": "Scroll Area",
+      "module": "scroll-area",
+      "symbol": "ScrollArea",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/scroll-area"
+    },
+    {
+      "name": "Select",
+      "module": "select",
+      "symbol": "Select",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/select"
+    },
+    {
+      "name": "Separator",
+      "module": "separator",
+      "symbol": "Separator",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/separator"
+    },
+    {
+      "name": "Sheet",
+      "module": "sheet",
+      "symbol": "Sheet",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/sheet"
+    },
+    {
+      "name": "Sidebar",
+      "module": "admin-shell",
+      "symbol": "AdminShell",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/sidebar"
+    },
+    {
+      "name": "Skeleton",
+      "module": "skeleton",
+      "symbol": "Skeleton",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/skeleton"
+    },
+    {
+      "name": "Slider",
+      "module": "slider",
+      "symbol": "Slider",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/slider"
+    },
+    {
+      "name": "Spinner",
+      "module": "spinner",
+      "symbol": "Spinner",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/spinner"
+    },
+    {
+      "name": "Switch",
+      "module": "switch",
+      "symbol": "Switch",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/switch"
+    },
+    {
+      "name": "Table",
+      "module": "table",
+      "symbol": "Table",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/table"
+    },
+    {
+      "name": "Tabs",
+      "module": "tabs",
+      "symbol": "Tabs",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/tabs"
+    },
+    {
+      "name": "Textarea",
+      "module": "textarea",
+      "symbol": "Textarea",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/textarea"
+    },
+    {
+      "name": "Toast",
+      "module": "sonner",
+      "symbol": "Toaster",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/toast"
+    },
+    {
+      "name": "Toggle",
+      "module": "toggle",
+      "symbol": "Toggle",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/toggle"
+    },
+    {
+      "name": "Toggle Group",
+      "module": "toggle-group",
+      "symbol": "ToggleGroup",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/toggle-group"
+    },
+    {
+      "name": "Tooltip",
+      "module": "tooltip",
+      "symbol": "Tooltip",
+      "status": "existing",
+      "source": "https://ui.shadcn.com/docs/components/tooltip"
+    },
+    {
+      "name": "Typography",
+      "module": "typography",
+      "symbol": "Heading",
+      "status": "added",
+      "source": "https://ui.shadcn.com/docs/components/typography"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "repository": "../agora",
+  "checked": "2026-09-06",
+  "files": [
+    {
+      "path": "components/auth/login-form.tsx",
+      "exports": ["LoginForm"]
+    },
+    {
+      "path": "components/auth/logout-button.tsx",
+      "exports": ["LogoutButton"]
+    },
+    {
+      "path": "components/board/board-select.tsx",
+      "exports": ["BoardSelect"]
+    },
+    {
+      "path": "components/board/board.tsx",
+      "exports": ["Board"]
+    },
+    {
+      "path": "components/board/bulk-actions.tsx",
+      "exports": ["BulkActions"]
+    },
+    {
+      "path": "components/board/focus-view.tsx",
+      "exports": ["FocusView"]
+    },
+    {
+      "path": "components/board/priority-star.tsx",
+      "exports": ["PriorityStar"]
+    },
+    {
+      "path": "components/board/quick-add.tsx",
+      "exports": ["QuickAdd"]
+    },
+    {
+      "path": "components/board/task-fields.tsx",
+      "exports": ["TaskFields"]
+    },
+    {
+      "path": "components/board/test-dashboard.tsx",
+      "exports": ["TestDashboard"]
+    },
+    {
+      "path": "components/board/view-controls.tsx",
+      "exports": ["BoardMenu", "CheckMenu", "useBoardPreferences"]
+    },
+    {
+      "path": "components/board/workspace-editor.tsx",
+      "exports": ["WorkspaceEditor"]
+    },
+    {
+      "path": "components/graph/dependency-graph.tsx",
+      "exports": ["DependencyGraph"]
+    },
+    {
+      "path": "components/suggestions/inbox.tsx",
+      "exports": ["SuggestionsInbox"]
+    },
+    {
+      "path": "components/theme-provider.tsx",
+      "exports": ["ThemeProvider"]
+    }
+  ]
+}

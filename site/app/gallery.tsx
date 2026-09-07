@@ -53,12 +53,14 @@ import { MobileMenu } from "@aisocratic/design/components/mobile-menu"
 import { Popover, PopoverContent, PopoverTrigger } from "@aisocratic/design/components/popover"
 import { Progress } from "@aisocratic/design/components/progress"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@aisocratic/design/components/select"
+import { SelectField } from "@aisocratic/design/components/select-field"
 import { Switch } from "@aisocratic/design/components/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@aisocratic/design/components/tabs"
 import { ThemeToggle } from "@aisocratic/design/components/theme-toggle"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@aisocratic/design/components/tooltip"
 
 import { AuthDemo, FormDemo, TableDemo } from "./demos"
+import { ComponentCatalog } from "./catalog"
 
 export type ColorRow = { role: string; ref: string; light: string; dark: string; contrast: { light: number; dark: number } | null }
 export type PaletteScale = { name: string; steps: { step: string; hex: string }[] }
@@ -83,6 +85,7 @@ const NAV = [
   { href: "#colour", label: "Colour" },
   { href: "#shape", label: "Shape" },
   { href: "#components", label: "Components" },
+  { href: "#catalog", label: "Catalog" },
   { href: "#admin", label: "Admin" },
   { href: "#tables", label: "Tables" },
   { href: "#forms", label: "Forms" },
@@ -100,16 +103,6 @@ function Github({ className }: { className?: string }) {
   )
 }
 
-function Swatch({ hex, className }: { hex: string; className?: string }) {
-  return (
-    <span
-      className={cn("inline-block size-5 rounded-md border border-border align-middle", className)}
-      style={{ background: hex }}
-      aria-hidden
-    />
-  )
-}
-
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return <p className="text-eyebrow text-muted-foreground">{children}</p>
 }
@@ -117,6 +110,8 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 /* ------------------------------------------------------------ components */
 
 function ComponentPanel({ mode }: { mode: "light" | "dark" }) {
+  const [country, setCountry] = useState<string>()
+  const [tags, setTags] = useState<string[]>([])
   return (
     <div data-testid={`${mode}-panel`} className={cn(mode, "space-y-8 rounded-xl border border-border bg-background p-6 text-foreground")}>
       <Eyebrow>{mode}</Eyebrow>
@@ -154,7 +149,7 @@ function ComponentPanel({ mode }: { mode: "light" | "dark" }) {
 
       <div className="grid gap-6 md:grid-cols-2">
         <Card className="space-y-4 p-4">
-          <p className="font-display text-title">A card</p>
+          <p className="font-body font-normal text-title">A card</p>
           <div className="space-y-1.5">
             <Label htmlFor={`${mode}-email`}>Email</Label>
             <Input id={`${mode}-email`} placeholder="you@example.com" />
@@ -173,6 +168,36 @@ function ComponentPanel({ mode }: { mode: "light" | "dark" }) {
               <SelectItem value="mad">Madrid</SelectItem>
             </SelectContent>
           </Select>
+          <SelectField
+            label="Country"
+            placeholder="Choose a country"
+            searchable
+            value={country}
+            onValueChange={setCountry}
+            options={[
+              "Australia",
+              "Brazil",
+              "Canada",
+              "France",
+              "Germany",
+              "India",
+              "Italy",
+              "Japan",
+              "Spain",
+              "United Kingdom",
+              "United States",
+            ].map((label) => ({ value: label, label }))}
+          />
+          <SelectField
+            label="Tags / labels"
+            placeholder="Choose tags"
+            searchable
+            multiple
+            values={tags}
+            onValuesChange={setTags}
+            options={["AI", "Design", "Engineering", "Research", "Community", "Writing"].map((label) => ({ value: label, label }))}
+            description="Search and select more than one. Remove a tag with its × button."
+          />
           <div className="flex items-center gap-6">
             <label htmlFor={`${mode}-remember`} className="flex items-center gap-2 text-body">
               <Checkbox id={`${mode}-remember`} defaultChecked /> Remember me
@@ -388,8 +413,6 @@ function AdminDemo() {
 /* ---------------------------------------------------------------- gallery */
 
 export function Gallery({
-  colors,
-  aliases,
   scales,
   type,
 }: {
@@ -402,9 +425,9 @@ export function Gallery({
     <>
       <SiteHeader
         brand={
-          <a href="#top" aria-label="AI Socratic Design home" className="flex items-center gap-2 text-foreground">
-            <Wordmark height={32} />
-            <span className="font-body text-body text-muted-foreground">/ design</span>
+          <a href="#top" aria-label="Stoa home" className="inline-flex items-center gap-2 font-body text-lead font-medium text-foreground">
+            <LogoMark size={24} aria-hidden="true" />
+            Stoa
           </a>
         }
         links={NAV}
@@ -438,7 +461,7 @@ export function Gallery({
           <PageHero
             eyebrow="Design system"
             title="AI Socratic Design"
-            subtitle="The tokens, type and primitives shared by aisocratic.org, Agora and Atlas — one package, one version to bump."
+            subtitle="Explore the fonts, colours and components behind AI Socratic. Try the controls and see how they look in light and dark."
             actions={
               <>
                 <Button asChild variant="cta" size="lg">
@@ -452,81 +475,85 @@ export function Gallery({
           />
           <div className="mx-auto grid max-w-3xl gap-3 sm:grid-cols-3">
             <MetricCard label="Palette" value={`${scales.reduce((n, s) => n + s.steps.length, 0) + 1} colours`} />
-            <MetricCard label="Roles" value={`${colors.length} + ${aliases.length}`} />
+            <MetricCard label="Fonts" value="3" />
             <MetricCard label="Radii" value="2" />
           </div>
         </Section>
 
         <Section id="type" size="md" divider>
           <SectionHeading
-            eyebrow="Type"
-            title="Nine steps, one scale"
-            subtitle="A golden-ratio ladder anchored at 14px. The top six are fluid between 390px and 1440px. Each step owns its line-height."
+            eyebrow="Typography"
+            title="Three fonts, clear purposes"
+            subtitle="Use Space Grotesk for everyday UI, Newsreader for headlines, and JetBrains Mono for code."
           />
-          <div className="space-y-6">
-            {type.map((row) => (
-              <div key={row.name} className="grid gap-2 md:grid-cols-[8rem_1fr] md:items-baseline">
-                <div className="font-code text-micro text-muted-foreground">
-                  text-{row.name}
-                  <br />
-                  {row.px}px · {row.lineHeight}
+          <div className="grid gap-4 md:grid-cols-3">
+            <Card className="space-y-4 p-6">
+              <h3 className="font-body text-title">Space Grotesk</h3>
+              <p className="text-body text-muted-foreground">400 · Card names, labels, navigation and body text.</p>
+              <p className="font-body text-title">Team members</p>
+              <p data-testid="nav-sample" className="text-nav">
+                Events · News · About
+              </p>
+              <code className="block break-words font-code text-micro text-muted-foreground">
+                {'<h3 className="font-body text-title">Team members</h3>'}
+              </code>
+            </Card>
+            <Card className="space-y-4 p-6">
+              <h3 className="font-body text-title">Newsreader</h3>
+              <p className="text-body text-muted-foreground">200 · News headlines and page titles.</p>
+              <p className="font-display text-page">A new chapter in AI</p>
+              <code className="block break-words font-code text-micro text-muted-foreground">
+                {'<h1 className="font-display text-page">A new chapter in AI</h1>'}
+              </code>
+            </Card>
+            <Card className="space-y-4 p-6">
+              <h3 className="font-body text-title">JetBrains Mono</h3>
+              <p className="text-body text-muted-foreground">400 / 500 · Code snippets and technical values.</p>
+              <p className="font-code text-lead">pnpm add @aisocratic/design</p>
+              <code className="block break-words font-code text-micro text-muted-foreground">
+                {'<code className="font-code">npm install</code>'}
+              </code>
+            </Card>
+          </div>
+          <details className="mt-8 rounded-xl border border-border p-6">
+            <summary className="cursor-pointer text-body">Explore the size scale</summary>
+            <div className="mt-6 space-y-4">
+              {type.map((row) => (
+                <div key={row.name} className="grid gap-2 md:grid-cols-[8rem_1fr] md:items-baseline">
+                  <p className="font-code text-micro text-muted-foreground">
+                    text-{row.name} · {row.px}px
+                  </p>
+                  <p
+                    data-testid={`step-${row.name}`}
+                    className={cn(
+                      STEP_CLASS[row.name],
+                      "break-words text-foreground",
+                      ["micro", "body", "lead", "title"].includes(row.name) ? "font-body" : "font-display",
+                    )}
+                  >
+                    Ideas worth sharing
+                  </p>
                 </div>
-                <p data-testid={`step-${row.name}`} className={cn(STEP_CLASS[row.name], "truncate font-display text-foreground")}>
-                  The quick brown fox jumps over the lazy dog
-                </p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            <Card className="p-4">
-              <Eyebrow>font-body</Eyebrow>
-              <p className="mt-2 font-body text-lead">Space Grotesk — running text, UI, and the header navigation.</p>
-              <p data-testid="nav-sample" className="mt-3 text-nav text-foreground/50">
-                Events · Blog · News · About
-              </p>
-            </Card>
-            <Card className="p-4">
-              <Eyebrow>font-display</Eyebrow>
-              <p className="mt-2 font-display text-lead">Newsreader 200 — headings. Hierarchy from size, never weight.</p>
-              <p className="mt-3 font-display text-lead italic text-muted-foreground">
-                The app fills the slot; aisocratic.org fills it with its own face.
-              </p>
-            </Card>
-            <Card className="p-4">
-              <Eyebrow>font-code</Eyebrow>
-              <p className="mt-2 font-code text-lead">JetBrains Mono — code and technical values.</p>
-              <p className="mt-3 text-eyebrow font-code text-muted-foreground">text-eyebrow · 11px · 0.14em</p>
-            </Card>
-          </div>
+              ))}
+            </div>
+          </details>
         </Section>
 
         <Section id="colour" size="md" divider>
           <SectionHeading
             eyebrow="Colour"
-            title="A palette, then roles"
-            subtitle="Every hex lives once in the palette. Only the roles become classes, and each role points at a palette entry per mode — so two roles that share a job cannot drift apart."
+            title="The palette at a glance"
+            subtitle="A compact view of every colour, followed by examples of how they work together."
           />
-          <div className="space-y-6">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {scales.map((scale) => (
-              <div key={scale.name} className="grid gap-2 md:grid-cols-[8rem_1fr] md:items-center">
-                <p className="font-code text-micro text-muted-foreground">{scale.name}</p>
-                <div className="flex overflow-hidden rounded-md border border-border">
+              <div key={scale.name} className="space-y-2">
+                <p className="text-body capitalize">{scale.name}</p>
+                <div className="flex h-12 overflow-hidden rounded-md border border-border">
                   {scale.steps.map((s) => (
-                    <div
-                      key={s.step}
-                      className="flex h-12 flex-1 items-end justify-center"
-                      style={{ background: s.hex }}
-                      title={`${scale.name}.${s.step} ${s.hex}`}
-                    >
-                      <span
-                        className="pb-1 font-code text-micro"
-                        style={{
-                          color: scale.name === "ink" ? "#e6e6e6" : "#1f1d18",
-                          mixBlendMode: "difference",
-                          filter: "invert(1) grayscale(1) contrast(9)",
-                        }}
-                      >
-                        {s.step}
+                    <div key={s.step} className="flex-1" style={{ background: s.hex }} title={`${scale.name} ${s.step} · ${s.hex}`}>
+                      <span className="sr-only">
+                        {scale.name} {s.step}: {s.hex}
                       </span>
                     </div>
                   ))}
@@ -534,44 +561,27 @@ export function Gallery({
               </div>
             ))}
           </div>
-
-          <div className="mt-10 overflow-x-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Role</TableHead>
-                  <TableHead>Palette</TableHead>
-                  <TableHead>Light</TableHead>
-                  <TableHead>Dark</TableHead>
-                  <TableHead className="text-right">Contrast</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {colors.map((row) => (
-                  <TableRow key={row.role}>
-                    <TableCell className="font-code text-micro">--{row.role}</TableCell>
-                    <TableCell className="font-code text-micro text-muted-foreground">{row.ref}</TableCell>
-                    <TableCell className="font-code text-micro">
-                      <Swatch hex={row.light} /> {row.light}
-                    </TableCell>
-                    <TableCell className="font-code text-micro">
-                      <Swatch hex={row.dark} /> {row.dark}
-                    </TableCell>
-                    <TableCell className="text-right font-code text-micro text-muted-foreground">
-                      {row.contrast ? `${row.contrast.light}:1 · ${row.contrast.dark}:1` : ""}
-                    </TableCell>
-                  </TableRow>
-                ))}
-                {aliases.map((a) => (
-                  <TableRow key={a.alias}>
-                    <TableCell className="font-code text-micro text-muted-foreground">--{a.alias}</TableCell>
-                    <TableCell className="font-code text-micro text-muted-foreground" colSpan={4}>
-                      alias of --{a.role}, for shadcn output
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            <Card className="space-y-4 p-5">
+              <p className="text-title">Actions</p>
+              <div className="flex flex-wrap gap-2">
+                <Button>Save changes</Button>
+                <Button variant="secondary">Cancel</Button>
+              </div>
+            </Card>
+            <Card className="space-y-4 p-5">
+              <p className="text-title">Status</p>
+              <div className="flex flex-wrap gap-2">
+                <Badge tone="success">Published</Badge>
+                <Badge tone="warning">Draft</Badge>
+                <Badge tone="danger">Failed</Badge>
+              </div>
+            </Card>
+            <Card className="space-y-2 p-5">
+              <p className="text-title">Surfaces & text</p>
+              <p className="text-body">Primary text on a card.</p>
+              <p className="text-body text-muted-foreground">Secondary text adds context.</p>
+            </Card>
           </div>
         </Section>
 
@@ -600,12 +610,6 @@ export function Gallery({
               </div>
               <p className="mt-2 font-code text-micro text-muted-foreground">rounded-full</p>
             </div>
-            <div className="text-center">
-              <div className="flex size-24 items-center justify-center">
-                <LogoMark size={64} />
-              </div>
-              <p className="mt-2 font-code text-micro text-muted-foreground">LogoMark</p>
-            </div>
           </div>
         </Section>
 
@@ -618,6 +622,16 @@ export function Gallery({
             <ComponentPanel mode="light" />
             <ComponentPanel mode="dark" />
           </div>
+        </Section>
+
+        <Section id="catalog" size="md" divider>
+          <SectionHeading
+            eyebrow="Component library"
+            title="More pieces to build with"
+            subtitle="Cards from Agora, charts from Atlas, and the missing controls — all in Stoa’s style."
+            className="mb-10"
+          />
+          <ComponentCatalog />
         </Section>
 
         <Section id="admin" size="md" divider>
@@ -641,8 +655,9 @@ export function Gallery({
         <Section id="forms" size="md" divider>
           <SectionHeading
             eyebrow="Forms"
-            title="Fields carry their own chrome"
-            subtitle="TextField (prefix, leading icon, multiline), SelectField (plain, searchable, multiple, grouped), ToggleField, ChoiceCard and FilterChip, grouped in FormSection cards. Every field wires its label, description and error."
+            title="Forms that are easy to fill in"
+            className="mb-10"
+            subtitle="Clear labels, helpful hints and room to breathe. Try the fields, search the options and select a few topics."
           />
           <FormDemo />
         </Section>
@@ -670,7 +685,12 @@ export function Gallery({
       </main>
 
       <SiteFooter
-        brand={<Wordmark height={32} />}
+        brand={
+          <a href="#top" aria-label="Stoa home" className="inline-flex items-center gap-2 font-body text-lead font-medium text-foreground">
+            <LogoMark size={24} aria-hidden="true" />
+            Stoa
+          </a>
+        }
         description="The AI Socratic design system, as one package."
         columns={[
           { title: "System", links: NAV.slice(0, 4) },

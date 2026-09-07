@@ -23,3 +23,23 @@ export const cardSurface = "bg-card border border-border rounded-xl"
 export function Card({ className, ...props }: ComponentProps<"div">) {
   return <div data-slot="card" className={cn(cardSurface, className)} {...props} />
 }
+
+export function CardHeader({ className, ...props }: ComponentProps<"div">) {
+  return <div className={cn("space-y-2 p-5", className)} {...props} />
+}
+export function CardTitle({ className, children, ...props }: ComponentProps<"h3">) {
+  return (
+    <h3 className={cn("font-body text-lead font-normal", className)} {...props}>
+      {children}
+    </h3>
+  )
+}
+export function CardDescription({ className, ...props }: ComponentProps<"p">) {
+  return <p className={cn("text-body text-muted-foreground", className)} {...props} />
+}
+export function CardContent({ className, ...props }: ComponentProps<"div">) {
+  return <div className={cn("px-5 pb-5", className)} {...props} />
+}
+export function CardFooter({ className, ...props }: ComponentProps<"div">) {
+  return <div className={cn("flex items-center gap-2 px-5 pb-5", className)} {...props} />
+}

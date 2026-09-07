@@ -555,14 +555,14 @@ export function AuthScreen({
               {benefits.map((b, i) => (
                 <li key={i} className="rounded-xl border border-white/12 bg-white/5 p-4">
                   {b.icon ? <b.icon className="size-5 text-violet-300" /> : null}
-                  <h3 className="mt-3 font-display text-lead text-white">{b.title}</h3>
+                  <h3 className="mt-3 font-body font-normal text-lead text-white">{b.title}</h3>
                   <p className="mt-1 text-micro text-white/60">{b.description}</p>
                 </li>
               ))}
             </ul>
           ) : null}
           {note ? (
-            <div className="mt-6 rounded-xl border border-white/12 bg-white/5 p-4 text-micro text-white/60 [&_strong]:font-display [&_strong]:text-body [&_strong]:font-normal [&_strong]:text-white">
+            <div className="mt-6 rounded-xl border border-white/12 bg-white/5 p-4 text-micro text-white/60 [&_strong]:font-body [&_strong]:text-body [&_strong]:font-normal [&_strong]:text-white">
               {note}
             </div>
           ) : null}

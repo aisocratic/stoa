@@ -1,0 +1,90 @@
+{
+  "repository": "../atlas",
+  "checked": "2026-09-06",
+  "files": [
+    {
+      "path": "components/analytics/analytics-preview.tsx",
+      "exports": ["AnalyticsPreview"]
+    },
+    {
+      "path": "components/analytics/breakdown-chart.tsx",
+      "exports": ["BreakdownChart"]
+    },
+    {
+      "path": "components/analytics/chart-select.tsx",
+      "exports": ["ChartSelect"]
+    },
+    {
+      "path": "components/analytics/chart-tooltip.tsx",
+      "exports": ["ChartValueTooltip"]
+    },
+    {
+      "path": "components/analytics/preview-grid.tsx",
+      "exports": ["PreviewGrid"]
+    },
+    {
+      "path": "components/app-chrome.tsx",
+      "exports": ["AppHeader", "AppFooter"]
+    },
+    {
+      "path": "components/dashboard/dashboard-canvas.tsx",
+      "exports": ["DashboardCanvas"]
+    },
+    {
+      "path": "components/demo-banner.tsx",
+      "exports": ["DemoBanner"]
+    },
+    {
+      "path": "components/sign-out.tsx",
+      "exports": ["SignOut"]
+    },
+    {
+      "path": "components/telemetry-card.tsx",
+      "exports": ["TelemetryCard"]
+    },
+    {
+      "path": "components/theme-preference.tsx",
+      "exports": ["ThemePreference"]
+    },
+    {
+      "path": "components/theme-provider.tsx",
+      "exports": ["ThemeProvider"]
+    },
+    {
+      "path": "cards/ai-usage/component.tsx",
+      "exports": ["Card"]
+    },
+    {
+      "path": "cards/anomalies/component.tsx",
+      "exports": ["Card"]
+    },
+    {
+      "path": "cards/lighthouse/component.tsx",
+      "exports": ["Card"]
+    },
+    {
+      "path": "cards/real-users/component.tsx",
+      "exports": ["Card"]
+    },
+    {
+      "path": "cards/region-latency/component.tsx",
+      "exports": ["RegionLatencyCard"]
+    },
+    {
+      "path": "cards/releases/component.tsx",
+      "exports": ["Card"]
+    },
+    {
+      "path": "cards/repo-metrics/component.tsx",
+      "exports": ["Card"]
+    },
+    {
+      "path": "cards/seo-audit/component.tsx",
+      "exports": ["Card"]
+    },
+    {
+      "path": "cards/server-errors/component.tsx",
+      "exports": ["Card"]
+    }
+  ]
+}

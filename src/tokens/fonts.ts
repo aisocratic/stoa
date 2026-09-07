@@ -6,9 +6,9 @@
  * fallback stack so an unfilled slot still renders the right face if it is
  * installed, and a sane system face if not.
  *
- *   body     Space Grotesk — running text and UI. Also the `body` default,
+ *   body     Space Grotesk — running text, card names and UI titles. Also the `body` default,
  *            so in most places the class is redundant and can be deleted.
- *   display  Newsreader — headings and the wordmark. Only weight 200 (and its
+ *   display  Newsreader — editorial/page headings and the wordmark. Only weight 200 (and its
  *            italic) is meant to load, so hierarchy comes from SIZE, never
  *            from a weight class: `font-bold` here only asks the browser to
  *            smear the one weight it has.

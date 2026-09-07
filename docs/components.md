@@ -121,3 +121,40 @@ border-border`, focus ring, `aria-invalid` styling).
 Data tables, charts, calendars, composed form fields, the user menu, and
 anything that needs the app's data. Those belong in the app, built on the
 chrome and primitives above.
+
+## Expanded catalog
+
+The [component inventory](component-inventory.md) maps all 64 shadcn categories and records the website, Agora and Atlas sources. The local gallery's **Catalog** section includes searchable previews and usage snippets.
+
+New optional subpaths: `accordion`, `alert-dialog`, `calendar`, `context-menu`, `date-picker`, `direction`, `drawer`, `hover-card`, `menubar`, `navigation-menu`, `radio-group`, `resizable`, `slider`, `toggle`, `toggle-group`. Radix wrappers need the corresponding `@radix-ui/react-<name>` peer. Calendar needs `react-day-picker` v9; DatePicker also needs `@radix-ui/react-popover`. Drawer needs `vaul`; Resizable needs `react-resizable-panels` v3.
+
+New dependency-free patterns are exported from the root and individual subpaths: `Chart`, `ChartCard`, `TaskCard`, `ContentCard`, `Carousel`, `Questionnaire`, `MessageScroller`, `Message`, `Bubble`, `Marker`, `Attachment`, `TagInput`, `InlineEdit`, `InputOTP`, `FileUpload`, `CopyButton`, `Countdown`, `BackToTop`, `AspectRatio`, `Separator`, `ButtonGroup`, `Kbd`, `NativeSelect`, `InputGroup`, `Item`, and typography primitives. "Dependency-free" here means no additional optional peers beyond the package's required React and Slot peers.
+
+```tsx
+import { Chart, ChartCard, TaskCard } from "@aisocratic/design"
+
+<ChartCard title="Weekly activity" description="Sample data">
+  <Chart label="Visits" kind="line" data={[
+    { label: "Mon", value: 24 },
+    { label: "Tue", value: 38 },
+  ]} />
+</ChartCard>
+
+<TaskCard
+  title="Review agent output"
+  priority="High"
+  assignee="Anna"
+  labels={["Design"]}
+  status={status}
+  columns={[{ value: "ready", label: "Ready" }, { value: "done", label: "Done" }]}
+  onStatusChange={setStatus}
+/>
+```
+
+Card names use Space Grotesk. `ContentCard editorial` explicitly opts a news headline into Newsreader. `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, and `CardFooter` add optional structure to the existing unpadded Card surface.
+
+Charts are intentionally basic: line and area are single-series; bar supports signed values; donut, segmented and ranking visualize nonnegative shares; gauge uses a 0–100 scale. Every chart includes a “View data” table. App-level filtering, collectors and streaming transports remain outside Stoa.
+
+`Questionnaire` takes questions with stable `id`, `title`, `type` (`single`, `multiple`, `text`), optional `options` and `optional`. It preserves answers across Previous/Next, validates required answers, awaits `onComplete`, and lets the user retry a failed submission. Remount with a new key to start another questionnaire.
+
+`FileUpload` selects files and checks `maxBytes`; it does not upload them. `accept` is only a native picker hint, so validate files again in the consuming application. `TaskCard` exposes presentation and callbacks; use the app's drag-and-drop layer and backend for board operations.

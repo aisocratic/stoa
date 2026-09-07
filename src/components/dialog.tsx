@@ -74,7 +74,13 @@ function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 function DialogTitle({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Title>) {
-  return <DialogPrimitive.Title data-slot="dialog-title" className={cn("font-display text-title text-foreground", className)} {...props} />
+  return (
+    <DialogPrimitive.Title
+      data-slot="dialog-title"
+      className={cn("font-body font-normal text-title text-foreground", className)}
+      {...props}
+    />
+  )
 }
 
 function DialogDescription({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Description>) {

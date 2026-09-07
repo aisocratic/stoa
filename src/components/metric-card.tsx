@@ -85,7 +85,7 @@ export function MetricCard({
         <span className="text-eyebrow font-code">{label}</span>
         {trailing ? <span className="ml-auto">{trailing}</span> : null}
       </div>
-      <p className={cn("font-display text-foreground", compact ? "text-lead" : "text-title", valueClassName)}>{value}</p>
+      <p className={cn("font-body font-normal text-foreground", compact ? "text-lead" : "text-title", valueClassName)}>{value}</p>
     </div>
   )
 }

@@ -33,7 +33,8 @@ describe("dist", () => {
         (total, entry) => total + (entry.isDirectory() ? bytes(join(dir, entry.name)) : readFileSync(join(dir, entry.name)).byteLength),
         0,
       )
-    expect(bytes(join(ROOT, "dist"))).toBeLessThan(400_000)
+    // Expanded catalog: 32 additional component categories plus shared card/chart patterns.
+    expect(bytes(join(ROOT, "dist"))).toBeLessThan(500_000)
   })
 
   it("resolves the root and every component through the public package exports", async () => {

@@ -121,3 +121,20 @@ border-border`, focus ring, `aria-invalid` styling).
 Data tables, charts, calendars, composed form fields, the user menu, and
 anything that needs the app's data. Those belong in the app, built on the
 chrome and primitives above.
+
+## Expanded component catalog
+
+Keep UI/card headings in Space Grotesk (`font-body`). Newsreader (`font-display`) is for editorial headlines and page titles.
+
+Additional root exports: `Chart`, `ChartCard`, `TaskCard`, `ContentCard`, `Carousel`, `Questionnaire`, `MessageScroller`, `Message`, `Bubble`, `Marker`, `Attachment`, `TagInput`, `InlineEdit`, `InputOTP`, `FileUpload`, `CopyButton`, `Countdown`, `BackToTop`, `AspectRatio`, `Separator`, `ButtonGroup`, `Kbd`, `NativeSelect`, `InputGroup`, `Item`, `Heading`, `Text`, `Code`, `Blockquote`, and the optional Card header/content/footer parts.
+
+Optional-peer components must use `@aisocratic/design/components/<module>`: `accordion`, `alert-dialog`, `calendar`, `context-menu`, `date-picker`, `direction`, `drawer`, `hover-card`, `menubar`, `navigation-menu`, `radio-group`, `resizable`, `slider`, `toggle`, `toggle-group`. Install the corresponding Radix peer for wrappers; `react-day-picker` v9 for Calendar; `react-day-picker` and `@radix-ui/react-popover` for DatePicker; `vaul` for Drawer; `react-resizable-panels` v3 for Resizable.
+
+- `Chart`: `{ label, kind, data: { label, value, color? }[] }`; kinds are line, area, bar, donut, ranking, segmented, gauge. Line/area are single-series. Includes empty state and accessible data table.
+- `ChartCard`: title, description, actions, footer around any chart.
+- `TaskCard`: title, description, labels, priority, assignee, status/columns/onStatusChange, onOpen, metadata/actions slots, compact and selected presentation. Apps own drag-and-drop and persistence.
+- `ContentCard`: title, href, description, eyebrow, media and footer. `editorial` enables Newsreader for news.
+- `Questionnaire`: questions (`id`, `title`, `type`, `options?`, `optional?`) and async `onComplete`. Supports single/multiple/text answers and retry after failure.
+- `MessageScroller`: follows messages while the reader is at the bottom; shows a return button when they scroll up.
+- `FileUpload`: native file selection and size checks; apps own upload transport and storage.
+- Combobox remains `SelectField searchable`; multiselect remains `SelectField searchable multiple`. Sidebar remains `AdminShell`.

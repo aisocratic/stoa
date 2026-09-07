@@ -1,0 +1,1049 @@
+{
+  "repository": "../website",
+  "checked": "2026-09-06",
+  "files": [
+    {
+      "path": "components/about/hero-photo-backdrop.tsx",
+      "exports": ["HeroPhotoBackdrop"]
+    },
+    {
+      "path": "components/about/parallax-drift.tsx",
+      "exports": ["ParallaxDrift"]
+    },
+    {
+      "path": "components/about/parallax-hero.tsx",
+      "exports": ["ParallaxHero"]
+    },
+    {
+      "path": "components/about/parallax-mission.tsx",
+      "exports": ["ParallaxMission"]
+    },
+    {
+      "path": "components/about/parallax-vision.tsx",
+      "exports": ["ParallaxVision"]
+    },
+    {
+      "path": "components/about/photo-rotator.tsx",
+      "exports": ["PhotoRotator"]
+    },
+    {
+      "path": "components/about/video-button.tsx",
+      "exports": ["VideoButton"]
+    },
+    {
+      "path": "components/about/what-we-do-card.tsx",
+      "exports": ["WhatWeDoCard"]
+    },
+    {
+      "path": "components/acquisition-capture.tsx",
+      "exports": ["AcquisitionCapture"]
+    },
+    {
+      "path": "components/active-chapter-card.tsx",
+      "exports": ["ActiveChapterCard"]
+    },
+    {
+      "path": "components/admin/ai-referrers.tsx",
+      "exports": ["AiReferrers"]
+    },
+    {
+      "path": "components/admin/ai-usage.tsx",
+      "exports": ["AiUsage"]
+    },
+    {
+      "path": "components/admin/ambassador-scopes.tsx",
+      "exports": ["AmbassadorScopes"]
+    },
+    {
+      "path": "components/admin/anomalies-card.tsx",
+      "exports": ["AnomaliesCard"]
+    },
+    {
+      "path": "components/admin/audit-log-list.tsx",
+      "exports": ["AuditLogList"]
+    },
+    {
+      "path": "components/admin/back-link.tsx",
+      "exports": ["BackLink"]
+    },
+    {
+      "path": "components/admin/breadcrumb.tsx",
+      "exports": ["AdminBreadcrumb"]
+    },
+    {
+      "path": "components/admin/cadence-label.tsx",
+      "exports": ["CadenceLabel"]
+    },
+    {
+      "path": "components/admin/card-info-panel.tsx",
+      "exports": ["CardInfoPanel"]
+    },
+    {
+      "path": "components/admin/card-refresh-button.tsx",
+      "exports": ["CardRefreshButton"]
+    },
+    {
+      "path": "components/admin/card-title.tsx",
+      "exports": ["CardTitle"]
+    },
+    {
+      "path": "components/admin/chart-shell.tsx",
+      "exports": ["ChartShell"]
+    },
+    {
+      "path": "components/admin/client-data-table.tsx",
+      "exports": ["ClientDataTable"]
+    },
+    {
+      "path": "components/admin/code-quality.tsx",
+      "exports": [
+        "CodeHealth",
+        "CodeStructure",
+        "CodeHealthOverTime",
+        "StructureOverTime",
+        "DuplicationOverTime",
+        "LargestCloneClusters",
+        "LargestFiles"
+      ]
+    },
+    {
+      "path": "components/admin/column-layout.tsx",
+      "exports": ["ColumnLayoutGroup", "tableLayoutClass", "ColumnHeaderCell"]
+    },
+    {
+      "path": "components/admin/community-breakdown.tsx",
+      "exports": ["CommunityPersonas", "CommunityMembership", "CommunityEmployment", "CommunityIndustries", "CommunityEmployers"]
+    },
+    {
+      "path": "components/admin/community-overview.tsx",
+      "exports": ["CommunityOverview"]
+    },
+    {
+      "path": "components/admin/content-performance.tsx",
+      "exports": ["ContentPerformance"]
+    },
+    {
+      "path": "components/admin/core-web-vitals-routes.tsx",
+      "exports": ["CoreWebVitalsRoutes"]
+    },
+    {
+      "path": "components/admin/dashboard-summary.tsx",
+      "exports": ["jumpToDashboardCard", "DashboardSummary"]
+    },
+    {
+      "path": "components/admin/data-table.tsx",
+      "exports": ["columnIdFor", "AdminDataTable"]
+    },
+    {
+      "path": "components/admin/device-breakdown.tsx",
+      "exports": ["DeviceBreakdown"]
+    },
+    {
+      "path": "components/admin/duplicate-avatar.tsx",
+      "exports": ["DuplicateAvatar"]
+    },
+    {
+      "path": "components/admin/duplicate-groups-dialog.tsx",
+      "exports": ["DuplicateGroupsDialog"]
+    },
+    {
+      "path": "components/admin/engagement-metrics.tsx",
+      "exports": ["EngagementMetrics"]
+    },
+    {
+      "path": "components/admin/favourite-star.tsx",
+      "exports": ["FavouriteStar"]
+    },
+    {
+      "path": "components/admin/filter-rail.tsx",
+      "exports": ["FilterRail"]
+    },
+    {
+      "path": "components/admin/first-party-traffic.tsx",
+      "exports": ["FirstPartyTraffic"]
+    },
+    {
+      "path": "components/admin/form-section.tsx",
+      "exports": ["FormSection"]
+    },
+    {
+      "path": "components/admin/ga4-coverage-note.tsx",
+      "exports": ["coverageNotes", "Ga4CoverageNote"]
+    },
+    {
+      "path": "components/admin/geo-distribution.tsx",
+      "exports": ["GeoDistribution"]
+    },
+    {
+      "path": "components/admin/last-updated-label.tsx",
+      "exports": ["LastUpdatedLabel"]
+    },
+    {
+      "path": "components/admin/latest-releases.tsx",
+      "exports": ["LatestReleases"]
+    },
+    {
+      "path": "components/admin/luma-analytics.tsx",
+      "exports": ["LumaAnalytics"]
+    },
+    {
+      "path": "components/admin/luma-attendance.tsx",
+      "exports": ["LumaAttendance"]
+    },
+    {
+      "path": "components/admin/luma-funnel.tsx",
+      "exports": ["LumaFunnel"]
+    },
+    {
+      "path": "components/admin/metric-info-hint.tsx",
+      "exports": ["MetricInfoHint"]
+    },
+    {
+      "path": "components/admin/mobile-app-analytics.tsx",
+      "exports": ["MobileAppAnalytics"]
+    },
+    {
+      "path": "components/admin/newsletter-sources.tsx",
+      "exports": ["NewsletterSources"]
+    },
+    {
+      "path": "components/admin/page-header.tsx",
+      "exports": ["PageHeader"]
+    },
+    {
+      "path": "components/admin/page-toolbar.tsx",
+      "exports": ["AdminPageToolbar"]
+    },
+    {
+      "path": "components/admin/performance-metrics.tsx",
+      "exports": [
+        "LighthouseSummary",
+        "LighthousePerformance",
+        "LighthouseCoreWebVitals",
+        "LighthousePayload",
+        "worstScore",
+        "LighthouseReports"
+      ]
+    },
+    {
+      "path": "components/admin/project-health.tsx",
+      "exports": ["ProjectSize", "ProjectBuild", "ProjectDeployTest", "ProjectSnapshots"]
+    },
+    {
+      "path": "components/admin/record-header.tsx",
+      "exports": ["RecordHeader"]
+    },
+    {
+      "path": "components/admin/region-latency-status.tsx",
+      "exports": ["RegionLatencyStatus"]
+    },
+    {
+      "path": "components/admin/region-latency.tsx",
+      "exports": ["RegionLatencyTrend"]
+    },
+    {
+      "path": "components/admin/section-header.tsx",
+      "exports": ["SectionHeader"]
+    },
+    {
+      "path": "components/admin/seo-coverage.tsx",
+      "exports": ["SeoCoverage"]
+    },
+    {
+      "path": "components/admin/seo-scores.tsx",
+      "exports": ["SeoScores"]
+    },
+    {
+      "path": "components/admin/server-errors.tsx",
+      "exports": ["ServerErrors"]
+    },
+    {
+      "path": "components/admin/signups-chart.tsx",
+      "exports": ["SignupsChart"]
+    },
+    {
+      "path": "components/admin/slowest-pages.tsx",
+      "exports": ["SlowestPages"]
+    },
+    {
+      "path": "components/admin/sticky-bar.tsx",
+      "exports": ["stickyRailClass", "AdminStickyBar"]
+    },
+    {
+      "path": "components/admin/sticky-section-nav.tsx",
+      "exports": ["AdminStickySectionNav"]
+    },
+    {
+      "path": "components/admin/table-shell.tsx",
+      "exports": ["AdminTableShell"]
+    },
+    {
+      "path": "components/admin/todo-metrics.tsx",
+      "exports": ["TodoMetrics"]
+    },
+    {
+      "path": "components/admin/traffic-sources.tsx",
+      "exports": ["TrafficSources"]
+    },
+    {
+      "path": "components/admin/user-combobox.tsx",
+      "exports": ["UserCombobox"]
+    },
+    {
+      "path": "components/admin/user-growth-chart.tsx",
+      "exports": ["UserGrowthChart"]
+    },
+    {
+      "path": "components/admin/venue-contact.tsx",
+      "exports": ["VenueContact"]
+    },
+    {
+      "path": "components/animated-stat.tsx",
+      "exports": ["AnimatedStat"]
+    },
+    {
+      "path": "components/auth/google-glyph.tsx",
+      "exports": ["GoogleGlyph"]
+    },
+    {
+      "path": "components/auth/user-nav.tsx",
+      "exports": ["UserNav"]
+    },
+    {
+      "path": "components/auth/user-provider.tsx",
+      "exports": ["UserProvider", "useUser"]
+    },
+    {
+      "path": "components/blog/align-insert-dialog.tsx",
+      "exports": ["AlignInsertDialog"]
+    },
+    {
+      "path": "components/blog/author-card.tsx",
+      "exports": ["AuthorCard"]
+    },
+    {
+      "path": "components/blog/author-combobox.tsx",
+      "exports": ["AuthorCombobox"]
+    },
+    {
+      "path": "components/blog/base-insert-dialog.tsx",
+      "exports": ["BaseInsertDialog"]
+    },
+    {
+      "path": "components/blog/blog-events-block.tsx",
+      "exports": ["BlogEventsBlock"]
+    },
+    {
+      "path": "components/blog/blog-gallery-block.tsx",
+      "exports": ["BlogGalleryBlock"]
+    },
+    {
+      "path": "components/blog/blog-people-block.tsx",
+      "exports": ["BlogPeopleBlock"]
+    },
+    {
+      "path": "components/blog/blog-person-block.tsx",
+      "exports": ["BlogPersonBlock"]
+    },
+    {
+      "path": "components/blog/blog-post-card.tsx",
+      "exports": ["BlogPostCard"]
+    },
+    {
+      "path": "components/blog/blog-posts-block.tsx",
+      "exports": ["BlogPostsBlock"]
+    },
+    {
+      "path": "components/blog/blog-shoutouts-block.tsx",
+      "exports": ["BlogShoutoutsBlock"]
+    },
+    {
+      "path": "components/blog/button-insert-dialog.tsx",
+      "exports": ["ButtonInsertDialog"]
+    },
+    {
+      "path": "components/blog/collaborative/collaborative-editor.tsx",
+      "exports": ["CollaborativeEditor"]
+    },
+    {
+      "path": "components/blog/collaborative/comment-sidebar.tsx",
+      "exports": ["CommentSidebar"]
+    },
+    {
+      "path": "components/blog/collaborative/locked-notice.tsx",
+      "exports": ["LockedNotice"]
+    },
+    {
+      "path": "components/blog/collaborative/suggestions-panel.tsx",
+      "exports": ["SuggestionsPanel"]
+    },
+    {
+      "path": "components/blog/collaborative/version-history-panel.tsx",
+      "exports": ["VersionHistoryPanel"]
+    },
+    {
+      "path": "components/blog/collaborative/workflow-status-badge.tsx",
+      "exports": ["WorkflowStatusBadge"]
+    },
+    {
+      "path": "components/blog/columns-insert-dialog.tsx",
+      "exports": ["ColumnsInsertDialog"]
+    },
+    {
+      "path": "components/blog/cover-image-context-menu.tsx",
+      "exports": ["CoverImageContextMenu"]
+    },
+    {
+      "path": "components/blog/editor-toolbar.tsx",
+      "exports": ["EditorToolbar"]
+    },
+    {
+      "path": "components/blog/glitch-title.tsx",
+      "exports": ["GlitchTitle"]
+    },
+    {
+      "path": "components/blog/image-insert-dialog.tsx",
+      "exports": ["ImageInsertDialog"]
+    },
+    {
+      "path": "components/blog/image-lightbox.tsx",
+      "exports": ["ImageLightbox"]
+    },
+    {
+      "path": "components/blog/markdown-editor/blame-gutter.tsx",
+      "exports": ["BlameGutter"]
+    },
+    {
+      "path": "components/blog/markdown-editor/insert-dialogs.tsx",
+      "exports": ["EditorInsertDialogs"]
+    },
+    {
+      "path": "components/blog/markdown-editor.tsx",
+      "exports": ["MarkdownEditor"]
+    },
+    {
+      "path": "components/blog/newsletter-prompt.tsx",
+      "exports": ["NewsletterPrompt"]
+    },
+    {
+      "path": "components/blog/parallax-image.tsx",
+      "exports": ["ParallaxImage"]
+    },
+    {
+      "path": "components/blog/parallax-wrapper.tsx",
+      "exports": ["ParallaxWrapper"]
+    },
+    {
+      "path": "components/blog/post-slideshow-launcher.tsx",
+      "exports": ["PostSlideshowLauncher"]
+    },
+    {
+      "path": "components/blog/post-slideshow.tsx",
+      "exports": ["PostSlideshow"]
+    },
+    {
+      "path": "components/blog/related-posts-field.tsx",
+      "exports": ["RelatedPostsField"]
+    },
+    {
+      "path": "components/blog/segments-editor.tsx",
+      "exports": ["splitIntoSegments", "reassembleSegments", "segmentBodyOffset", "SegmentsEditor"]
+    },
+    {
+      "path": "components/blog/slide-hero.tsx",
+      "exports": ["SlideHero", "SlideDateMeta", "SlideReadingTimeMeta", "SlideCategoryMeta"]
+    },
+    {
+      "path": "components/blog/slideshow-shell.tsx",
+      "exports": ["SlideshowShell"]
+    },
+    {
+      "path": "components/blog/source-avatar.tsx",
+      "exports": ["SourceAvatar"]
+    },
+    {
+      "path": "components/blog/source-chip.tsx",
+      "exports": ["SourceChip"]
+    },
+    {
+      "path": "components/blog/source-picker.tsx",
+      "exports": ["SourcePicker"]
+    },
+    {
+      "path": "components/blog/table-of-contents.tsx",
+      "exports": ["TableOfContents"]
+    },
+    {
+      "path": "components/blog/tweet-insert-dialog.tsx",
+      "exports": ["TweetInsertDialog"]
+    },
+    {
+      "path": "components/blog/update-form.tsx",
+      "exports": ["UpdateForm"]
+    },
+    {
+      "path": "components/blog/video-insert-dialog.tsx",
+      "exports": ["VideoInsertDialog"]
+    },
+    {
+      "path": "components/blog/video-upload.tsx",
+      "exports": ["VideoUpload"]
+    },
+    {
+      "path": "components/blog/view-tracker.tsx",
+      "exports": ["ViewTracker"]
+    },
+    {
+      "path": "components/book-call-dialog.tsx",
+      "exports": ["BookCallDialog"]
+    },
+    {
+      "path": "components/breadcrumbs.tsx",
+      "exports": ["Breadcrumbs"]
+    },
+    {
+      "path": "components/chapters/vote-button.tsx",
+      "exports": ["VoteButton"]
+    },
+    {
+      "path": "components/chapters-grid.tsx",
+      "exports": ["ChaptersGrid"]
+    },
+    {
+      "path": "components/chapters-section.tsx",
+      "exports": ["ChaptersSection"]
+    },
+    {
+      "path": "components/chapters-world-map.tsx",
+      "exports": ["ChaptersWorldMap"]
+    },
+    {
+      "path": "components/city-subscriptions-dialog.tsx",
+      "exports": ["CitySubscriptionsDialog"]
+    },
+    {
+      "path": "components/consent-analytics.tsx",
+      "exports": ["ConsentAnalytics"]
+    },
+    {
+      "path": "components/consultant-network.tsx",
+      "exports": ["ConsultantNetwork"]
+    },
+    {
+      "path": "components/consulting-companies-explorer.tsx",
+      "exports": ["ConsultingCompaniesExplorer"]
+    },
+    {
+      "path": "components/consulting-hero.tsx",
+      "exports": ["ConsultingHero"]
+    },
+    {
+      "path": "components/consulting-jobs-explorer.tsx",
+      "exports": ["ConsultingJobsExplorer"]
+    },
+    {
+      "path": "components/cookie-consent-banner.tsx",
+      "exports": ["CookieConsentBanner", "useCookieConsentValue"]
+    },
+    {
+      "path": "components/cookie-consent-bootstrap.tsx",
+      "exports": ["CookieConsentBootstrap"]
+    },
+    {
+      "path": "components/cookie-preferences-button.tsx",
+      "exports": ["CookiePreferencesButton"]
+    },
+    {
+      "path": "components/copy-link-button.tsx",
+      "exports": ["CopyLinkButton"]
+    },
+    {
+      "path": "components/cta-link.tsx",
+      "exports": ["CtaLink"]
+    },
+    {
+      "path": "components/download-image-button.tsx",
+      "exports": ["DownloadImageButton"]
+    },
+    {
+      "path": "components/engagement/star-button.tsx",
+      "exports": ["StarButton"]
+    },
+    {
+      "path": "components/engagement/stars-provider.tsx",
+      "exports": ["StarsProvider", "useStars"]
+    },
+    {
+      "path": "components/event-posts-wall.tsx",
+      "exports": ["EventPostsWall"]
+    },
+    {
+      "path": "components/events/event-card.tsx",
+      "exports": ["EventCardRowView", "EventCardRow"]
+    },
+    {
+      "path": "components/events/event-story-tile.tsx",
+      "exports": ["eventTileFromRow", "EventStoryTile"]
+    },
+    {
+      "path": "components/feedback/feedback-button.tsx",
+      "exports": ["FeedbackButton"]
+    },
+    {
+      "path": "components/floating-search.tsx",
+      "exports": ["FloatingSearch"]
+    },
+    {
+      "path": "components/footer.tsx",
+      "exports": ["Footer"]
+    },
+    {
+      "path": "components/global-search.tsx",
+      "exports": ["GlobalSearch"]
+    },
+    {
+      "path": "components/gradient-descent-bg.tsx",
+      "exports": ["GradientDescentBg"]
+    },
+    {
+      "path": "components/gradient-descent-image-bg.tsx",
+      "exports": ["GRADIENT_BG_CDN_BASE", "GradientDescentImageBg"]
+    },
+    {
+      "path": "components/header.tsx",
+      "exports": ["Header"]
+    },
+    {
+      "path": "components/home/become-member-link.tsx",
+      "exports": ["BecomeMemberLink"]
+    },
+    {
+      "path": "components/home/feed-tiles.tsx",
+      "exports": ["newsTile", "blogTile", "eventsTile", "FEED_GRID_CLASS"]
+    },
+    {
+      "path": "components/home/home-cta.tsx",
+      "exports": ["HomeCta"]
+    },
+    {
+      "path": "components/home/home-feed-infinite.tsx",
+      "exports": ["HomeFeedInfinite"]
+    },
+    {
+      "path": "components/home/mixed-feed-section.tsx",
+      "exports": ["splitFeaturedLead", "newsCardsNeededToFillHomeGrid", "MixedFeedSection"]
+    },
+    {
+      "path": "components/home/story-tile.tsx",
+      "exports": ["StoryTile"]
+    },
+    {
+      "path": "components/impersonation-banner.tsx",
+      "exports": ["ImpersonationBanner"]
+    },
+    {
+      "path": "components/join/join-portal.tsx",
+      "exports": ["JoinPortal", "JoinScreen"]
+    },
+    {
+      "path": "components/json-ld.tsx",
+      "exports": ["JsonLd"]
+    },
+    {
+      "path": "components/lazy-video.tsx",
+      "exports": ["LazyVideo"]
+    },
+    {
+      "path": "components/legal/legal-page.tsx",
+      "exports": ["LegalPage", "LegalSection", "LegalParagraph", "LegalList", "LegalSubheading"]
+    },
+    {
+      "path": "components/lightbox-image.tsx",
+      "exports": ["LightboxImage"]
+    },
+    {
+      "path": "components/logo-band.tsx",
+      "exports": ["LogoBand"]
+    },
+    {
+      "path": "components/logo.tsx",
+      "exports": ["Logo"]
+    },
+    {
+      "path": "components/markdown/lightbox-image.tsx",
+      "exports": ["LightboxImage"]
+    },
+    {
+      "path": "components/markdown/youtube-embed.tsx",
+      "exports": ["YouTubeEmbed"]
+    },
+    {
+      "path": "components/markdown-content.tsx",
+      "exports": ["markdownSanitizeSchema", "rehypeRestrictEmbeds", "hasGatedMarkdown", "MarkdownContent"]
+    },
+    {
+      "path": "components/marketing-cta.tsx",
+      "exports": ["MarketingCTA"]
+    },
+    {
+      "path": "components/membership/supporter-checkout-button.tsx",
+      "exports": ["SupporterCheckoutButton"]
+    },
+    {
+      "path": "components/membership/supporter-manage-button.tsx",
+      "exports": ["SupporterManageButton"]
+    },
+    {
+      "path": "components/mobile-menu.tsx",
+      "exports": ["MobileMenu"]
+    },
+    {
+      "path": "components/newsletter/newsletter-toggle.tsx",
+      "exports": ["NewsletterToggle"]
+    },
+    {
+      "path": "components/newsletter-form.tsx",
+      "exports": ["NewsletterForm"]
+    },
+    {
+      "path": "components/not-found-screen.tsx",
+      "exports": ["NotFoundScreen"]
+    },
+    {
+      "path": "components/notifications/notification-bell.tsx",
+      "exports": ["NotificationBell"]
+    },
+    {
+      "path": "components/onboarding/welcome-tour.tsx",
+      "exports": ["WelcomeTour"]
+    },
+    {
+      "path": "components/pageview-beacon.tsx",
+      "exports": ["PageviewBeacon"]
+    },
+    {
+      "path": "components/partnerships-event-gallery.tsx",
+      "exports": ["PartnershipsEventGallery"]
+    },
+    {
+      "path": "components/partnerships-hero.tsx",
+      "exports": ["PartnershipsHero"]
+    },
+    {
+      "path": "components/slides/editable-slide.tsx",
+      "exports": ["parseAgendaRows", "serializeAgendaRows", "AgendaSlideEditor", "EditableSlideContent"]
+    },
+    {
+      "path": "components/slides/fit-to-frame.tsx",
+      "exports": ["FitToFrame"]
+    },
+    {
+      "path": "components/slides/gradient-descent-slide-bg.tsx",
+      "exports": ["GradientDescentSlideBg"]
+    },
+    {
+      "path": "components/slides/preview-gate.tsx",
+      "exports": ["PreviewGate"]
+    },
+    {
+      "path": "components/slides/slide-proposals-panel.tsx",
+      "exports": ["SlideProposalsPanel"]
+    },
+    {
+      "path": "components/slides/slide-steps.tsx",
+      "exports": ["SlideStepContext", "useSlideStep", "SteppedMarkdown"]
+    },
+    {
+      "path": "components/slides/slide-summary-cover.tsx",
+      "exports": ["SummaryModeProvider", "SlideSummaryCover"]
+    },
+    {
+      "path": "components/social-icons.tsx",
+      "exports": ["LinkedInIcon", "GithubIcon", "XIcon", "InstagramIcon"]
+    },
+    {
+      "path": "components/stat-grid.tsx",
+      "exports": ["StatGrid"]
+    },
+    {
+      "path": "components/tag-filters.tsx",
+      "exports": ["TagFilters"]
+    },
+    {
+      "path": "components/theme-provider.tsx",
+      "exports": ["ThemeProvider"]
+    },
+    {
+      "path": "components/theme-toggle.tsx",
+      "exports": ["ThemeToggle"]
+    },
+    {
+      "path": "components/topics/topic-link.tsx",
+      "exports": ["TopicLink"]
+    },
+    {
+      "path": "components/twitter-embed.tsx",
+      "exports": ["TwitterEmbed", "extractTweetId"]
+    },
+    {
+      "path": "components/ui/alert.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/avatar-upload.tsx",
+      "exports": ["AvatarUpload"]
+    },
+    {
+      "path": "components/ui/avatar.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/back-to-top.tsx",
+      "exports": ["BackToTop"]
+    },
+    {
+      "path": "components/ui/badge.tsx",
+      "exports": ["statusBadgeToneClasses", "Badge"]
+    },
+    {
+      "path": "components/ui/base-feature-dialog.tsx",
+      "exports": ["BaseFeatureDialog", "useFeatureDialogSubmit"]
+    },
+    {
+      "path": "components/ui/brand-icons.tsx",
+      "exports": ["Github", "Linkedin", "Twitter"]
+    },
+    {
+      "path": "components/ui/button-link.tsx",
+      "exports": ["ButtonLink"]
+    },
+    {
+      "path": "components/ui/button.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/calendar.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/card.tsx",
+      "exports": ["cardSurface", "Card"]
+    },
+    {
+      "path": "components/ui/chart.tsx",
+      "exports": ["chartGridDefaults", "chartXAxisDefaults", "chartYAxisDefaults"]
+    },
+    {
+      "path": "components/ui/checkbox.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/choice-card.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/collapsible.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/command.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/confirm-delete-dialog.tsx",
+      "exports": ["ConfirmDeleteDialog"]
+    },
+    {
+      "path": "components/ui/countdown.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/dialog.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/dropdown-menu.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/empty-state.tsx",
+      "exports": ["EmptyState"]
+    },
+    {
+      "path": "components/ui/filter-chip-group.tsx",
+      "exports": ["FilterChip", "FilterChipGroup"]
+    },
+    {
+      "path": "components/ui/filter-toolbar.tsx",
+      "exports": ["FilterToolbar"]
+    },
+    {
+      "path": "components/ui/form-fields.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/image-upload.tsx",
+      "exports": ["ImageUpload"]
+    },
+    {
+      "path": "components/ui/inline-edit.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/input.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/label.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/lazy-toaster.tsx",
+      "exports": ["LazyToaster"]
+    },
+    {
+      "path": "components/ui/metric-card.tsx",
+      "exports": ["MetricCard"]
+    },
+    {
+      "path": "components/ui/multi-select-filter.tsx",
+      "exports": ["MultiSelectFilter"]
+    },
+    {
+      "path": "components/ui/pagination-controls.tsx",
+      "exports": ["PaginationControls"]
+    },
+    {
+      "path": "components/ui/popover.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/progress.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/results-summary.tsx",
+      "exports": ["ResultsSummary"]
+    },
+    {
+      "path": "components/ui/row-actions.tsx",
+      "exports": ["RowActions", "RowAction"]
+    },
+    {
+      "path": "components/ui/scroll-area.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/search-field.tsx",
+      "exports": ["SearchField"]
+    },
+    {
+      "path": "components/ui/section.tsx",
+      "exports": ["Section", "SectionHeading", "RuledHeading", "PageHero"]
+    },
+    {
+      "path": "components/ui/segmented-control.tsx",
+      "exports": ["SegmentedControl"]
+    },
+    {
+      "path": "components/ui/select.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/sheet.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/skeleton.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/sonner.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/sort-icon.tsx",
+      "exports": ["SortIcon"]
+    },
+    {
+      "path": "components/ui/sortable-header-cell.tsx",
+      "exports": ["SortableHeaderCell", "SortableHeaderContent"]
+    },
+    {
+      "path": "components/ui/spinner.tsx",
+      "exports": ["Spinner"]
+    },
+    {
+      "path": "components/ui/story-tile-skeleton.tsx",
+      "exports": ["StoryTileSkeleton", "FilterToolbarSkeleton"]
+    },
+    {
+      "path": "components/ui/switch.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/table.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/tabs.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/tag-filter-bar.tsx",
+      "exports": ["TagFilterBar"]
+    },
+    {
+      "path": "components/ui/tag-input.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/text-field.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/textarea.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/tooltip.tsx",
+      "exports": []
+    },
+    {
+      "path": "components/ui/user-avatar.tsx",
+      "exports": ["UserAvatar", "AuthorRow"]
+    },
+    {
+      "path": "components/updates/compile-to-draft-button.tsx",
+      "exports": ["CompileToDraftButton"]
+    },
+    {
+      "path": "components/user/email-addresses.tsx",
+      "exports": ["EmailAddresses"]
+    },
+    {
+      "path": "components/user/profile-completion-card.tsx",
+      "exports": ["ProfileCompletionCard"]
+    },
+    {
+      "path": "components/web-vitals-reporter.tsx",
+      "exports": ["WebVitalsReporter"]
+    },
+    {
+      "path": "components/workshops/rotating-text.tsx",
+      "exports": ["RotatingText"]
+    },
+    {
+      "path": "components/workshops/testimonials-section.tsx",
+      "exports": ["TestimonialsSection", "CommunityStats"]
+    },
+    {
+      "path": "components/workshops/tool-stack-section.tsx",
+      "exports": ["ToolStackSection"]
+    },
+    {
+      "path": "components/workshops/workshop-hero.tsx",
+      "exports": ["WorkshopHero"]
+    }
+  ]
+}

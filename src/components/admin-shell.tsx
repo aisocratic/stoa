@@ -143,7 +143,7 @@ export function AdminShell({
     <div className={cn(embedded ? "relative min-h-full overflow-hidden" : "min-h-screen", "bg-background", className)}>
       {/* Mobile top bar — in flow, scrolls away. */}
       <div className="flex items-center justify-between border-b border-border p-4 lg:hidden">
-        <div className="font-display text-title">{topBar ?? "Admin"}</div>
+        <div className="font-body font-normal text-title">{topBar ?? "Admin"}</div>
         <Button
           ref={triggerRef}
           variant="ghost"

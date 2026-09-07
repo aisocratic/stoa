@@ -153,7 +153,7 @@ export function FormDemo() {
   const [slug, setSlug] = useState("milan-12")
   const slugError = slug.length < 3 ? "At least 3 characters." : undefined
   return (
-    <div data-testid="form-demo" className="space-y-6">
+    <div data-testid="form-demo" className="flex flex-col gap-6">
       <FilterToolbar
         filters={
           <>
