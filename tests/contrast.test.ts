@@ -44,7 +44,8 @@ describe.each<Mode>(["light", "dark"])("%s mode contrast", (mode) => {
     if (mode === "dark") {
       const ratio = roleContrast("foreground", "background", "dark")
       expect(ratio).toBeLessThan(17)
-      expect(ratio).toBeGreaterThan(15)
+      // The lifted charcoal page yields ~14.76:1, still comfortably above AAA.
+      expect(ratio).toBeGreaterThan(14)
     }
   })
 

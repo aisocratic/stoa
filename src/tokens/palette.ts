@@ -24,7 +24,7 @@
  * 12 slate-dark #141413. Sampled from https://www.anthropic.com/ on
  * 2026-09-04. The page uses step 2, cards step 1. Intervening steps preserve
  * a monotonic ramp. Legacy neutral/slate primitives remain for overrides.
- * Dark keeps aisocratic.org's page #0a0a0a, card #141414, text #e6e6e6.
+ * Dark uses lifted charcoal surfaces: page #141414, card #1c1c1c, text #e6e6e6.
  *
  * ## Hues: Tailwind weights
  *
@@ -56,12 +56,12 @@ export const palette = {
   },
 
   ink: {
-    1: "#0a0a0a",
-    2: "#141414",
-    3: "#1a1a1a",
-    4: "#262626",
-    5: "#2e2e2e",
-    6: "#383838",
+    1: "#141414",
+    2: "#1c1c1c",
+    3: "#202020",
+    4: "#242424",
+    5: "#282828",
+    6: "#303030",
     7: "#474747",
     8: "#5c5c5c",
     9: "#737373",

@@ -8,7 +8,7 @@
  * drifting one hex apart the way they used to.
  *
  * Light surfaces and warm text use Anthropic's ivory/oat palette; dark
- * retains aisocratic.org's ink surfaces. The page is ivory-medium, cards
+ * uses lifted charcoal ink surfaces. The page is ivory-medium, cards
  * are ivory-light, and oat borders define controls without stark white.
  * Amber accents, violet membership CTAs and status colors retain their
  * semantic roles. Destructive fills use red.600 for readable white labels.
@@ -36,12 +36,12 @@ export const colors = {
   /** Boxed surfaces: one step off the page. */
   card: pair("oat.1", "ink.2"),
   /** Floating surfaces use the raised card ground with a defining border. */
-  popover: pair("oat.1", "ink.1"),
+  popover: pair("oat.1", "ink.3"),
   /** Subdued fills — table hover, neutral badges, skeletons. */
-  muted: pair("oat.3", "ink.4"),
+  muted: pair("oat.3", "ink.5"),
   /** Secondary buttons and the hover fill of ghost/outline controls. */
-  secondary: pair("oat.3", "ink.3"),
-  border: pair("oat.4", "ink.4"),
+  secondary: pair("oat.3", "ink.4"),
+  border: pair("oat.4", "ink.6"),
 
   /* -------------------------------------------------------------- controls */
   /** Near-monochrome by design: the page inverted. */
@@ -74,7 +74,7 @@ export const colors = {
   "chart-ramp-2": pair("oat.12", "ink.12"),
   "chart-ramp-3": pair("oat.10", "ink.10"),
   "chart-ramp-4": pair("oat.8", "ink.8"),
-  "chart-ramp-5": pair("oat.6", "ink.6"),
+  "chart-ramp-5": pair("oat.6", "ink.7"),
   "chart-ramp-muted": pair("oat.3", "ink.3"),
 } as const satisfies Record<string, ColorDef>
 

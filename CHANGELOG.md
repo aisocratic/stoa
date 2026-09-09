@@ -5,6 +5,10 @@ All notable changes to `@aisocratic/design`. The format follows
 
 ## Unreleased
 
+- Lift dark surfaces to charcoal: `#141414` pages, `#1c1c1c` cards, and
+  `#202020` popovers, with coordinated control and border tones. Preserve
+  readable text and distinct chart ramp steps.
+
 - Use Anthropic’s measured ivory/oat light palette across page surfaces, cards,
   controls and text. Dark mode retains the AI Socratic ink theme.
 

@@ -13,15 +13,15 @@ Use semantic roles in components. Primitive values are only for theme overrides.
 
 | Role                         | Light            | Dark                  |
 | ---------------------------- | ---------------- | --------------------- |
-| background                   | oat.2 `#f0eee6`  | ink.1 `#0a0a0a`       |
+| background                   | oat.2 `#f0eee6`  | ink.1 `#141414`       |
 | foreground                   | oat.12 `#141413` | ink.12 `#e6e6e6`      |
 | reading                      | oat.11 `#3d3d3a` | neutral.300 `#c8c8c8` |
 | muted-foreground             | oat.10 `#5e5d59` | ink.11 `#a1a1aa`      |
-| card                         | oat.1 `#faf9f5`  | ink.2 `#141414`       |
-| popover                      | oat.1            | ink.1                 |
-| muted                        | oat.3            | ink.4                 |
-| secondary                    | oat.3            | ink.3                 |
-| border / input               | oat.4            | ink.4                 |
+| card                         | oat.1 `#faf9f5`  | ink.2 `#1c1c1c`       |
+| popover                      | oat.1            | ink.3 `#202020`       |
+| muted                        | oat.3            | ink.5 `#282828`       |
+| secondary                    | oat.3            | ink.4 `#242424`       |
+| border / input               | oat.4            | ink.6 `#303030`       |
 | primary / primary-foreground | oat.12 / oat.1   | neutral.50 / ink.1    |
 | accent / ring                | amber.600        | amber.400             |
 | join                         | violet.600       | violet.500            |
