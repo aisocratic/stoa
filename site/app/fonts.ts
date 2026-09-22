@@ -1,7 +1,7 @@
-import { JetBrains_Mono, Newsreader, Space_Grotesk } from "next/font/google"
+import { Inter, JetBrains_Mono, Newsreader } from "next/font/google"
 
 // next/font must be called in app source; the package only reads these slots.
-export const body = Space_Grotesk({ weight: "400", subsets: ["latin"], display: "swap", variable: "--aisocratic-font-body" })
+export const body = Inter({ subsets: ["latin"], display: "swap", variable: "--aisocratic-font-body" })
 export const display = Newsreader({
   weight: ["200"],
   style: ["normal", "italic"],

@@ -124,7 +124,7 @@ chrome and primitives above.
 
 ## Expanded component catalog
 
-Keep UI/card headings in Space Grotesk (`font-body`). Newsreader (`font-display`) is for editorial headlines and page titles.
+Keep UI/card headings in Inter (`font-body`). Newsreader (`font-display`) is for editorial headlines and page titles.
 
 Additional root exports: `Chart`, `ChartCard`, `TaskCard`, `ContentCard`, `Carousel`, `Questionnaire`, `MessageScroller`, `Message`, `Bubble`, `Marker`, `Attachment`, `TagInput`, `InlineEdit`, `InputOTP`, `FileUpload`, `CopyButton`, `Countdown`, `BackToTop`, `AspectRatio`, `Separator`, `ButtonGroup`, `Kbd`, `NativeSelect`, `InputGroup`, `Item`, `Heading`, `Text`, `Code`, `Blockquote`, and the optional Card header/content/footer parts.
 

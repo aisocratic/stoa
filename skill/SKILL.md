@@ -29,7 +29,7 @@ board); this skill is the layer underneath it and wins on tokens, type and radii
    responsive chains for headings (the upper six steps are fluid `clamp()` already), and
    never pair a step with `leading-*` (each step owns its line-height).
    Enforce it with a drift test in the consuming repo.
-2. **Fonts:** `font-display` (Newsreader) for headings, `font-body` (Space Grotesk, the
+2. **Fonts:** `font-display` (Newsreader) for headings, `font-body` (Inter, the
    default — also the header nav, as `text-nav`) for everything else, `font-code`
    (JetBrains Mono) for code and technical values. Eyebrows and column heads are
    `text-eyebrow`, never a hand-written `text-micro uppercase tracking-[…]`.

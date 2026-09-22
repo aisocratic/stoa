@@ -151,7 +151,7 @@ import { Chart, ChartCard, TaskCard } from "@aisocratic/design"
 />
 ```
 
-Card names use Space Grotesk. `ContentCard editorial` explicitly opts a news headline into Newsreader. `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, and `CardFooter` add optional structure to the existing unpadded Card surface.
+Card names use Inter. `ContentCard editorial` explicitly opts a news headline into Newsreader. `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, and `CardFooter` add optional structure to the existing unpadded Card surface.
 
 Charts are intentionally basic: line and area are single-series; bar supports signed values; donut, segmented and ranking visualize nonnegative shares; gauge uses a 0–100 scale. Every chart includes a “View data” table. App-level filtering, collectors and streaming transports remain outside Stoa.
 

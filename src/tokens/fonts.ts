@@ -6,8 +6,9 @@
  * fallback stack so an unfilled slot still renders the right face if it is
  * installed, and a sane system face if not.
  *
- *   body     Space Grotesk — running text, card names and UI titles. Also the `body` default,
- *            so in most places the class is redundant and can be deleted.
+ *   body     Inter — running text, article body, card names and UI titles. Also the `body`
+ *            default, so in most places the class is redundant and can be deleted. Loaded
+ *            as the variable font, so `font-medium`/`font-bold` get real weights.
  *   display  Newsreader — editorial/page headings and the wordmark. Only weight 200 (and its
  *            italic) is meant to load, so hierarchy comes from SIZE, never
  *            from a weight class: `font-bold` here only asks the browser to
@@ -37,13 +38,13 @@ export type FontSpec = {
 
 export const fonts = {
   body: {
-    family: "Space Grotesk",
-    weights: [400],
+    family: "Inter",
+    weights: [400, 500, 600, 700],
     italic: false,
     fallback: "ui-sans-serif, system-ui, sans-serif",
     slot: "--aisocratic-font-body",
     legacySlot: "--stoa-font-body",
-    google: "Space+Grotesk:wght@400",
+    google: "Inter:wght@400..700",
     license: "OFL-1.1",
   },
   display: {

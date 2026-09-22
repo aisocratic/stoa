@@ -59,7 +59,7 @@ import { Dialog } from "@aisocratic/design/components/dialog"
 3. **Three text colours.** `text-foreground` for titles and emphasis,
    `text-reading` for prose in an article, `text-muted-foreground` for chrome.
    No fourth shade.
-4. **Three faces, by role.** `font-body` (Space Grotesk — body, UI and the
+4. **Three faces, by role.** `font-body` (Inter — body, UI and the
    header nav), `font-display` (Newsreader 200 — hierarchy comes from size,
    never a weight class), `font-code` (JetBrains Mono). The app loads them;
    the package ships none.
@@ -109,6 +109,6 @@ as fallbacks during the compatibility window.
 
 ## License
 
-MIT © AI Socratic. Space Grotesk, Newsreader and JetBrains Mono are under
+MIT © AI Socratic. Inter, Newsreader and JetBrains Mono are under
 the SIL Open Font License 1.1 and are loaded by the consuming application;
 this repository contains no font files.

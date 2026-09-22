@@ -34,7 +34,7 @@ test("the package's classes are generated and the theme resolves", async ({ page
   // The header nav is the body face, uppercase and tracked — `text-nav`.
   const nav = page.getByTestId("nav-sample")
   await expect(nav).toHaveCSS("text-transform", "uppercase")
-  await expect(nav).toHaveCSS("font-family", /Space Grotesk/)
+  await expect(nav).toHaveCSS("font-family", /Inter/)
   expect(parseFloat(await nav.evaluate((el) => getComputedStyle(el).letterSpacing))).toBeCloseTo(14 * 0.08, 1)
 
   // The same Button inside the two panels — roles resolve through the palette by ancestor class.

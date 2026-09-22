@@ -89,7 +89,7 @@ Loaded by the app (`app/fonts.ts`, see adopting.md) into the three `--aisocratic
 
 | Class          | Face                             | Role                                                                                               |
 | -------------- | -------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `font-body`    | Space Grotesk (weight 400)       | body/UI and the header nav — the `body` default, usually redundant to write                        |
+| `font-body`    | Inter (variable, 400–700)        | body/UI and the header nav — the `body` default, usually redundant to write                        |
 | `font-display` | Newsreader (weight 200 + italic) | headings only; NEVER add a weight class. aisocratic.org fills this slot with its own licensed face |
 | `font-code`    | JetBrains Mono (400/500)         | code and technical values                                                                          |
 

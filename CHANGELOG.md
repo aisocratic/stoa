@@ -5,6 +5,11 @@ All notable changes to `@aisocratic/design`. The format follows
 
 ## Unreleased
 
+- Switch the body face from Space Grotesk to **Inter** (variable, 400–700) for
+  more readable article and UI text. `fonts.body`, its Google Fonts spec and the
+  `--font-body` fallback name change; consuming apps fill `--aisocratic-font-body`
+  with Inter (see docs/adopting.md).
+
 - Lift dark surfaces to charcoal: `#141414` pages, `#1c1c1c` cards, and
   `#202020` popovers, with coordinated control and border tones. Preserve
   readable text and distinct chart ramp steps.

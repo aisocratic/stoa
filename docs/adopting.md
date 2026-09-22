@@ -24,9 +24,9 @@
    stays in your repo:
 
    ```ts
-   import { JetBrains_Mono, Newsreader, Space_Grotesk } from "next/font/google"
+   import { Inter, JetBrains_Mono, Newsreader } from "next/font/google"
 
-   export const body = Space_Grotesk({ weight: "400", subsets: ["latin"], display: "swap", variable: "--aisocratic-font-body" })
+   export const body = Inter({ subsets: ["latin"], display: "swap", variable: "--aisocratic-font-body" })
    export const display = Newsreader({
      weight: ["200"],
      style: ["normal", "italic"],
@@ -70,7 +70,7 @@ App-local shadcn components keep working unchanged: they import `cn` from
 ```html
 <link
   rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,200;1,6..72,200&family=JetBrains+Mono:wght@400;500&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=Newsreader:ital,opsz,wght@0,6..72,200;1,6..72,200&family=JetBrains+Mono:wght@400;500&display=swap"
 />
 <link rel="stylesheet" href="./vendor/ai-socratic-design.css" />
 <!-- a pinned copy of dist/css/tokens.css -->

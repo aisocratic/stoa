@@ -484,12 +484,12 @@ export function Gallery({
           <SectionHeading
             eyebrow="Typography"
             title="Three fonts, clear purposes"
-            subtitle="Use Space Grotesk for everyday UI, Newsreader for headlines, and JetBrains Mono for code."
+            subtitle="Use Inter for everyday UI, Newsreader for headlines, and JetBrains Mono for code."
           />
           <div className="grid gap-4 md:grid-cols-3">
             <Card className="space-y-4 p-6">
-              <h3 className="font-body text-title">Space Grotesk</h3>
-              <p className="text-body text-muted-foreground">400 · Card names, labels, navigation and body text.</p>
+              <h3 className="font-body text-title">Inter</h3>
+              <p className="text-body text-muted-foreground">400–700 · Card names, labels, navigation and article body text.</p>
               <p className="font-body text-title">Team members</p>
               <p data-testid="nav-sample" className="text-nav">
                 Events · News · About

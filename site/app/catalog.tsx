@@ -201,7 +201,7 @@ export function ComponentCatalog() {
           </AccordionItem>
           <AccordionItem value="two">
             <AccordionTrigger>Which font belongs on cards?</AccordionTrigger>
-            <AccordionContent>Space Grotesk keeps names and labels readable.</AccordionContent>
+            <AccordionContent>Inter keeps names and labels readable.</AccordionContent>
           </AccordionItem>
         </Accordion>
       ),
@@ -427,11 +427,11 @@ export function ComponentCatalog() {
       group: "Disclosure",
       module: "hover-card",
       usage:
-        '<HoverCard><HoverCardTrigger href="#type">Space Grotesk</HoverCardTrigger><HoverCardContent>Readable UI type.</HoverCardContent></HoverCard>',
+        '<HoverCard><HoverCardTrigger href="#type">Inter</HoverCardTrigger><HoverCardContent>Readable UI type.</HoverCardContent></HoverCard>',
       content: (
         <HoverCard>
           <HoverCardTrigger href="#type" className="text-body underline underline-offset-4">
-            Space Grotesk
+            Inter
           </HoverCardTrigger>
           <HoverCardContent>Our font for readable names, controls and body copy.</HoverCardContent>
         </HoverCard>
@@ -623,7 +623,7 @@ export function ComponentCatalog() {
             <MessageContent>
               <MessageHeader>Agent</MessageHeader>
               <Bubble>
-                <BubbleContent>Ready to review. The card titles use Space Grotesk.</BubbleContent>
+                <BubbleContent>Ready to review. The card titles use Inter.</BubbleContent>
               </Bubble>
             </MessageContent>
           </Message>

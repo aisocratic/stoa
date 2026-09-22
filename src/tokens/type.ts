@@ -68,7 +68,7 @@ export function typeSize(step: TypeStep): string {
  * one spelling.
  *
  *   nav      the header navigation on aisocratic.org: body size, uppercase,
- *            0.08em tracking, in the body face (Space Grotesk).
+ *            0.08em tracking, in the body face (Inter).
  *   eyebrow  the label above a heading, a footer column head, a status
  *            group: micro size, uppercase, 0.14em tracking.
  */
