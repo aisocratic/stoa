@@ -1,6 +1,6 @@
-# AI Socratic Design
+# Stoa — AI Socratic Design
 
-**The AI Socratic design system, as one package.** Tokens, a Tailwind v4
+**Stoa is the AI Socratic design system, as one package.** Tokens, a Tailwind v4
 theme, and the React primitives behind [aisocratic.org](https://aisocratic.org)
 and its sibling apps — so every product reads as one family, and updating the
 design is a version bump.

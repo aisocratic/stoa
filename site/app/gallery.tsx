@@ -459,8 +459,8 @@ export function Gallery({
       <main id="top" className="min-h-screen">
         <Section lead size="lg">
           <PageHero
-            eyebrow="Design system"
-            title="AI Socratic Design"
+            eyebrow="AI Socratic Design"
+            title="Stoa"
             subtitle="Explore the fonts, colours and components behind AI Socratic. Try the controls and see how they look in light and dark."
             actions={
               <>
@@ -468,7 +468,7 @@ export function Gallery({
                   <a href={`${REPO}#adopting-it`}>Adopt it</a>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <a href={`${REPO}/blob/main/docs/adopting.md`}>@aisocratic/design</a>
+                  <a href={`${REPO}/blob/main/docs/adopting.md`}>Adoption guide</a>
                 </Button>
               </>
             }

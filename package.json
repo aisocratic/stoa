@@ -1,7 +1,7 @@
 {
   "name": "@aisocratic/design",
   "version": "0.2.0",
-  "description": "The AI Socratic design system: tokens, a Tailwind v4 theme, and React primitives",
+  "description": "Stoa, the AI Socratic design system: tokens, a Tailwind v4 theme, and React primitives",
   "license": "MIT",
   "author": "AI Socratic (https://aisocratic.org)",
   "homepage": "https://github.com/aisocratic/stoa",

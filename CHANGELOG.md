@@ -5,6 +5,8 @@ All notable changes to `@aisocratic/design`. The format follows
 
 ## Unreleased
 
+- The gallery and docs are branded **Stoa — AI Socratic Design** (browser
+  title, hero, README). The package name stays `@aisocratic/design`.
 - Switch the body face from Space Grotesk to **Inter** (variable, 400–700) for
   more readable article and UI text. `fonts.body`, its Google Fonts spec and the
   `--font-body` fallback name change; consuming apps fill `--aisocratic-font-body`
