@@ -52,6 +52,9 @@ All notable changes to `@aisocratic/design`. The format follows
   segment is selected, a second row of options sits inline inside its tinted
   pill. Options also take `prefetch`, passed to `linkComponent` (Next.js
   `Link`) for `href` segments.
+- `SortableHeaderCell` takes `onHide`, which adds `HideColumnButton` (also
+  exported): an eye-off button beside the label, shown on header hover or
+  focus (always on touch), that hides the column without sorting it.
 - `deltaE` (OKLab distance ×100) in the token colour math.
 - Export `site.css`: tokens and shared static header, hero, controls, mobile menu,
   sections and footer for the Stoa, Agora and Atlas GitHub Pages sites.

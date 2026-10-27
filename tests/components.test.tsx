@@ -9,6 +9,7 @@ import { useState, type ReactNode } from "react"
 import { AdminShell } from "../src/components/admin-shell.js"
 import { AuthPanel, type AuthMode } from "../src/components/auth-panel.js"
 import { DataTable, type DataColumn } from "../src/components/data-table.js"
+import { SortableHeaderCell } from "../src/components/table-parts.js"
 import { SegmentedControl } from "../src/components/segmented-control.js"
 import { SelectField } from "../src/components/select-field.js"
 
@@ -193,5 +194,42 @@ describe("SegmentedControl", () => {
     expect(screen.getByRole("link", { name: "Tools" })).toHaveAttribute("aria-current", "page")
     rerender(<SegmentedControl value="tools" options={options} />)
     expect(screen.getByRole("link", { name: "Tools" })).not.toHaveAttribute("prefetch")
+  })
+})
+
+describe("SortableHeaderCell", () => {
+  it("hides its column from a separate button that never sorts", async () => {
+    const onSort = vi.fn()
+    const onHide = vi.fn()
+    render(
+      <table>
+        <thead>
+          <tr>
+            <SortableHeaderCell label="Guests" column="guests" sortColumn="date" sortDirection="asc" onSort={onSort} onHide={onHide} />
+          </tr>
+        </thead>
+      </table>,
+    )
+    expect(screen.getByRole("columnheader", { name: /Guests/ })).toHaveAttribute("aria-sort", "none")
+    await userEvent.click(screen.getByRole("button", { name: "Hide column Guests" }))
+    expect(onHide).toHaveBeenCalledOnce()
+    expect(onSort).not.toHaveBeenCalled()
+    await userEvent.click(screen.getByRole("button", { name: "Guests" }))
+    expect(onSort).toHaveBeenCalledWith("guests")
+    expect(document.querySelector("button button")).toBeNull()
+  })
+
+  it("renders no hide affordance without onHide", () => {
+    render(
+      <table>
+        <thead>
+          <tr>
+            <SortableHeaderCell label="Guests" column="guests" sortColumn="guests" sortDirection="desc" onSort={vi.fn()} />
+          </tr>
+        </thead>
+      </table>,
+    )
+    expect(screen.queryByRole("button", { name: /Hide column/ })).toBeNull()
+    expect(screen.getByRole("columnheader")).toHaveAttribute("aria-sort", "descending")
   })
 })

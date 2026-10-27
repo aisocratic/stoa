@@ -59,7 +59,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@aisocratic/design/com
 import { ThemeToggle } from "@aisocratic/design/components/theme-toggle"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@aisocratic/design/components/tooltip"
 
-import { AuthDemo, FormDemo, TableDemo } from "./demos"
+import { AuthDemo, FormDemo, SortableTableDemo, TableDemo } from "./demos"
 import { ComponentCatalog } from "./catalog"
 
 export type ColorRow = { role: string; ref: string; light: string; dark: string; contrast: { light: number; dark: number } | null }
@@ -676,6 +676,8 @@ export function Gallery({
             subtitle="DataTable: search, select filters, sortable columns, pinned rows, selection with bulk actions, row actions, expandable sub-rows and pagination — in memory here, or driven by the server with the same props. Delete asks through ConfirmDialog."
           />
           <TableDemo />
+          <h3 className="mt-10 mb-3 font-body text-title">A hand-built table</h3>
+          <SortableTableDemo />
         </Section>
 
         <Section id="forms" size="md" divider>

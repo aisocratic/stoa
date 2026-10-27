@@ -28,6 +28,7 @@ export {
   TableShell,
   ResultsSummary,
   SortIcon,
+  HideColumnButton,
   SortableHeaderCell,
   SortableHeaderContent,
   useTableSort,

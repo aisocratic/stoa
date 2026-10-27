@@ -14,7 +14,13 @@ import {
   FormSection,
   RowAction,
   RowActions,
+  SortableHeaderCell,
+  TableShell,
   TextField,
+  tableBodyCell,
+  tableBodyRow,
+  tableHeadRow,
+  useTableSort,
   type BadgeTone,
 } from "@aisocratic/design"
 import { AuthPanel, AuthScreen, type AuthMode, type AuthResult } from "@aisocratic/design/components/auth-panel"
@@ -127,6 +133,65 @@ export function TableDemo() {
           toast.success("Deleted")
         }}
       />
+    </div>
+  )
+}
+
+type HideableColumn = "name" | "chapter" | "date" | "guests"
+const HIDEABLE: { key: HideableColumn; label: string; numeric?: boolean }[] = [
+  { key: "name", label: "Event" },
+  { key: "chapter", label: "Chapter" },
+  { key: "date", label: "Date" },
+  { key: "guests", label: "Guests", numeric: true },
+]
+
+/** A hand-built table: SortableHeaderCell with `onHide`, and the way back. */
+export function SortableTableDemo() {
+  const { sortColumn, sortDirection, handleSort, applySortDirection } = useTableSort<HideableColumn>("date", "desc")
+  const [hidden, setHidden] = useState<Set<HideableColumn>>(new Set())
+  const visible = HIDEABLE.filter((c) => !hidden.has(c.key))
+  const rows = [...EVENTS].sort((a, b) => applySortDirection(a[sortColumn] < b[sortColumn] ? -1 : a[sortColumn] > b[sortColumn] ? 1 : 0))
+  return (
+    <div data-testid="sortable-table-demo" className="space-y-3">
+      <div className="flex items-center justify-between gap-3">
+        <p className="text-body text-muted-foreground">Hover a header to hide its column.</p>
+        {hidden.size > 0 && (
+          <Button size="sm" variant="outline" onClick={() => setHidden(new Set())}>
+            Show {hidden.size} hidden {hidden.size === 1 ? "column" : "columns"}
+          </Button>
+        )}
+      </div>
+      <TableShell>
+        <table className="w-full text-body">
+          <thead>
+            <tr className={tableHeadRow}>
+              {visible.map((c) => (
+                <SortableHeaderCell
+                  key={c.key}
+                  label={c.label}
+                  column={c.key}
+                  sortColumn={sortColumn}
+                  sortDirection={sortDirection}
+                  onSort={handleSort}
+                  onHide={visible.length > 1 ? () => setHidden((h) => new Set(h).add(c.key)) : undefined}
+                  className={c.numeric ? "text-right" : undefined}
+                />
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.slice(0, 4).map((e) => (
+              <tr key={e.id} className={tableBodyRow}>
+                {visible.map((c) => (
+                  <td key={c.key} className={c.numeric ? `${tableBodyCell} text-right font-code` : tableBodyCell}>
+                    {e[c.key]}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </TableShell>
     </div>
   )
 }

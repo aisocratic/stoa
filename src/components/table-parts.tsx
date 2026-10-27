@@ -1,9 +1,10 @@
 "use client"
 
-import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react"
+import { ArrowDown, ArrowUp, ArrowUpDown, EyeOff } from "lucide-react"
 import { useCallback, useState, type ComponentProps, type ReactNode } from "react"
 
 import { cn } from "../cn.js"
+import { Button } from "./button.js"
 import { cardSurface } from "./card.js"
 
 /**
@@ -99,12 +100,44 @@ export function SortableHeaderContent<T extends string>({
   )
 }
 
+/**
+ * The hide-this-column affordance a column header carries: invisible until
+ * the header is hovered (the `<th>` needs `group/th`) or the button is
+ * focused, always shown where there is no hover. It never sorts or drags the
+ * column it sits in. Whatever hides the column must also offer a way back —
+ * a column picker or a "show hidden columns" button.
+ */
+export function HideColumnButton({ label, onHide, className }: { label: string; onHide: () => void; className?: string }) {
+  return (
+    <Button
+      type="button"
+      variant="ghost"
+      size="icon-xs"
+      aria-label={`Hide column ${label}`}
+      title="Hide column"
+      draggable={false}
+      onClick={(event) => {
+        event.stopPropagation()
+        onHide()
+      }}
+      onPointerDown={(event) => event.stopPropagation()}
+      className={cn(
+        "ml-1 size-5 shrink-0 text-muted-foreground opacity-0 transition-opacity hover:text-foreground focus-visible:opacity-100 group-hover/th:opacity-100 [@media(hover:none)]:opacity-100",
+        className,
+      )}
+    >
+      <EyeOff className="size-3" />
+    </Button>
+  )
+}
+
 export function SortableHeaderCell<T extends string>({
   label,
   column,
   sortColumn,
   sortDirection,
   onSort,
+  onHide,
   className,
   contentClassName,
 }: {
@@ -113,25 +146,40 @@ export function SortableHeaderCell<T extends string>({
   sortColumn: T
   sortDirection: SortDirection
   onSort: (column: T) => void
+  /** Hides the column; renders a `HideColumnButton` after the label when given. */
+  onHide?: () => void
   className?: string
   contentClassName?: string
 }) {
   const active = sortColumn === column
+  const sortButton = (
+    <button
+      type="button"
+      className="inline-flex items-center rounded-sm transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      onClick={() => onSort(column)}
+    >
+      <SortableHeaderContent
+        label={label}
+        column={column}
+        sortColumn={sortColumn}
+        sortDirection={sortDirection}
+        className={contentClassName}
+      />
+    </button>
+  )
   return (
-    <th className={cn(tableHeadCell, className)} aria-sort={active ? (sortDirection === "asc" ? "ascending" : "descending") : "none"}>
-      <button
-        type="button"
-        className="inline-flex items-center rounded-sm transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-        onClick={() => onSort(column)}
-      >
-        <SortableHeaderContent
-          label={label}
-          column={column}
-          sortColumn={sortColumn}
-          sortDirection={sortDirection}
-          className={contentClassName}
-        />
-      </button>
+    <th
+      className={cn(tableHeadCell, onHide && "group/th", className)}
+      aria-sort={active ? (sortDirection === "asc" ? "ascending" : "descending") : "none"}
+    >
+      {onHide ? (
+        <span className="inline-flex items-center">
+          {sortButton}
+          <HideColumnButton label={typeof label === "string" ? label : String(column)} onHide={onHide} />
+        </span>
+      ) : (
+        sortButton
+      )}
     </th>
   )
 }
