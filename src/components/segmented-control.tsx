@@ -10,6 +10,26 @@ export type SegmentedControlOption<T extends string = string> = {
   title?: string
   /** Render this segment as a link instead of a button — route nav that works in server components. */
   href?: string
+  /**
+   * Passed to `linkComponent` as its `prefetch` prop (Next.js `<Link>`), so an
+   * expensive section can opt out of speculative route work. Ignored for a
+   * plain `<a>`.
+   */
+  prefetch?: boolean
+  /**
+   * A second level that belongs to this segment (the views of a section,
+   * say). While the segment is selected its options sit inline right after
+   * its label, inside the same tinted pill, so the choice reads as part of
+   * the segment instead of as a second control somewhere else on the page.
+   */
+  sub?: SegmentedControlSub
+}
+
+export type SegmentedControlSub = {
+  "aria-label": string
+  options: Pick<SegmentedControlOption, "value" | "label" | "icon" | "title">[]
+  value: string | null
+  onValueChange?: (value: string) => void
 }
 
 /**
@@ -26,6 +46,15 @@ const segment = {
   wrapped: "h-7 px-2.5",
   selected: "bg-primary/10 text-primary",
   unselected: "text-muted-foreground hover:text-foreground",
+  /* A selected segment with a second level: the tint moves to the pill that
+     wraps the label and its options, and the chosen option is cut out of it
+     in the card colour, the way the segment itself is cut out of the bar. */
+  group: "inline-flex h-full shrink-0 items-center rounded-full bg-primary/10 pr-0.5",
+  groupWrapped: "h-7",
+  subBase: "inline-flex h-[18px] items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 text-body transition-colors",
+  subWrapped: "h-6",
+  subSelected: "bg-card text-primary",
+  subUnselected: "text-muted-foreground hover:text-foreground",
 }
 
 export function SegmentedControl<T extends string>({
@@ -45,6 +74,7 @@ export function SegmentedControl<T extends string>({
   segmentClassName?: string
   /** Let segments run onto a second line; releases the fixed height. */
   wrap?: boolean
+  /** The link element for `href` segments — pass Next.js `Link` to get client routing and `prefetch`. */
   linkComponent?: ElementType
   "aria-label"?: string
 }) {
@@ -53,22 +83,28 @@ export function SegmentedControl<T extends string>({
     <div className={cn(containerClass, wrap && "h-auto min-h-8 flex-wrap gap-1", className)} aria-label={ariaLabel}>
       {options.map((option) => {
         const selected = option.value === value
+        const sub = selected ? option.sub : undefined
         const cls = cn(
           segment.base,
           wrap && segment.wrapped,
           option.icon && "gap-1.5",
           selected ? segment.selected : segment.unselected,
+          sub && "bg-transparent",
           segmentClassName,
         )
-        if (option.href) {
-          return (
-            <L key={option.value} href={option.href} aria-current={selected ? "page" : undefined} title={option.title} className={cls}>
-              {option.icon}
-              {option.label}
-            </L>
-          )
-        }
-        return (
+        const item = option.href ? (
+          <L
+            key={option.value}
+            href={option.href}
+            {...(linkComponent && option.prefetch !== undefined ? { prefetch: option.prefetch } : {})}
+            aria-current={selected ? "page" : undefined}
+            title={option.title}
+            className={cls}
+          >
+            {option.icon}
+            {option.label}
+          </L>
+        ) : (
           <button
             key={option.value}
             type="button"
@@ -80,6 +116,32 @@ export function SegmentedControl<T extends string>({
             {option.icon}
             {option.label}
           </button>
+        )
+        if (!sub) return item
+
+        return (
+          <span key={option.value} className={cn(segment.group, wrap && segment.groupWrapped)}>
+            {item}
+            <span role="group" aria-label={sub["aria-label"]} className="inline-flex items-center gap-px">
+              {sub.options.map((subOption) => (
+                <button
+                  key={subOption.value}
+                  type="button"
+                  onClick={() => sub.onValueChange?.(subOption.value)}
+                  aria-pressed={subOption.value === sub.value}
+                  title={subOption.title}
+                  className={cn(
+                    segment.subBase,
+                    wrap && segment.subWrapped,
+                    subOption.value === sub.value ? segment.subSelected : segment.subUnselected,
+                  )}
+                >
+                  {subOption.icon}
+                  {subOption.label}
+                </button>
+              ))}
+            </span>
+          </span>
         )
       })}
     </div>

@@ -48,6 +48,10 @@ All notable changes to `@aisocratic/design`. The format follows
 
 - `chartRampColors` and `chartRampMuted`, and a `colors` prop on `Chart` to
   fill rows from them (or any list) instead of the categorical `chartColors`.
+- `SegmentedControl` options take `sub` (`SegmentedControlSub`): while that
+  segment is selected, a second row of options sits inline inside its tinted
+  pill. Options also take `prefetch`, passed to `linkComponent` (Next.js
+  `Link`) for `href` segments.
 - `deltaE` (OKLab distance ×100) in the token colour math.
 - Export `site.css`: tokens and shared static header, hero, controls, mobile menu,
   sections and footer for the Stoa, Agora and Atlas GitHub Pages sites.

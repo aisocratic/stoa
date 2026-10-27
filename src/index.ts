@@ -20,7 +20,7 @@ export { PageHeader } from "./components/page-header.js"
 export { PageToolbar } from "./components/page-toolbar.js"
 export { StickyBar, stickyRailClass } from "./components/sticky-bar.js"
 export { Breadcrumbs, type BreadcrumbItem } from "./components/breadcrumbs.js"
-export { SegmentedControl, type SegmentedControlOption } from "./components/segmented-control.js"
+export { SegmentedControl, type SegmentedControlOption, type SegmentedControlSub } from "./components/segmented-control.js"
 export { MetricCard } from "./components/metric-card.js"
 
 /* Tables. `DataTable` itself is a subpath (it composes Select and Checkbox). */

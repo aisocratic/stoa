@@ -4,11 +4,12 @@ import { afterEach, describe, expect, it, vi } from "vitest"
 import { cleanup, render, screen, waitFor } from "@testing-library/react"
 import { userEvent } from "@testing-library/user-event"
 import axe from "axe-core"
-import { useState } from "react"
+import { useState, type ReactNode } from "react"
 
 import { AdminShell } from "../src/components/admin-shell.js"
 import { AuthPanel, type AuthMode } from "../src/components/auth-panel.js"
 import { DataTable, type DataColumn } from "../src/components/data-table.js"
+import { SegmentedControl } from "../src/components/segmented-control.js"
 import { SelectField } from "../src/components/select-field.js"
 
 afterEach(cleanup)
@@ -136,5 +137,61 @@ describe("AdminShell", () => {
     expect(screen.queryByRole("dialog", { name: "Admin navigation" })).toBeNull()
     expect(document.querySelector("aside")).toHaveAttribute("inert")
     expect(trigger).toHaveFocus()
+  })
+})
+
+describe("SegmentedControl", () => {
+  const sub = {
+    "aria-label": "Layout",
+    value: "list",
+    options: [
+      { value: "list", label: "List" },
+      { value: "calendar", label: "Calendar" },
+    ],
+  }
+
+  it("shows a selected segment's second level inline, and only while it is selected", async () => {
+    const onSub = vi.fn()
+    const { rerender } = render(
+      <SegmentedControl
+        aria-label="View"
+        value="upcoming"
+        options={[
+          { value: "all", label: "All" },
+          { value: "upcoming", label: "Upcoming", sub: { ...sub, onValueChange: onSub } },
+        ]}
+      />,
+    )
+    const group = screen.getByRole("group", { name: "Layout" })
+    expect(screen.getByRole("button", { name: "List" })).toHaveAttribute("aria-pressed", "true")
+    await userEvent.click(screen.getByRole("button", { name: "Calendar" }))
+    expect(onSub).toHaveBeenCalledWith("calendar")
+    expect(group.parentElement).toContainElement(screen.getByRole("button", { name: "Upcoming" }))
+
+    rerender(
+      <SegmentedControl
+        aria-label="View"
+        value="all"
+        options={[
+          { value: "all", label: "All" },
+          { value: "upcoming", label: "Upcoming", sub },
+        ]}
+      />,
+    )
+    expect(screen.queryByRole("group", { name: "Layout" })).toBeNull()
+  })
+
+  it("passes prefetch to a link component, never to a plain anchor", () => {
+    const Link = ({ prefetch, children, ...props }: { prefetch?: boolean; href: string; children?: ReactNode }) => (
+      <a data-prefetch={String(prefetch)} {...props}>
+        {children}
+      </a>
+    )
+    const options = [{ value: "tools", label: "Tools", href: "/tools", prefetch: false }]
+    const { rerender } = render(<SegmentedControl value="tools" options={options} linkComponent={Link} />)
+    expect(screen.getByRole("link", { name: "Tools" })).toHaveAttribute("data-prefetch", "false")
+    expect(screen.getByRole("link", { name: "Tools" })).toHaveAttribute("aria-current", "page")
+    rerender(<SegmentedControl value="tools" options={options} />)
+    expect(screen.getByRole("link", { name: "Tools" })).not.toHaveAttribute("prefetch")
   })
 })

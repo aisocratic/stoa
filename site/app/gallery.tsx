@@ -328,7 +328,8 @@ const ROWS = [
 ] as const
 
 function AdminDemo() {
-  const [view, setView] = useState<"all" | "upcoming" | "past">("all")
+  const [view, setView] = useState<"all" | "upcoming" | "past">("upcoming")
+  const [layout, setLayout] = useState("list")
   return (
     <div data-testid="admin-demo" className="h-[640px] overflow-hidden rounded-xl border border-border">
       <AdminShell
@@ -357,7 +358,19 @@ function AdminDemo() {
                 onValueChange={setView}
                 options={[
                   { value: "all", label: "All" },
-                  { value: "upcoming", label: "Upcoming" },
+                  {
+                    value: "upcoming",
+                    label: "Upcoming",
+                    sub: {
+                      "aria-label": "Upcoming layout",
+                      value: layout,
+                      onValueChange: setLayout,
+                      options: [
+                        { value: "list", label: "List" },
+                        { value: "calendar", label: "Calendar" },
+                      ],
+                    },
+                  },
                   { value: "past", label: "Past" },
                 ]}
               />
