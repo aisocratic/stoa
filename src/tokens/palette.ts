@@ -70,8 +70,21 @@ export const palette = {
     12: "#e6e6e6",
   },
 
-  /** The accent. 600 on oat, 400 on ink. */
-  amber: { 400: "#fbbf24", 600: "#d97706" },
+  /**
+   * The accent — 600 on oat, 400 on ink — and the full Tailwind amber scale
+   * the breakdown ramp (`chart-ramp-*`) steps through.
+   */
+  amber: {
+    100: "#fef3c7",
+    300: "#fcd34d",
+    400: "#fbbf24",
+    500: "#f59e0b",
+    600: "#d97706",
+    700: "#b45309",
+    800: "#92400e",
+    900: "#78350f",
+    950: "#451a03",
+  },
   /** The one saturated CTA colour (`--join`) and the brand ring's start. */
   violet: { 500: "#8b5cf6", 600: "#7c3aed" },
   /** 600 is the destructive fill; 700 is red as text on oat. */

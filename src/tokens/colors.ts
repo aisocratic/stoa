@@ -70,11 +70,20 @@ export const colors = {
   "chart-3": pair("purple.700", "purple.400"),
   "chart-4": pair("violet.600", "violet.500"),
   "chart-5": pair("red.700", "red.400"),
+  /**
+   * The breakdown ramp for donuts and split bars reads in shades of amber:
+   * the accent leads, then darker and lighter weights alternate so
+   * neighbouring slices stay apart (adjacent OKLab ΔE ≥ 20 in both modes)
+   * while the ring stays one colour. Slot order is ring order. `muted` is the
+   * neutral wash for "not reported", the one grey left.
+   */
   "chart-ramp-1": pair("amber.600", "amber.400"),
-  "chart-ramp-2": pair("oat.12", "ink.12"),
-  "chart-ramp-3": pair("oat.10", "ink.10"),
-  "chart-ramp-4": pair("oat.8", "ink.8"),
-  "chart-ramp-5": pair("oat.6", "ink.7"),
+  "chart-ramp-2": pair("amber.900", "amber.800"),
+  "chart-ramp-3": pair("amber.300", "amber.100"),
+  "chart-ramp-4": pair("amber.800", "amber.900"),
+  "chart-ramp-5": pair("amber.100", "amber.500"),
+  "chart-ramp-6": pair("amber.700", "amber.950"),
+  "chart-ramp-7": pair("amber.400", "amber.600"),
   "chart-ramp-muted": pair("oat.3", "ink.3"),
 } as const satisfies Record<string, ColorDef>
 

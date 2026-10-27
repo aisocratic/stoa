@@ -13,7 +13,7 @@ export {
   type Mode,
 } from "./colors.js"
 export { palette, paletteHex, paletteEntries, paletteVar, type PaletteRef } from "./palette.js"
-export { contrast, luminance, mixOklab } from "./color-math.js"
+export { contrast, deltaE, luminance, mixOklab } from "./color-math.js"
 export { type, typeSize, textStyles, FLUID_RANGE, type TypeStep, type TypeStepName, type TextStyleName } from "./type.js"
 export { radii, radiusAliases, type RadiusRung } from "./radii.js"
 export { fonts, fontStack, type FontRole, type FontSpec } from "./fonts.js"

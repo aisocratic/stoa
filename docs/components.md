@@ -153,7 +153,7 @@ import { Chart, ChartCard, TaskCard } from "@aisocratic/design"
 
 Card names use Inter. `ContentCard editorial` explicitly opts a news headline into Newsreader. `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, and `CardFooter` add optional structure to the existing unpadded Card surface.
 
-Charts are intentionally basic: line and area are single-series; bar supports signed values; donut, segmented and ranking visualize nonnegative shares; gauge uses a 0–100 scale. Every chart includes a “View data” table. App-level filtering, collectors and streaming transports remain outside Stoa.
+Charts are intentionally basic: line and area are single-series; bar supports signed values; donut, segmented and ranking visualize nonnegative shares; gauge uses a 0–100 scale. Every chart includes a “View data” table. Pass `colors={chartRampColors}` for a one-hue amber breakdown (donut, segmented) and give a “not reported” row `color: chartRampMuted`. App-level filtering, collectors and streaming transports remain outside Stoa.
 
 `Questionnaire` takes questions with stable `id`, `title`, `type` (`single`, `multiple`, `text`), optional `options` and `optional`. It preserves answers across Previous/Next, validates required answers, awaits `onComplete`, and lets the user retry a failed submission. Remount with a new key to start another questionnaire.
 

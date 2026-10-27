@@ -7,6 +7,8 @@ import {
   Card,
   Chart,
   ChartCard,
+  chartRampColors,
+  chartRampMuted,
   TaskCard,
   ContentCard,
   Kbd,
@@ -90,6 +92,16 @@ const devices = [
   { label: "Desktop", value: 640 },
   { label: "Mobile", value: 280 },
   { label: "Tablet", value: 80 },
+]
+const sources = [
+  { label: "Search", value: 420 },
+  { label: "Newsletter", value: 310 },
+  { label: "LinkedIn", value: 220 },
+  { label: "Meetups", value: 160 },
+  { label: "Referral", value: 120 },
+  { label: "Podcast", value: 80 },
+  { label: "Other", value: 50 },
+  { label: "Not reported", value: 90, color: chartRampMuted },
 ]
 const columns = [
   { value: "ready", label: "Ready" },
@@ -184,6 +196,21 @@ export function ComponentCatalog() {
                   : devices
             }
           />
+        </ChartCard>
+      ),
+    })),
+    ...(["donut", "segmented"] as const).map((kind) => ({
+      name: `Breakdown ${kind === "donut" ? "donut" : "split bar"}`,
+      group: "Charts",
+      module: "chart",
+      usage: `<Chart kind="${kind}" label="Sources" colors={chartRampColors} data={[…, { label: "Not reported", value: 90, color: chartRampMuted }]} />`,
+      content: (
+        <ChartCard
+          title="Where members heard of us"
+          description="Sample data"
+          footer="One hue: amber steps alternate dark and light, ring order."
+        >
+          <Chart kind={kind} label={`Breakdown ${kind} example`} colors={chartRampColors} data={sources} />
         </ChartCard>
       ),
     })),

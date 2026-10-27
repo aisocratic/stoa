@@ -6,7 +6,15 @@ import { Card } from "./card.js"
 
 export type ChartDatum = { label: string; value: number; color?: string }
 export type ChartKind = "line" | "area" | "bar" | "donut" | "ranking" | "segmented" | "gauge"
+/** Categorical series colours: the status hues. */
 export const chartColors = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)", "var(--chart-4)", "var(--chart-5)"]
+/**
+ * The breakdown ramp for donuts and split bars: seven amber steps in ring
+ * order, alternating dark and light so neighbours stay apart. Pair the last
+ * "not reported" slice with `chartRampMuted`.
+ */
+export const chartRampColors = [1, 2, 3, 4, 5, 6, 7].map((n) => `var(--chart-ramp-${n})`)
+export const chartRampMuted = "var(--chart-ramp-muted)"
 
 export function ChartCard({
   title,
@@ -51,6 +59,7 @@ export function Chart({
   className,
   formatValue = (value: number) => value.toLocaleString(),
   showValues = true,
+  colors = chartColors,
 }: {
   data: ChartDatum[]
   kind?: ChartKind
@@ -58,13 +67,15 @@ export function Chart({
   className?: string
   formatValue?: (value: number) => string
   showValues?: boolean
+  /** Fill order for rows without their own `color`. `chartRampColors` for one-hue breakdowns. */
+  colors?: readonly string[]
 }) {
   const id = useId()
   const rows = data.filter((row) => Number.isFinite(row.value))
   const positive = rows.map((row) => ({ ...row, value: Math.max(0, row.value) }))
   const isShare = ["donut", "ranking", "segmented", "gauge"].includes(kind)
   const total = positive.reduce((sum, row) => sum + row.value, 0)
-  const fill = (index: number) => rows[index]?.color ?? chartColors[index % chartColors.length]
+  const fill = (index: number) => rows[index]?.color ?? colors[index % colors.length]
   const max = Math.max(0, ...rows.map((row) => row.value))
   const min = Math.min(0, ...rows.map((row) => row.value))
   const span = max - min || 1
@@ -95,7 +106,7 @@ export function Chart({
                 <div className="h-2 overflow-hidden rounded-full bg-muted">
                   <div
                     className="h-full rounded-full"
-                    style={{ width: `${(row.value / total) * 100}%`, background: row.color ?? chartColors[i % 5] }}
+                    style={{ width: `${(row.value / total) * 100}%`, background: row.color ?? colors[i % colors.length] }}
                   />
                 </div>
               </div>

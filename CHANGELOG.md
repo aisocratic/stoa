@@ -7,6 +7,13 @@ All notable changes to `@aisocratic/design`. The format follows
 
 ### Changed
 
+- **The breakdown ramp is amber.** `chart-ramp-2`…`chart-ramp-5` move from the
+  oat/ink neutrals to Tailwind amber weights, and `chart-ramp-6` and
+  `chart-ramp-7` are new, so donuts and split bars read as one hue with
+  alternating dark and light steps (adjacent OKLab ΔE ≥ 20 in both modes).
+  `chart-ramp-muted` stays the neutral "not reported" wash. The palette gains
+  amber 100, 300, 500, 700, 800, 900 and 950. Apps that painted
+  `chart-ramp-2…5` will now see amber instead of grey.
 - The gallery and docs are branded **Stoa — AI Socratic Design** (browser
   title, hero, README). The package name stays `@aisocratic/design`.
 - Switch the body face from Space Grotesk to **Inter** (variable, 400–700) for
@@ -31,6 +38,9 @@ All notable changes to `@aisocratic/design`. The format follows
 
 ### Added
 
+- `chartRampColors` and `chartRampMuted`, and a `colors` prop on `Chart` to
+  fill rows from them (or any list) instead of the categorical `chartColors`.
+- `deltaE` (OKLab distance ×100) in the token colour math.
 - Export `site.css`: tokens and shared static header, hero, controls, mobile menu,
   sections and footer for the Stoa, Agora and Atlas GitHub Pages sites.
 - Document local package adoption, vendored stylesheet updates and family links.

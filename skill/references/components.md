@@ -130,7 +130,7 @@ Additional root exports: `Chart`, `ChartCard`, `TaskCard`, `ContentCard`, `Carou
 
 Optional-peer components must use `@aisocratic/design/components/<module>`: `accordion`, `alert-dialog`, `calendar`, `context-menu`, `date-picker`, `direction`, `drawer`, `hover-card`, `menubar`, `navigation-menu`, `radio-group`, `resizable`, `slider`, `toggle`, `toggle-group`. Install the corresponding Radix peer for wrappers; `react-day-picker` v9 for Calendar; `react-day-picker` and `@radix-ui/react-popover` for DatePicker; `vaul` for Drawer; `react-resizable-panels` v3 for Resizable.
 
-- `Chart`: `{ label, kind, data: { label, value, color? }[] }`; kinds are line, area, bar, donut, ranking, segmented, gauge. Line/area are single-series. Includes empty state and accessible data table.
+- `Chart`: `{ label, kind, data: { label, value, color? }[] }`; kinds are line, area, bar, donut, ranking, segmented, gauge. Line/area are single-series. Includes empty state and accessible data table. `colors` sets the fill order: `chartColors` (default, categorical) or `chartRampColors` (one-hue amber breakdown; give a "not reported" row `color: chartRampMuted`).
 - `ChartCard`: title, description, actions, footer around any chart.
 - `TaskCard`: title, description, labels, priority, assignee, status/columns/onStatusChange, onOpen, metadata/actions slots, compact and selected presentation. Apps own drag-and-drop and persistence.
 - `ContentCard`: title, href, description, eyebrow, media and footer. `editorial` enables Newsreader for news.

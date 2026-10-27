@@ -15,7 +15,7 @@ import {
   AlertDialogAction,
 } from "../src/components/alert-dialog.js"
 import { Calendar } from "../src/components/calendar.js"
-import { Chart } from "../src/components/chart.js"
+import { Chart, chartRampColors } from "../src/components/chart.js"
 import { Carousel } from "../src/components/carousel.js"
 import { Questionnaire } from "../src/components/questionnaire.js"
 import { TagInput } from "../src/components/tag-input.js"
@@ -240,6 +240,22 @@ describe("chart data and accessibility", () => {
     rerender(<Chart label="Scores" data={[{ label: "Quality", value: 140 }]} kind="gauge" />)
     expect(screen.getByRole("img", { name: "Quality: 100 of 100" })).toBeVisible()
     expect(container.querySelector("table")?.textContent).toContain("140")
+  })
+  it("fills a breakdown from the colours it is given, in ring order", () => {
+    const { container } = render(
+      <Chart
+        label="Devices"
+        kind="segmented"
+        colors={chartRampColors}
+        data={[
+          { label: "Desktop", value: 6 },
+          { label: "Mobile", value: 3 },
+          { label: "Tablet", value: 1, color: "var(--chart-ramp-muted)" },
+        ]}
+      />,
+    )
+    const fills = [...container.querySelectorAll<HTMLElement>('[role="img"] > div')].map((el) => el.style.background)
+    expect(fills).toEqual(["var(--chart-ramp-1)", "var(--chart-ramp-2)", "var(--chart-ramp-muted)"])
   })
   it("exposes labeled cards and chart alternatives without accessibility violations", async () => {
     const { container } = render(

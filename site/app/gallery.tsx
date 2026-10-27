@@ -561,6 +561,19 @@ export function Gallery({
               </div>
             ))}
           </div>
+          <div className="mt-6 space-y-2">
+            <p className="text-body">Breakdown ramp</p>
+            <div data-testid="chart-ramp" className="flex h-12 overflow-hidden rounded-md border border-border">
+              {[1, 2, 3, 4, 5, 6, 7, "muted"].map((step) => (
+                <div key={step} className="flex-1" style={{ background: `var(--chart-ramp-${step})` }} title={`chart-ramp-${step}`}>
+                  <span className="sr-only">chart-ramp-{step}</span>
+                </div>
+              ))}
+            </div>
+            <p className="text-micro text-muted-foreground">
+              Donuts and split bars step through amber in ring order; the last swatch is the neutral “not reported” wash.
+            </p>
+          </div>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             <Card className="space-y-4 p-5">
               <p className="text-title">Actions</p>

@@ -56,6 +56,13 @@ function fromOklab([L, a, b]: [number, number, number]): string {
   )
 }
 
+/** Euclidean distance in OKLab, ×100 — "ΔE OK". 2 is a just-noticeable step; 20 reads as a different colour. */
+export function deltaE(a: string, b: string): number {
+  const A = toOklab(a)
+  const B = toOklab(b)
+  return 100 * Math.hypot(A[0] - B[0], A[1] - B[1], A[2] - B[2])
+}
+
 /** `color-mix(in oklab, a <amount>%, b)` — `amount` of `a`, the rest `b`. */
 export function mixOklab(a: string, b: string, amount: number): string {
   const t = amount / 100

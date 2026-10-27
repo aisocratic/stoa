@@ -37,13 +37,22 @@ pair matching the website, so override it too when creating a different theme.
 
 Seven `status-*` roles cover success, warning, caution, danger, info, highlight,
 and accent. They use a deep hue in light mode and a light hue in dark mode.
-Categorical charts reuse status hues. `chart-ramp-1` is amber; the remaining ramp
-steps are oat in light mode and ink in dark mode. Charts always carry labels.
+Categorical charts (`chart-1`…`chart-5`) reuse status hues. The breakdown ramp
+for donuts and split bars, `chart-ramp-1`…`chart-ramp-7`, reads in shades of
+Tailwind amber: the accent leads, then darker and lighter weights alternate so
+neighbouring slices stay apart (adjacent OKLab ΔE ≥ 20 in both modes) while the
+ring stays one colour. Slot order is ring order. `chart-ramp-muted` is the
+neutral wash for "not reported". Charts always carry labels.
+
+| Ramp step | 1   | 2   | 3   | 4   | 5   | 6   | 7   | muted |
+| --------- | --- | --- | --- | --- | --- | --- | --- | ----- |
+| Light     | 600 | 900 | 300 | 800 | 100 | 700 | 400 | oat.3 |
+| Dark      | 400 | 800 | 100 | 900 | 500 | 950 | 600 | ink.3 |
 
 `card-foreground`, `popover-foreground`, and `secondary-foreground` alias
 `foreground`; `input` aliases `border`, and `ring` aliases `accent`.
 
-The 12-step `oat` scale drives light surfaces, text and neutral chart ramps.
+The 12-step `oat` scale drives light surfaces and text.
 Legacy cool neutral/slate primitives remain available for overrides. Resolved colors are
 exported in `@aisocratic/design/tokens.json`, also displayed in the gallery.
 

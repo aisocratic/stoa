@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest"
 
+import { deltaE } from "../src/tokens/color-math.ts"
 import { colors, resolveColor, roleContrast, type ColorRole, type Mode } from "../src/tokens/colors.ts"
 
 describe.each<Mode>(["light", "dark"])("%s mode contrast", (mode) => {
@@ -34,9 +35,19 @@ describe.each<Mode>(["light", "dark"])("%s mode contrast", (mode) => {
   })
 
   it("the breakdown ramp steps are distinguishable neighbours", () => {
-    const ramp = ["chart-ramp-2", "chart-ramp-3", "chart-ramp-4", "chart-ramp-5", "chart-ramp-muted"] as const
+    const ramp = [1, 2, 3, 4, 5, 6, 7].map((n) => `chart-ramp-${n}` as ColorRole)
     for (let i = 1; i < ramp.length; i++) {
-      expect(roleContrast(ramp[i - 1]!, ramp[i]!, mode), `${ramp[i - 1]} vs ${ramp[i]}`).toBeGreaterThanOrEqual(1.3)
+      const [a, b] = [ramp[i - 1]!, ramp[i]!]
+      expect(deltaE(resolveColor(a, mode), resolveColor(b, mode)), `${a} vs ${b}`).toBeGreaterThanOrEqual(20)
+      expect(roleContrast(a, b, mode), `${a} vs ${b}`).toBeGreaterThanOrEqual(1.3)
+    }
+    expect(roleContrast("chart-ramp-7", "chart-ramp-muted", mode)).toBeGreaterThanOrEqual(1.3)
+  })
+
+  it("the breakdown ramp is amber, so a ring reads as one colour", () => {
+    for (let n = 1; n <= 7; n++) {
+      const def = colors[`chart-ramp-${n}` as ColorRole]
+      expect("light" in def && def.light.startsWith("amber.") && def.dark.startsWith("amber."), `chart-ramp-${n}`).toBe(true)
     }
   })
 

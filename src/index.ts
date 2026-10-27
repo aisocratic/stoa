@@ -74,7 +74,7 @@ export {
 } from "./brand/provider-glyphs.js"
 
 /* Shared patterns with no optional runtime dependencies. */
-export { Chart, ChartCard, chartColors, type ChartDatum, type ChartKind } from "./components/chart.js"
+export { Chart, ChartCard, chartColors, chartRampColors, chartRampMuted, type ChartDatum, type ChartKind } from "./components/chart.js"
 export { TaskCard } from "./components/task-card.js"
 export { ContentCard } from "./components/content-card.js"
 export { AspectRatio } from "./components/aspect-ratio.js"
