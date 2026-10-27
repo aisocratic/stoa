@@ -74,6 +74,12 @@ describe("dist", () => {
     expect(css.match(/color-scheme: dark;/g)?.length).toBe(2)
   })
 
+  it("tailwind.css keeps sticky rails in place while a Radix overlay locks scrolling", () => {
+    const css = readFileSync(join(ROOT, "dist/css/tailwind.css"), "utf8")
+    expect(css).toMatch(/html body\[data-scroll-locked\] \{\s*overflow: clip !important;/)
+    expect(css.match(/overflow-x: clip;/g)?.length).toBe(2)
+  })
+
   it("the static site import includes tokens and shared page chrome without a build tool", () => {
     const css = readFileSync(join(ROOT, "dist/css/site.css"), "utf8")
     expect(css.startsWith(readFileSync(join(ROOT, "dist/css/tokens.css"), "utf8"))).toBe(true)

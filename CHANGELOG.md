@@ -36,6 +36,14 @@ All notable changes to `@aisocratic/design`. The format follows
 - Multi-select, admin-drawer, authentication, and confirmation flows have
   stronger keyboard and asynchronous-state behavior.
 
+### Fixed
+
+- The page no longer shifts and sticky sidebars no longer jump while a Radix
+  dialog, sheet or menu is open: the base layer sets
+  `html body[data-scroll-locked] { overflow: clip !important }` so the locked
+  body never becomes a scroll container, and clips sideways overflow on `html`
+  and `body` with `overflow-x: clip` instead of `hidden`.
+
 ### Added
 
 - `chartRampColors` and `chartRampMuted`, and a `colors` prop on `Chart` to

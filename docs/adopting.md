@@ -20,6 +20,13 @@
    blocks, `@theme` blocks and base layer — they are all in the import. Keep
    anything app-specific below it, unlayered.
 
+   The base layer also clips sideways overflow on `html` and `body`
+   (`overflow-x: clip`) and keeps the page from becoming a scroll container
+   while a Radix dialog, sheet or menu is open
+   (`html body[data-scroll-locked] { overflow: clip !important }`), so sticky
+   sidebars stay put. Delete your own copies of those rules, and do not set
+   `overflow-x: hidden` on `html` or `body`: it breaks `position: sticky`.
+
 3. `app/fonts.ts` — `next/font` must be called in app source, so this file
    stays in your repo:
 

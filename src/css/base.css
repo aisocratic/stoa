@@ -62,12 +62,29 @@
     @apply border-border outline-ring/50;
   }
 
+  /* `clip`, not `hidden`: a wide child cannot scroll the page sideways, and
+   * neither element becomes a scroll container, so `position: sticky`
+   * rails keep the viewport as their scroll ancestor. */
   html {
     scrollbar-gutter: stable;
+    overflow-x: clip;
+  }
+
+  /* Radix overlays (Dialog, Sheet, Select, DropdownMenu…) lock body
+   * scrolling while open with `overflow: hidden`, which makes body a new
+   * scroll container, so sticky sidebars jump out of the viewport and the
+   * page behind the dialog shifts. `clip` keeps the viewport as their
+   * scroll ancestor; Radix still blocks wheel and touch scrolling and
+   * restores it when the overlay closes. `html body` outranks the
+   * selector Radix injects; a layered `!important` also beats its
+   * unlayered one. */
+  html body[data-scroll-locked] {
+    overflow: clip !important;
   }
 
   body {
     @apply bg-background text-foreground;
+    overflow-x: clip;
     font-family: var(--font-body);
     /* The scale's body step, so anything WITHOUT an explicit size still lands
        on the scale. 16px would be one rung above the system's actual body
