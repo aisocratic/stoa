@@ -389,7 +389,7 @@ function AdminDemo() {
             }
           />
           <div className="grid gap-3 sm:grid-cols-3">
-            <MetricCard label="Upcoming" value="12" />
+            <MetricCard label="Upcoming" value="12" href="#tables" hrefLabel="Upcoming: view the 12 events" />
             <MetricCard label="Registrations" value="1,284" trailing={<Badge tone="success">+8%</Badge>} />
             <MetricCard label="Attendance" value="71%" />
           </div>

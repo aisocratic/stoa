@@ -9,6 +9,7 @@ import { useState, type ReactNode } from "react"
 import { AdminShell } from "../src/components/admin-shell.js"
 import { AuthPanel, type AuthMode } from "../src/components/auth-panel.js"
 import { DataTable, type DataColumn } from "../src/components/data-table.js"
+import { MetricCard } from "../src/components/metric-card.js"
 import { SortableHeaderCell } from "../src/components/table-parts.js"
 import { SegmentedControl } from "../src/components/segmented-control.js"
 import { SelectField } from "../src/components/select-field.js"
@@ -231,5 +232,42 @@ describe("SortableHeaderCell", () => {
     )
     expect(screen.queryByRole("button", { name: /Hide column/ })).toBeNull()
     expect(screen.getByRole("columnheader")).toHaveAttribute("aria-sort", "descending")
+  })
+})
+
+describe("MetricCard", () => {
+  it("stays a plain block without href", () => {
+    render(<MetricCard label="Members" value="1,204" />)
+    expect(screen.queryByRole("link")).toBeNull()
+  })
+
+  it("becomes one link through the given link component", () => {
+    const Link = ({ children, ...props }: { href: string; children?: ReactNode }) => (
+      <a data-router="next" {...props}>
+        {children}
+      </a>
+    )
+    render(
+      <MetricCard
+        label="Founders"
+        value="38"
+        href="/admin/people?role=founder"
+        hrefLabel="Founders: view these people"
+        linkComponent={Link}
+      />,
+    )
+    const link = screen.getByRole("link", { name: "Founders: view these people" })
+    expect(link).toHaveAttribute("href", "/admin/people?role=founder")
+    expect(link).toHaveAttribute("data-router", "next")
+    expect(link).toHaveTextContent("38")
+  })
+
+  it("opens external targets in a new tab with a plain anchor, bar rows included", () => {
+    const Link = vi.fn()
+    render(<MetricCard label="GA4" value={12} href="https://example.com" external linkComponent={Link} progress={{ percentage: 40 }} />)
+    const link = screen.getByRole("link", { name: /GA4/ })
+    expect(link).toHaveAttribute("target", "_blank")
+    expect(link).toHaveAttribute("rel", "noopener noreferrer")
+    expect(Link).not.toHaveBeenCalled()
   })
 })

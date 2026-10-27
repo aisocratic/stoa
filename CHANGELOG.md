@@ -55,6 +55,10 @@ All notable changes to `@aisocratic/design`. The format follows
 - `SortableHeaderCell` takes `onHide`, which adds `HideColumnButton` (also
   exported): an eye-off button beside the label, shown on header hover or
   focus (always on touch), that hides the column without sorting it.
+- `MetricCard` takes `href`, which makes the whole card (or progress row) a
+  drill-down link with a hover tint and focus ring, plus `hrefLabel` for its
+  accessible name, `external` for a new-tab `<a>`, and `linkComponent` (pass
+  Next.js `Link`; Stoa imports no framework).
 - `deltaE` (OKLab distance ×100) in the token colour math.
 - Export `site.css`: tokens and shared static header, hero, controls, mobile menu,
   sections and footer for the Stoa, Agora and Atlas GitHub Pages sites.

@@ -25,7 +25,7 @@ link takes `linkComponent` (pass Next's `Link`) and renders `<a>` otherwise.
 | `StickyBar`, `stickyRailClass` | the pinned bar itself, and the one offset a rail beside it uses                                                                                                                                                                     |
 | `PageHeader`                   | a record page's title (display face, `text-page`), mono subtitle, actions. Section pages named by the sidebar render no heading                                                                                                     |
 | `SegmentedControl`             | pill view switcher; segments with `href` are route nav (`linkComponent`, per-segment `prefetch`), with `onValueChange` an in-page toggle; `sub` puts a selected segment's second level inline. **Never** Radix `Tabs` for route nav |
-| `MetricCard`                   | the stat card: eyebrow label + display value; `size="compact"`, or `progress` for a label/value row over a bar                                                                                                                      |
+| `MetricCard`                   | the stat card: eyebrow label + display value; `size="compact"`, or `progress` for a label/value row over a bar; `href` (+ `hrefLabel`, `external`, `linkComponent`) makes the whole card a drill-down link                          |
 
 ## Tables
 
