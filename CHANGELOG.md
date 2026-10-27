@@ -5,35 +5,23 @@ All notable changes to `@aisocratic/design`. The format follows
 
 ## Unreleased
 
+### Changed
+
 - The gallery and docs are branded **Stoa — AI Socratic Design** (browser
   title, hero, README). The package name stays `@aisocratic/design`.
 - Switch the body face from Space Grotesk to **Inter** (variable, 400–700) for
   more readable article and UI text. `fonts.body`, its Google Fonts spec and the
   `--font-body` fallback name change; consuming apps fill `--aisocratic-font-body`
   with Inter (see docs/adopting.md).
-
 - Lift dark surfaces to charcoal: `#141414` pages, `#1c1c1c` cards, and
   `#202020` popovers, with coordinated control and border tones. Preserve
   readable text and distinct chart ramp steps.
-
 - Use Anthropic’s measured ivory/oat light palette across page surfaces, cards,
   controls and text. Dark mode retains the AI Socratic ink theme.
-
 - Align light surfaces and reading colors with aisocratic.org; preserve readable
   small labels and offer oat primitives for optional warm themes.
 - Use the body font consistently in shared public navigation, admin navigation,
   table chrome and auth controls.
-- Export `site.css`: tokens and shared static header, hero, controls, mobile menu,
-  sections and footer for the Stoa, Agora and Atlas GitHub Pages sites.
-- Document local package adoption, vendored stylesheet updates and family links.
-
-## Unreleased
-
-- Use Anthropic’s measured ivory/oat light palette across page surfaces, cards,
-  controls and text. Dark mode retains the AI Socratic ink theme.
-
-### Changed
-
 - Renamed the package and gallery to **AI Socratic Design** (`@aisocratic/design`).
   The `--stoa-font-*` custom properties remain as compatibility fallbacks.
 - `DataTable` server mode now supports controlled sorting and synchronized
@@ -43,6 +31,9 @@ All notable changes to `@aisocratic/design`. The format follows
 
 ### Added
 
+- Export `site.css`: tokens and shared static header, hero, controls, mobile menu,
+  sections and footer for the Stoa, Agora and Atlas GitHub Pages sites.
+- Document local package adoption, vendored stylesheet updates and family links.
 - Component-level DOM and accessibility tests, JSX accessibility linting,
   formatting checks, wildcard-export verification, and a distribution-size budget.
 
