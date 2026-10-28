@@ -44,16 +44,16 @@ link takes `linkComponent` (pass Next's `Link`) and renders `<a>` otherwise.
 
 Every field carries its own label, description and error and wires `aria-describedby` / `aria-invalid`. Never compose raw label + input + error text inline.
 
-| Export                                        | Use for                                                                                                                                         |
-| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `TextField`                                   | the labelled text input; `prefix` (bordered leading segment), `leadingIcon` (glyph inside), `multiline` (textarea), `variant`, `inputClassName` |
-| `SelectField` (`components/select-field`)     | plain (Radix Select), `searchable` (popover + command), `multiple` (badges), options with `group`; `triggerVariant="chip"` beside filter chips  |
-| `ToggleField` (`components/toggle-field`)     | one labelled boolean; `control="checkbox"` (default) or `"switch"`                                                                              |
-| `SearchField`                                 | the filter-bar search box — not a form field                                                                                                    |
-| `FieldWrapper`, `useFieldIds`, `labelClass`   | build a new field on the same chrome                                                                                                            |
-| `FormSection`, `FormActions`                  | the titled card grouping a run of fields (`columns` 1 or 2), and the footer row                                                                 |
-| `ChoiceCard`                                  | card-shaped toggle for pickers; `indicator` radio / checkbox                                                                                    |
-| `ConfirmDialog` (`components/confirm-dialog`) | the one confirmation — never a native `confirm()`                                                                                               |
+| Export                                        | Use for                                                                                                                                                                                                                                    |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `TextField`                                   | the labelled text input; `prefix` (bordered leading segment), `leadingIcon` (glyph inside), `multiline` (textarea), `variant`, `inputClassName`                                                                                            |
+| `SelectField` (`components/select-field`)     | plain (Radix Select), `searchable` (popover + command), `multiple` (badges), options with `group`; `triggerVariant="chip"` beside filter chips; the cmdk search list loads on first open (`React.lazy`), so plain selects never fetch cmdk |
+| `ToggleField` (`components/toggle-field`)     | one labelled boolean; `control="checkbox"` (default) or `"switch"`                                                                                                                                                                         |
+| `SearchField`                                 | the filter-bar search box — not a form field                                                                                                                                                                                               |
+| `FieldWrapper`, `useFieldIds`, `labelClass`   | build a new field on the same chrome                                                                                                                                                                                                       |
+| `FormSection`, `FormActions`                  | the titled card grouping a run of fields (`columns` 1 or 2), and the footer row                                                                                                                                                            |
+| `ChoiceCard`                                  | card-shaped toggle for pickers; `indicator` radio / checkbox                                                                                                                                                                               |
+| `ConfirmDialog` (`components/confirm-dialog`) | the one confirmation — never a native `confirm()`                                                                                                                                                                                          |
 
 Not here: a date picker (needs a calendar peer) and a tag input. Build them in the app on `FieldWrapper`.
 

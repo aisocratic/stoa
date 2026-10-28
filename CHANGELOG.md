@@ -35,6 +35,10 @@ All notable changes to `@aisocratic/design`. The format follows
   search state; sortable headers and row URLs use native interactive elements.
 - Multi-select, admin-drawer, authentication, and confirmation flows have
   stronger keyboard and asynchronous-state behavior.
+- `SelectField` loads its cmdk search list (`components/searchable-option-list`)
+  with `React.lazy` the first time a searchable or multiple select opens, so
+  pages with only plain selects no longer ship cmdk (about 11 KB gzipped).
+  The popover shows a short placeholder while it loads.
 
 ### Fixed
 

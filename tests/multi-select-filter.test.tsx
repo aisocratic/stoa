@@ -3,37 +3,9 @@
 import { afterEach, describe, expect, it, vi } from "vitest"
 import { cleanup, render, screen } from "@testing-library/react"
 import { userEvent } from "@testing-library/user-event"
-import { Slot } from "@radix-ui/react-slot"
-import { createContext, useContext, useState, type ReactNode } from "react"
 
-/*
- * Radix's popper (floating-ui) stalls jsdom for seconds per mounted popover,
- * so the popover is replaced by a plain disclosure. What is under test is the
- * list inside it: counts, depth, Clear all, footer and search.
- */
-vi.mock("../src/components/popover.js", () => {
-  const Open = createContext<[boolean, (open: boolean) => void]>([false, () => undefined])
-  return {
-    Popover: ({ children, onOpenChange }: { children: ReactNode; onOpenChange?: (open: boolean) => void }) => {
-      const [open, setOpen] = useState(false)
-      const set = (next: boolean) => {
-        setOpen(next)
-        onOpenChange?.(next)
-      }
-      return <Open.Provider value={[open, set]}>{children}</Open.Provider>
-    },
-    PopoverTrigger: ({ children }: { children: ReactNode }) => {
-      const [open, setOpen] = useContext(Open)
-      return <Slot onClick={() => setOpen(!open)}>{children}</Slot>
-    },
-    PopoverContent: ({ children, className }: { children: ReactNode; className?: string }) =>
-      useContext(Open)[0] ? (
-        <div role="dialog" className={className}>
-          {children}
-        </div>
-      ) : null,
-  }
-})
+// Radix's popper stalls jsdom for seconds per open popover; see popover-mock.tsx.
+vi.mock("../src/components/popover.js", () => import("./popover-mock.js"))
 
 const { MultiSelectFilter } = await import("../src/components/multi-select-filter.js")
 

@@ -1,18 +1,31 @@
 "use client"
 
-import { Check, ChevronsUpDown, X } from "lucide-react"
-import { useMemo, useState } from "react"
+import { ChevronsUpDown, X } from "lucide-react"
+import { lazy, Suspense, useMemo, useState } from "react"
 
 import { cn } from "../cn.js"
 import { fieldVariants } from "../control-variants.js"
 import { Badge } from "./badge.js"
 import { Button } from "./button.js"
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "./command.js"
 import { FieldWrapper, useFieldIds } from "./field.js"
 import { Popover, PopoverContent, PopoverTrigger } from "./popover.js"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "./select.js"
 
 export type SelectOption = { value: string; label: string; group?: string }
+
+/*
+ * The search list only ever renders inside an opened popover, so cmdk loads
+ * on first open instead of with every page that renders a SelectField.
+ */
+const SearchableOptionList = lazy(() => import("./searchable-option-list.js").then((mod) => ({ default: mod.SearchableOptionList })))
+
+function OptionList(props: React.ComponentProps<typeof SearchableOptionList>) {
+  return (
+    <Suspense fallback={<div className="h-24" aria-busy="true" />}>
+      <SearchableOptionList {...props} />
+    </Suspense>
+  )
+}
 
 type Base = {
   label?: React.ReactNode
@@ -141,29 +154,7 @@ export function SelectField(props: SelectFieldProps) {
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-(--radix-popover-trigger-width) p-0" align="start" disablePortal>
-            <Command>
-              <CommandInput placeholder="Search..." />
-              <CommandList>
-                <CommandEmpty>No results found.</CommandEmpty>
-                {groups.map(([name, opts]) => (
-                  <CommandGroup key={name} heading={name || undefined}>
-                    {opts.map((o) => (
-                      <CommandItem key={o.value} value={o.label} onSelect={() => toggle(o.value)}>
-                        <span
-                          className={cn(
-                            "mr-2 flex size-4 items-center justify-center rounded-[4px] border border-primary",
-                            selectedSet.has(o.value) ? "bg-primary text-primary-foreground" : "opacity-50",
-                          )}
-                        >
-                          {selectedSet.has(o.value) ? <Check className="size-3" /> : null}
-                        </span>
-                        {o.label}
-                      </CommandItem>
-                    ))}
-                  </CommandGroup>
-                ))}
-              </CommandList>
-            </Command>
+            <OptionList groups={groups} multiple isSelected={(value) => selectedSet.has(value)} onSelect={toggle} />
           </PopoverContent>
         </Popover>
         {selected.length ? (
@@ -216,29 +207,14 @@ export function SelectField(props: SelectFieldProps) {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-(--radix-popover-trigger-width) p-0" align="start" disablePortal>
-        <Command>
-          <CommandInput placeholder="Search..." />
-          <CommandList>
-            <CommandEmpty>No results found.</CommandEmpty>
-            {groups.map(([name, opts]) => (
-              <CommandGroup key={name} heading={name || undefined}>
-                {opts.map((o) => (
-                  <CommandItem
-                    key={o.value}
-                    value={o.label}
-                    onSelect={() => {
-                      single.onValueChange?.(o.value)
-                      setPopoverOpen(false)
-                    }}
-                  >
-                    <Check className={cn("mr-2 size-4", single.value === o.value ? "opacity-100" : "opacity-0")} />
-                    {o.label}
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            ))}
-          </CommandList>
-        </Command>
+        <OptionList
+          groups={groups}
+          isSelected={(value) => single.value === value}
+          onSelect={(value) => {
+            single.onValueChange?.(value)
+            setPopoverOpen(false)
+          }}
+        />
       </PopoverContent>
     </Popover>,
   )

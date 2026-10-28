@@ -74,6 +74,12 @@ describe("dist", () => {
     expect(css.match(/color-scheme: dark;/g)?.length).toBe(2)
   })
 
+  it("SelectField reaches cmdk only through a dynamic import", () => {
+    const js = readFileSync(join(ROOT, "dist/components/select-field.js"), "utf8")
+    expect(js).not.toMatch(/from ["'](cmdk|\.\/command\.js|\.\/searchable-option-list\.js)["']/)
+    expect(js).toContain('import("./searchable-option-list.js")')
+  })
+
   it("tailwind.css keeps sticky rails in place while a Radix overlay locks scrolling", () => {
     const css = readFileSync(join(ROOT, "dist/css/tailwind.css"), "utf8")
     expect(css).toMatch(/html body\[data-scroll-locked\] \{\s*overflow: clip !important;/)
