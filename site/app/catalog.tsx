@@ -76,6 +76,7 @@ import {
 } from "@aisocratic/design/components/navigation-menu"
 import { RadioGroup, RadioGroupItem } from "@aisocratic/design/components/radio-group"
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@aisocratic/design/components/resizable"
+import { MultiSelectFilter } from "@aisocratic/design/components/multi-select-filter"
 import { Slider } from "@aisocratic/design/components/slider"
 import { Toggle } from "@aisocratic/design/components/toggle"
 import { ToggleGroup, ToggleGroupItem } from "@aisocratic/design/components/toggle-group"
@@ -103,6 +104,15 @@ const sources = [
   { label: "Other", value: 50 },
   { label: "Not reported", value: 90, color: chartRampMuted },
 ]
+const PLACES = [
+  { value: "italy", label: "Italy", count: 412 },
+  { value: "milan", label: "Milan", count: 318, depth: 1 },
+  { value: "rome", label: "Rome", count: 94, depth: 1 },
+  { value: "spain", label: "Spain", count: 156 },
+  { value: "madrid", label: "Madrid", count: 156, depth: 1 },
+  { value: "usa", label: "United States", count: 1204 },
+  { value: "nyc", label: "New York", count: 1204, depth: 1 },
+]
 const columns = [
   { value: "ready", label: "Ready" },
   { value: "active", label: "In progress" },
@@ -116,6 +126,7 @@ export function ComponentCatalog() {
   const [group, setGroup] = useState("All")
   const [date, setDate] = useState<Date | undefined>()
   const [tags, setTags] = useState(["Design", "AI"])
+  const [places, setPlaces] = useState(["milan"])
   const [taskStatus, setTaskStatus] = useState("active")
   const [title, setTitle] = useState("A readable card title")
   const [notification, setNotification] = useState("")
@@ -334,6 +345,29 @@ export function ComponentCatalog() {
           <option>Italiano</option>
           <option>Español</option>
         </NativeSelect>
+      ),
+    },
+    {
+      name: "Multi-select filter",
+      group: "Fields",
+      module: "multi-select-filter",
+      usage:
+        '<MultiSelectFilter triggerLabel="2 cities" options={[{ value: "it", label: "Italy", count: 3 }, { value: "milan", label: "Milan", count: 2, depth: 1 }]} selectedValues={values} onChange={setValues} clearable searchable footer={…} />',
+      content: (
+        <MultiSelectFilter
+          triggerLabel={places.length ? `${places.length} ${places.length === 1 ? "place" : "places"}` : "All places"}
+          options={PLACES}
+          selectedValues={places}
+          onChange={setPlaces}
+          clearable
+          searchable
+          searchPlaceholder="Search places"
+          footer={
+            <Button variant="ghost" size="sm" className="w-full justify-start" onClick={() => setPlaces(["milan"])}>
+              Restore default
+            </Button>
+          }
+        />
       ),
     },
     {

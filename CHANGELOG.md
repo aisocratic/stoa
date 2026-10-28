@@ -59,6 +59,12 @@ All notable changes to `@aisocratic/design`. The format follows
   drill-down link with a hover tint and focus ring, plus `hrefLabel` for its
   accessible name, `external` for a new-tab `<a>`, and `linkComponent` (pass
   Next.js `Link`; Stoa imports no framework).
+- `MultiSelectFilter` (`components/multi-select-filter`, needs
+  `@radix-ui/react-popover`), the toolbar multi-select from aisocratic.org:
+  options carry an optional `count` (right-aligned) and `depth` (indented
+  hierarchy); `clearable` adds "Clear all" while anything is selected,
+  `footer` holds actions below the list, and `searchable` filters by label
+  while keeping selected options visible.
 - `deltaE` (OKLab distance ×100) in the token colour math.
 - Export `site.css`: tokens and shared static header, hero, controls, mobile menu,
   sections and footer for the Stoa, Agora and Atlas GitHub Pages sites.
