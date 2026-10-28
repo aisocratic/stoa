@@ -88,9 +88,14 @@ Bans (a consumer can enforce them with a drift test): `text-[Npx]`, stock steps
 (`text-xs`…`text-9xl`), `text-X md:text-Y` heading chains, `font-mono`,
 bold/semibold on the display face.
 
-**Article scale**: inside `.markdown-content` (a consumer's prose wrapper), prose runs
-one step up: `p/li` → `text-lead`, `h1` → `text-page`, `h2` → `text-section`,
-`h3` → `text-title`, tables → `text-body`. "An article is read, not scanned."
+**Article scale**: put `markdown-content` on the element that wraps rendered markdown
+(both `tailwind.css` and `site.css` ship it). Prose runs one step up in the reading
+colour: `p/li` → `text-lead` + `--reading`, bold back to `--foreground`; headings take
+the display face: `h1` → `text-page`, `h2` → `text-section`, `h3` → `text-title`,
+`h4` → `text-lead`; tables → `text-body`. It also sets the vertical rhythm, lists,
+links (foreground with an accent underline), quotes, code, rules and images, so a
+renderer can emit bare HTML. In `tailwind.css` it sits in `@layer base`, so utilities
+on a surface that must differ still win. "An article is read, not scanned."
 
 ## Fonts
 

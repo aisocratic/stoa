@@ -1,0 +1,187 @@
+/*
+ * Article typography — one scale for every rendered markdown body. Put
+ * `markdown-content` on the element that wraps an article's HTML (blog posts,
+ * news updates, event descriptions, docs pages) and its prose reads the same
+ * in every app. From aisocratic.org, where it ended two blog layouts that had
+ * drifted a whole step apart.
+ *
+ * tailwind.css carries this inside `@layer base`, so a surface with a genuine
+ * reason to differ (slide decks that size prose in utilities) still wins;
+ * site.css carries it unlayered, after its own element resets.
+ */
+
+/* Prose runs at `lead` (18px), one step up from the 14px UI body: an article
+ * is read, not scanned, and has the measure to afford it. It takes the
+ * reading colour, a step under the headings around it. */
+.markdown-content p,
+.markdown-content ul,
+.markdown-content ol,
+.markdown-content li {
+  font-size: var(--text-lead);
+  font-weight: 400;
+  line-height: var(--text-lead--line-height);
+  letter-spacing: normal;
+  color: var(--reading);
+}
+
+/* Emphasis climbs back to the title colour: in dimmed prose, weight alone
+ * is not a big enough jump to read as emphasis. */
+.markdown-content p strong,
+.markdown-content li strong,
+.markdown-content p b,
+.markdown-content li b {
+  color: var(--foreground);
+}
+
+/* Headings are the display face, fluid, and never bold. h4 lands on the
+ * prose size and stays distinct by face alone. */
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4 {
+  font-family: var(--font-display);
+  font-weight: 200;
+  color: var(--foreground);
+  text-wrap: balance;
+  scroll-margin-top: 8rem;
+}
+
+.markdown-content h1 {
+  font-size: var(--text-page);
+  line-height: var(--text-page--line-height);
+  margin: 2.5rem 0 1rem;
+}
+
+.markdown-content h2 {
+  font-size: var(--text-section);
+  line-height: var(--text-section--line-height);
+  margin: 2rem 0 0.75rem;
+}
+
+.markdown-content h3 {
+  font-size: var(--text-title);
+  line-height: var(--text-title--line-height);
+  margin: 1.5rem 0 0.5rem;
+}
+
+.markdown-content h4 {
+  font-size: var(--text-lead);
+  line-height: var(--text-lead--line-height);
+  margin: 1rem 0 0.5rem;
+}
+
+.markdown-content > :first-child {
+  margin-top: 0;
+}
+
+.markdown-content > :last-child {
+  margin-bottom: 0;
+}
+
+/* Vertical rhythm, for renderers that emit bare HTML. */
+.markdown-content p,
+.markdown-content ul,
+.markdown-content ol,
+.markdown-content pre,
+.markdown-content blockquote {
+  margin: 0 0 1rem;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  padding-left: 1.5rem;
+}
+
+.markdown-content ul {
+  list-style: disc;
+}
+
+.markdown-content ol {
+  list-style: decimal;
+}
+
+.markdown-content li + li {
+  margin-top: 0.5rem;
+}
+
+.markdown-content a {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 0.2em;
+  overflow-wrap: anywhere;
+}
+
+.markdown-content blockquote {
+  border-inline-start: 2px solid var(--primary);
+  padding-inline-start: 1rem;
+}
+
+.markdown-content blockquote p {
+  color: var(--muted-foreground);
+}
+
+.markdown-content code {
+  font-family: var(--font-code);
+  font-size: 0.875em;
+  background: var(--muted);
+  border-radius: var(--radius-md);
+  padding: 0.125rem 0.375rem;
+}
+
+.markdown-content pre {
+  font-family: var(--font-code);
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+  background: var(--muted);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.markdown-content pre code {
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+}
+
+.markdown-content hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+.markdown-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+}
+
+/* A step under the prose: a table is reference material, not reading. */
+.markdown-content table {
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+.markdown-content thead {
+  border-bottom: 2px solid var(--border);
+}
+
+.markdown-content tr {
+  border-bottom: 1px solid var(--border);
+}
+
+.markdown-content th,
+.markdown-content td {
+  padding: 0.5rem 0.75rem;
+  vertical-align: top;
+}
+
+.markdown-content th {
+  font-weight: 500;
+  color: var(--foreground);
+}

@@ -167,6 +167,8 @@ const textStyleUtilities = Object.entries(textStyles)
   .join("\n\n")
 
 const baseCss = readFileSync(join(ROOT, "src/css/base.css"), "utf8")
+/* Article typography: layered in tailwind.css so utilities win, unlayered in site.css after its resets. */
+const markdownCss = readFileSync(join(ROOT, "src/css/markdown.css"), "utf8")
 
 const tailwindCss =
   header('Tailwind v4 theme. Import AFTER `@import "tailwindcss"`') +
@@ -178,7 +180,9 @@ const tailwindCss =
   "\n\n" +
   textStyleUtilities +
   "\n\n" +
-  baseCss
+  baseCss +
+  "\n" +
+  `@layer base {\n${indent(markdownCss.trimEnd().split("\n"), 1).replace(/^ +$/gm, "")}\n}\n`
 
 /* --------------------------------------------------------------- tokens.json */
 const resolvedRoles = (mode: Mode) =>
@@ -208,7 +212,7 @@ const tokensJson = {
 
 mkdirSync(join(ROOT, "dist/css"), { recursive: true })
 writeFileSync(join(ROOT, "dist/css/tokens.css"), tokensCss)
-writeFileSync(join(ROOT, "dist/css/site.css"), tokensCss + "\n" + readFileSync(join(ROOT, "src/css/site.css"), "utf8"))
+writeFileSync(join(ROOT, "dist/css/site.css"), tokensCss + "\n" + readFileSync(join(ROOT, "src/css/site.css"), "utf8") + "\n" + markdownCss)
 writeFileSync(join(ROOT, "dist/css/tailwind.css"), tailwindCss)
 writeFileSync(join(ROOT, "dist/tokens.json"), JSON.stringify(tokensJson, null, 2) + "\n")
 console.log("wrote dist/css/tokens.css, dist/css/tailwind.css, dist/css/site.css, dist/tokens.json")

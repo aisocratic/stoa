@@ -550,6 +550,54 @@ export function Gallery({
               ))}
             </div>
           </details>
+          <div className="mt-8 grid gap-4 lg:grid-cols-[1fr_20rem]">
+            <Card data-testid="article-sample" className="p-6 md:p-8">
+              <article className="markdown-content max-w-[68ch]">
+                <h2>Reading, not scanning</h2>
+                <p>
+                  Wrap rendered markdown in <code>markdown-content</code> and prose steps up to <strong>text-lead</strong> in the reading
+                  colour, while headings take the display face. Links keep the <a href="#type">body colour</a> with an amber underline.
+                </p>
+                <h3>What it covers</h3>
+                <ul>
+                  <li>Paragraphs, lists and emphasis</li>
+                  <li>Headings h1 to h4 on the fluid scale</li>
+                  <li>Quotes, code, rules and reference tables</li>
+                </ul>
+                <blockquote>
+                  <p>An article is the one place on the site that is read rather than scanned.</p>
+                </blockquote>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Element</th>
+                      <th>Step</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>p, li</td>
+                      <td>lead</td>
+                    </tr>
+                    <tr>
+                      <td>h2</td>
+                      <td>section</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </article>
+            </Card>
+            <div className="space-y-3">
+              <h3 className="font-body text-title">Article text</h3>
+              <p className="text-body text-muted-foreground">
+                One class for every rendered article: blog posts, news updates, event descriptions. Built on the tokens, so it follows the
+                theme.
+              </p>
+              <code className="block break-words font-code text-micro text-muted-foreground">
+                {'<article className="markdown-content">{html}</article>'}
+              </code>
+            </div>
+          </div>
         </Section>
 
         <Section id="colour" size="md" divider>

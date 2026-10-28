@@ -69,6 +69,12 @@ All notable changes to `@aisocratic/design`. The format follows
   hierarchy); `clearable` adds "Clear all" while anything is selected,
   `footer` holds actions below the list, and `searchable` filters by label
   while keeping selected options visible.
+- `.markdown-content` article typography in `tailwind.css` (in `@layer base`) and
+  `site.css`, from aisocratic.org: prose at `text-lead` in the reading colour
+  with bold back at `--foreground`, display-face headings on the fluid scale
+  (h1 page, h2 section, h3 title, h4 lead), `text-body` tables, and the
+  rhythm, lists, links, quotes, code, rules and images a bare HTML renderer
+  needs.
 - `deltaE` (OKLab distance ×100) in the token colour math.
 - Export `site.css`: tokens and shared static header, hero, controls, mobile menu,
   sections and footer for the Stoa, Agora and Atlas GitHub Pages sites.

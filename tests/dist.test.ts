@@ -74,6 +74,15 @@ describe("dist", () => {
     expect(css.match(/color-scheme: dark;/g)?.length).toBe(2)
   })
 
+  it("ships the article typography layered in tailwind.css and after the resets in site.css", () => {
+    const tailwind = readFileSync(join(ROOT, "dist/css/tailwind.css"), "utf8")
+    const layered = tailwind.slice(tailwind.lastIndexOf("@layer base {"))
+    expect(layered).toMatch(/\.markdown-content p,[\s\S]*font-size: var\(--text-lead\);[\s\S]*color: var\(--reading\);/)
+    expect(layered).toContain("font-size: var(--text-page);")
+    const site = readFileSync(join(ROOT, "dist/css/site.css"), "utf8")
+    expect(site.indexOf(".markdown-content h1")).toBeGreaterThan(site.indexOf("h4 {"))
+  })
+
   it("SelectField reaches cmdk only through a dynamic import", () => {
     const js = readFileSync(join(ROOT, "dist/components/select-field.js"), "utf8")
     expect(js).not.toMatch(/from ["'](cmdk|\.\/command\.js|\.\/searchable-option-list\.js)["']/)
