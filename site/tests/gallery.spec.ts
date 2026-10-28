@@ -45,7 +45,7 @@ test("the package's classes are generated and the theme resolves", async ({ page
   await expect(light.getByRole("button", { name: "Primary" })).toHaveCSS("color", "rgb(250, 249, 245)")
   await expect(dark.getByRole("button", { name: "Primary" })).toHaveCSS("background-color", "rgb(250, 250, 250)")
   // Classes that live outside dist/components (control-variants.js) must be generated too.
-  await expect(dark.getByRole("button", { name: "Primary" })).toHaveCSS("color", "rgb(10, 10, 10)")
+  await expect(dark.getByRole("button", { name: "Primary" })).toHaveCSS("color", "rgb(20, 20, 20)") // charcoal page
   // Two rungs: controls are 10px, surfaces 16px.
   await expect(light.getByRole("button", { name: "Primary" })).toHaveCSS("border-radius", "10px")
   await expect(light).toHaveCSS("border-radius", "16px")
